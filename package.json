@@ -1,0 +1,31 @@
+{
+  "name": "hexcyra",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Northline — Independent Creative Studio. Single-page site built with Tailwind CSS and vanilla JavaScript.",
+  "scripts": {
+    "build": "npm run build:css",
+    "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --minify",
+    "dev:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --watch",
+    "serve": "python3 -m http.server 8080 --bind 0.0.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sakshamfit/HEXCYRA.git"
+  },
+  "keywords": [
+    "tailwindcss",
+    "vanilla-js",
+    "landing-page",
+    "creative-studio"
+  ],
+  "author": "Northline Studio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sakshamfit/HEXCYRA/issues"
+  },
+  "homepage": "https://github.com/sakshamfit/HEXCYRA#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}
