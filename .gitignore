@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Logs & OS cruft
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+
+# Note: assets/css/styles.css is the compiled Tailwind stylesheet and IS
+# committed on purpose — the site is served as a plain static page with no
+# build step. Rebuild it with `npm run build:css` after editing markup.

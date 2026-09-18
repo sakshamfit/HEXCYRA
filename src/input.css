@@ -1,0 +1,193 @@
+/* Northline — Independent Creative Studio
+   Font: Inter (400 / 500 / 600) via Google Fonts, imported in CSS as required. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --nl-ink: #111213;
+    --nl-bone: #f4f2ed;
+    --nl-flame: #f06a18;
+    --nl-ember: #ff6a1a;
+    --nl-paper: #e9e7e1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: #111213;
+    color: #f4f2ed;
+    font-family: 'Inter', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      'Helvetica Neue', Arial, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Selection colour is strictly #ff6a1a on black. */
+  ::selection {
+    background-color: #ff6a1a;
+    color: #000000;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :where(a, button, summary, [tabindex]):focus-visible {
+    outline: 2px solid #ff6a1a;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Dark outlines would disappear on the off-white + orange sections. */
+  #work :where(a, button, summary):focus-visible,
+  #contact :where(a, button, summary):focus-visible,
+  .nl-on-light :where(a, button, summary):focus-visible {
+    outline-color: #111213;
+  }
+
+  img {
+    background-color: #191a1b;
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #111213;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2c2e30;
+    border: 3px solid #111213;
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff6a1a;
+  }
+}
+
+@layer components {
+  /* Scroll reveal: translateY(22px) -> 0 and opacity 0 -> 1, driven by
+     the IntersectionObserver in assets/js/main.js. */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 720ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 720ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hero sequence: translate-y-6 (1.5rem) -> 0, opacity 0 -> 1,
+     staggered 105ms per element by JS. */
+  [data-hero] {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity 820ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 820ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  [data-hero].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Accordions (process + FAQ) toggle `hidden` in JS; the animation
+     only runs on the freshly opened panel. */
+  .process-detail.is-open,
+  .faq-answer.is-open {
+    animation: nl-accordion-in 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Open accordion item keeps its accent colour as a state cue. */
+  [data-accordion-item].is-open [data-accordion-title] {
+    color: #ff6a1a;
+  }
+
+  [data-accordion-item].is-open [data-accordion-indicator] {
+    border-color: rgba(255, 106, 26, 0.55);
+    color: #ff6a1a;
+  }
+
+  [data-accordion-item].is-open .process-detail,
+  [data-accordion-item].is-open .faq-answer {
+    border-left: 1px solid rgba(255, 106, 26, 0.25);
+  }
+
+  /* Thin hairline label used across section headers. */
+  .nl-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .nl-display {
+    letter-spacing: -0.035em;
+    line-height: 0.94;
+  }
+}
+
+@keyframes nl-accordion-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-reveal],
+  [data-hero] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Graceful state if JavaScript never runs: nothing stays invisible. */
+.no-js [data-reveal],
+.no-js [data-hero] {
+  opacity: 1;
+  transform: none;
+}
