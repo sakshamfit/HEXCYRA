@@ -1,8 +1,8 @@
 {
-  "name": "nexcyra",
+  "name": "hexcyra",
   "version": "1.0.0",
   "private": true,
-  "description": "NEXCYRA \u2014 Independent Creative Studio. Single-page site built with Tailwind CSS and vanilla JavaScript.",
+  "description": "HEXCYRA \u2014 Independent Creative Studio. Single-page site built with Tailwind CSS and vanilla JavaScript.",
   "scripts": {
     "build": "npm run build:css && npm run build:static",
     "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --minify",
@@ -20,7 +20,7 @@
     "landing-page",
     "creative-studio"
   ],
-  "author": "NEXCYRA Studio",
+  "author": "HEXCYRA Studio",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/sakshamfit/HEXCYRA/issues"

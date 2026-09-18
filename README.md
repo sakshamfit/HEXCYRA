@@ -1,6 +1,6 @@
-# NEXCYRA — Independent Creative Studio
+# HEXCYRA — Independent Creative Studio
 
-A single-page site for **NEXCYRA — Independent Creative Studio**, built with
+A single-page site for **HEXCYRA — Independent Creative Studio**, built with
 **Tailwind CSS** and **vanilla JavaScript**. No frameworks and no build step at runtime:
 open `index.html` and it works. Deployment is still a two-command build (`npm run build`)
 that compiles the CSS and stages the files into `public/` — see [Deploy](#deploy-vercel).
