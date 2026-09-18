@@ -1,5 +1,5 @@
 /*!
- * Northline — Independent Creative Studio
+ * NEXCYRA — Independent Creative Studio
  * Vanilla JS: header scroll state, hero stagger, scroll reveals,
  * IntersectionObserver nav highlighting, mobile menu, accordions.
  */

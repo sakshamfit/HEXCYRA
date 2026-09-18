@@ -1,6 +1,6 @@
-# HEXCYRA — Northline · Independent Creative Studio
+# NEXCYRA — Independent Creative Studio
 
-A single-page recreation of **"Northline — Independent Creative Studio"**, built with
+A single-page site for **NEXCYRA — Independent Creative Studio**, built with
 **Tailwind CSS** and **vanilla JavaScript**. No frameworks, no build step at runtime: open
 `index.html` and it works.
 
