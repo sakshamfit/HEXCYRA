@@ -4,8 +4,9 @@
   "private": true,
   "description": "NEXCYRA \u2014 Independent Creative Studio. Single-page site built with Tailwind CSS and vanilla JavaScript.",
   "scripts": {
-    "build": "npm run build:css",
+    "build": "npm run build:css && npm run build:static",
     "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --minify",
+    "build:static": "node scripts/build-static.mjs",
     "dev:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --watch=always --minify",
     "serve": "python3 -m http.server 8080 --bind 0.0.0.0"
   },

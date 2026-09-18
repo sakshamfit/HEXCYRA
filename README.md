@@ -1,32 +1,61 @@
 # NEXCYRA — Independent Creative Studio
 
 A single-page site for **NEXCYRA — Independent Creative Studio**, built with
-**Tailwind CSS** and **vanilla JavaScript**. No frameworks, no build step at runtime: open
-`index.html` and it works.
+**Tailwind CSS** and **vanilla JavaScript**. No frameworks and no build step at runtime:
+open `index.html` and it works. Deployment is still a two-command build (`npm run build`)
+that compiles the CSS and stages the files into `public/` — see [Deploy](#deploy-vercel).
 
 ```
 .
-├── index.html              # the whole site — 9 sections in the exact reference order
+├── index.html                  # the whole site — 9 sections in the exact reference order
 ├── assets/
-│   ├── css/styles.css      # compiled Tailwind output (committed, served as-is)
-│   └── js/main.js          # observers, header state, mobile menu, accordions
-├── src/input.css           # Tailwind source: @tailwind directives + @layer base/components
-├── tailwind.config.js      # Inter font stack, extended opacity scale, custom keyframes
-└── package.json            # tailwindcss CLI scripts
+│   ├── css/styles.css          # compiled Tailwind output (committed, served as-is)
+│   └── js/main.js              # observers, header state, mobile menu, accordions
+├── src/input.css               # Tailwind source: @tailwind directives + @layer base/components
+├── scripts/build-static.mjs    # assembles the deployable bundle into ./public
+├── tailwind.config.js          # Inter font stack, extended opacity scale, custom keyframes
+├── vercel.json                 # framework "Other", output dir public, cache headers
+├── public/                     # generated build output — gitignored, never edited by hand
+└── package.json                # tailwindcss CLI scripts
 ```
 
 ## Run it
 
 ```bash
 npm install          # installs the Tailwind CLI (devDependency)
-npm run serve        # static server on http://0.0.0.0:8080
+npm run serve        # static server on http://0.0.0.0:8080 (serves the repo root)
 npm run dev:css      # rebuild assets/css/styles.css on every markup change
-npm run build:css    # one-off minified production build
+npm run build        # build:css + build:static
+npm run build:css    # one-off minified Tailwind build
+npm run build:static # copy index.html + assets/ into ./public
 ```
 
 `assets/css/styles.css` is generated, but it is committed on purpose so the page can be
 served as a plain static file with no build step. Re-run `npm run build:css` after editing
 markup or `src/input.css`.
+
+## Deploy (Vercel)
+
+The repo root doubles as the site root, but static hosts want the *output* in a directory
+of its own. `npm run build` therefore ends with `build:static`, which copies the shipping
+files into `public/` — the directory `vercel.json` names as the output:
+
+```jsonc
+{
+  "framework": null,          // "Other" preset — no framework here
+  "buildCommand": "npm run build",
+  "outputDirectory": "public"
+}
+```
+
+`public/` is gitignored and rebuilt on every deploy, so `index.html` and `assets/` stay the
+single source of truth and nothing is duplicated in the repo. Vercel needs no dashboard
+overrides: the checked-in `vercel.json` wins. To preview the exact deployable bundle
+locally, serve `public/` instead of the root:
+
+```bash
+npm run build && python3 -m http.server 8080 --bind 0.0.0.0 --directory public
+```
 
 ## Runtime dependencies (loaded from CDN by the browser)
 
