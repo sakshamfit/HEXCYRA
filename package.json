@@ -1,32 +1,21 @@
 {
-  "name": "hexcyra",
+  "name": "sirocco",
   "version": "1.0.0",
   "private": true,
-  "description": "HEXCYRA \u2014 Independent Creative Studio. Single-page site built with Tailwind CSS and vanilla JavaScript.",
+  "description": "Sirocco — Luxury Desert Retreat. Single-page site built with React and Vite.",
+  "type": "module",
   "scripts": {
-    "build": "npm run build:css && npm run build:static",
-    "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --minify",
-    "build:static": "node scripts/build-static.mjs",
-    "dev:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --watch=always --minify",
-    "serve": "python3 -m http.server 8080 --bind 0.0.0.0"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sakshamfit/HEXCYRA.git"
+  "dependencies": {
+    "iconify-icon": "^2.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
-  "keywords": [
-    "tailwindcss",
-    "vanilla-js",
-    "landing-page",
-    "creative-studio"
-  ],
-  "author": "HEXCYRA Studio",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sakshamfit/HEXCYRA/issues"
-  },
-  "homepage": "https://github.com/sakshamfit/HEXCYRA#readme",
   "devDependencies": {
-    "tailwindcss": "^3.4.19"
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.0"
   }
 }
