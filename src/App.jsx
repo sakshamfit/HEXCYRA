@@ -4,11 +4,10 @@ import { useReveal, useScrollState, useCounter } from './hooks.js'
 
 /* ============================ NAV ======================================== */
 const NAV_LINKS = [
-  { label: 'Philosophy', href: '#philosophy' },
-  { label: 'Suites', href: '#suites' },
-  { label: 'Wellness', href: '#wellness' },
-  { label: 'Dining', href: '#dining' },
-  { label: 'Excursions', href: '#excursions' },
+  { label: 'Services', href: '#services' },
+  { label: 'Expertise', href: '#expertise' },
+  { label: 'Support', href: '#support' },
+  { label: 'Process', href: '#process' },
 ]
 
 function Nav({ isScrolled, isNavDark }) {
@@ -25,9 +24,9 @@ function Nav({ isScrolled, isNavDark }) {
         <div className="container nav-inner">
           <a className="nav-logo" href="#top">
             <span className="mark">
-              <iconify-icon icon="lucide:sun"></iconify-icon>
+              <iconify-icon icon="lucide:hexagon"></iconify-icon>
             </span>
-            Sirocco
+            HEXCYRA
           </a>
 
           <ul className="nav-links">
@@ -38,8 +37,8 @@ function Nav({ isScrolled, isNavDark }) {
             ))}
           </ul>
 
-          <a className="nav-cta" href="#reserve">
-            Reserve
+          <a className="nav-cta" href="#contact">
+            Get a Quote
           </a>
 
           <button
@@ -61,8 +60,8 @@ function Nav({ isScrolled, isNavDark }) {
             {l.label}
           </a>
         ))}
-        <a className="nav-cta" href="#reserve" onClick={close}>
-          Reserve
+        <a className="nav-cta" href="#contact" onClick={close}>
+          Get a Quote
         </a>
       </div>
     </>
@@ -79,27 +78,27 @@ function Hero({ scrollY }) {
       <img
         className="hero-bg"
         src={assets.hero}
-        alt="Sculpted desert dunes at golden hour"
+        alt="Abstract technology network"
         style={{ transform: `translateY(${translate}px)` }}
       />
       <div className="hero-overlay"></div>
 
       <div className="hero-content">
-        <span className="hero-eyebrow">A Luxury Desert Retreat</span>
-        <h1 className="hero-title">Sirocco</h1>
-        <p className="hero-subtitle">where the sands keep their silence</p>
+        <span className="hero-eyebrow">IT &amp; Managed Services</span>
+        <h1 className="hero-title">HEXCYRA</h1>
+        <p className="hero-subtitle">technology that works while you sleep</p>
         <p className="hero-desc">
-          Suspended between endless dunes and a sky thick with stars, Sirocco is
-          a sanctuary for those who seek stillness, warmth, and the slow luxury
-          of the desert.
+          HEXCYRA is your full-service IT partner — from managed infrastructure
+          and cloud engineering to cybersecurity and round-the-clock support. We
+          keep your business running, secure, and ready to scale.
         </p>
-        <a className="hero-cta" href="#reserve">
-          Reserve Your Escape
+        <a className="hero-cta" href="#contact">
+          Book a Free Consultation
           <iconify-icon icon="lucide:arrow-right"></iconify-icon>
         </a>
       </div>
 
-      <a className="hero-scroll" href="#philosophy">
+      <a className="hero-scroll" href="#about">
         Scroll
         <iconify-icon icon="lucide:chevron-down"></iconify-icon>
       </a>
@@ -107,15 +106,15 @@ function Hero({ scrollY }) {
   )
 }
 
-/* ========================= PHILOSOPHY ==================================== */
+/* ============================= ABOUT ==================================== */
 const STATS = [
-  { target: 42, suffix: '', label: 'Private Suites' },
-  { target: 1200, suffix: 'ha', label: 'Protected Dunes' },
-  { target: 24, suffix: '/7', label: 'Personal Concierge' },
+  { target: 320, suffix: '+', label: 'Projects Delivered' },
+  { target: 99.9, suffix: '%', label: 'Uptime SLA', decimals: 1 },
+  { target: 24, suffix: '/7', label: 'Monitoring & Support' },
 ]
 
-function Stat({ target, suffix, label }) {
-  const { ref, display } = useCounter(target)
+function Stat({ target, suffix, label, decimals = 0 }) {
+  const { ref, display } = useCounter(target, { decimals })
   return (
     <div className="stat">
       <div className="stat-num" ref={ref} data-count={target}>
@@ -127,27 +126,27 @@ function Stat({ target, suffix, label }) {
   )
 }
 
-function Philosophy() {
+function About() {
   return (
-    <section className="philosophy" id="philosophy">
+    <section className="philosophy" id="about">
       <div className="container philosophy-grid">
         <div className="philosophy-media reveal">
-          <img src={assets.philosophy} alt="Quiet luxury interior open to the dunes" />
+          <img src={assets.about} alt="The HEXCYRA team collaborating" />
         </div>
 
         <div className="philosophy-text">
-          <span className="eyebrow reveal">Our Philosophy</span>
+          <span className="eyebrow reveal">Who We Are</span>
           <h2 className="section-title reveal delay-1">
-            Luxury measured in <em>silence</em>, not excess.
+            Enterprise IT, delivered with <em>precision</em>.
           </h2>
           <p className="reveal delay-2">
-            Sirocco was shaped by the desert itself — its patience, its light,
-            its vast and generous quiet. Every suite, every ritual, every meal
-            is an invitation to slow down until time loosens its grip.
+            HEXCYRA is an IT services company helping businesses design, build,
+            and manage the technology they depend on. We pair deep engineering
+            expertise with real accountability — no jargon, no surprises.
           </p>
           <p className="reveal delay-2">
-            We built less so you could feel more: rammed-earth walls, hand-woven
-            textiles, and windows framed around nothing but horizon.
+            From fast-moving startups to established enterprises, we act as your
+            dedicated technology team: proactive, transparent, and always on.
           </p>
 
           <div className="stats reveal delay-3">
@@ -161,51 +160,51 @@ function Philosophy() {
   )
 }
 
-/* ============================ SUITES ===================================== */
-const SUITES = [
+/* =========================== SERVICES =================================== */
+const SERVICES = [
   {
-    name: 'The',
-    accent: 'Dune',
-    img: assets.suiteDune,
-    desc: 'A crescent of rammed earth folded into the sand, with a private plunge pool facing the dawn.',
+    name: 'Managed',
+    accent: 'IT',
+    img: assets.serviceManaged,
+    desc: 'End-to-end management of your devices, users, and networks with proactive monitoring and a responsive helpdesk.',
     price: '1,200',
   },
   {
-    name: 'The',
-    accent: 'Oasis',
-    img: assets.suiteOasis,
-    desc: 'Shaded by date palms around a spring-fed courtyard — the most verdant refuge in the retreat.',
-    price: '1,650',
+    name: 'Cloud &',
+    accent: 'DevOps',
+    img: assets.serviceCloud,
+    desc: 'Cloud migration, infrastructure-as-code, and CI/CD pipelines that help you ship faster and scale on demand.',
+    price: '2,400',
   },
   {
-    name: 'The',
-    accent: 'Riad',
-    img: assets.suiteRiad,
-    desc: 'A two-storey sanctuary with a rooftop majlis, carved screens, and a hammam of its own.',
-    price: '2,400',
+    name: 'Cyber',
+    accent: 'security',
+    img: assets.serviceSecurity,
+    desc: 'Threat detection, compliance, and hardening that keep your data and customers protected around the clock.',
+    price: '1,800',
   },
 ]
 
-function Suites() {
+function Services() {
   return (
-    <section className="suites" id="suites">
+    <section className="suites" id="services">
       <div className="container">
         <div className="section-head">
-          <span className="eyebrow reveal">The Suites</span>
+          <span className="eyebrow reveal">What We Do</span>
           <h2 className="section-title reveal delay-1">
-            Three ways to <em>disappear</em>
+            Services built to <em>scale</em>
           </h2>
           <p className="reveal delay-2">
-            Forty-two suites, each carved into the landscape so that the desert
-            is never a view but a room you can step into.
+            Flexible engagements — from fully managed IT to project-based
+            engineering — tailored to how your business actually runs.
           </p>
         </div>
 
         <div className="suites-grid">
-          {SUITES.map((s, i) => (
+          {SERVICES.map((s, i) => (
             <article className={`suite-card reveal delay-${i + 1}`} key={s.accent}>
               <div className="suite-media">
-                <img src={s.img} alt={`The ${s.accent} suite`} />
+                <img src={s.img} alt={`${s.name} ${s.accent}`} />
               </div>
               <div className="suite-body">
                 <h3 className="suite-name">
@@ -214,10 +213,10 @@ function Suites() {
                 <p className="suite-desc">{s.desc}</p>
                 <div className="suite-meta">
                   <div className="suite-price">
-                    ${s.price} <span>/ night</span>
+                    ${s.price} <span>/ mo</span>
                   </div>
-                  <a className="suite-link" href="#reserve">
-                    Reserve
+                  <a className="suite-link" href="#contact">
+                    Learn More
                     <iconify-icon icon="lucide:arrow-right"></iconify-icon>
                   </a>
                 </div>
@@ -265,48 +264,49 @@ function Transition({ innerRef }) {
       </div>
 
       <div className="transition-content">
-        <span className="eyebrow reveal">As Night Falls</span>
+        <span className="eyebrow reveal">Around The Clock</span>
         <h2 className="reveal delay-1">
-          The desert exhales, and the sky <em>ignites</em>.
+          When your team logs off, <em>we&rsquo;re still watching</em>.
         </h2>
         <p className="reveal delay-2">
-          When the sun slips beneath the dunes, Sirocco becomes something else
-          entirely — a place of firelight, fragrant smoke, and ten thousand
-          stars close enough to touch.
+          Systems don&rsquo;t keep office hours — and neither do we. HEXCYRA
+          monitors, patches, and defends your infrastructure through the night,
+          so you wake up to business as usual.
         </p>
       </div>
     </section>
   )
 }
 
-/* =========================== WELLNESS ==================================== */
-const WELLNESS_FEATURES = [
-  { icon: 'lucide:flame', text: 'Traditional hammam & sand rituals' },
-  { icon: 'lucide:flower-2', text: 'Botanical spa drawn from desert flora' },
-  { icon: 'lucide:sunrise', text: 'Sunrise yoga on the high dune' },
-  { icon: 'lucide:moon', text: 'Sound baths beneath the open sky' },
+/* ============================ SUPPORT ==================================== */
+const SUPPORT_FEATURES = [
+  { icon: 'lucide:headset', text: '24/7 helpdesk with rapid response SLAs' },
+  { icon: 'lucide:activity', text: 'Proactive monitoring & real-time alerting' },
+  { icon: 'lucide:shield-check', text: 'Patch management & security hardening' },
+  { icon: 'lucide:database-backup', text: 'Automated backup & disaster recovery' },
 ]
 
-function Wellness() {
+function Support() {
   return (
-    <section className="night-section wellness" id="wellness">
+    <section className="night-section wellness" id="support">
       <div className="night-glow"></div>
       <div className="container wellness-grid">
         <div className="wellness-media reveal">
-          <img src={assets.wellness} alt="Candlelit desert spa" />
+          <img src={assets.support} alt="HEXCYRA network operations center" />
         </div>
 
         <div className="wellness-text">
-          <span className="eyebrow reveal">Wellness</span>
+          <span className="eyebrow reveal">Managed Support</span>
           <h2 className="section-title reveal delay-1">
-            Rituals as old as the <em>sand</em>
+            Support that never <em>sleeps</em>
           </h2>
           <p className="reveal delay-2">
-            Our spa borrows from centuries of desert wisdom — heat, salt, oil,
-            and stillness — to unwind the body and quiet the mind.
+            Our operations center and helpdesk run 24/7/365. We catch issues
+            before they become outages and resolve tickets fast — with real
+            engineers, not scripts.
           </p>
           <ul className="feature-list reveal delay-3">
-            {WELLNESS_FEATURES.map((f) => (
+            {SUPPORT_FEATURES.map((f) => (
               <li key={f.text}>
                 <iconify-icon icon={f.icon}></iconify-icon>
                 {f.text}
@@ -319,51 +319,51 @@ function Wellness() {
   )
 }
 
-/* ============================ DINING ===================================== */
-function Dining() {
+/* =========================== EXPERTISE =================================== */
+function Expertise() {
   return (
-    <section className="night-section dining" id="dining">
+    <section className="night-section dining" id="expertise">
       <div className="night-glow"></div>
       <div className="container">
         <div className="section-head">
-          <span className="eyebrow reveal">Dining</span>
+          <span className="eyebrow reveal">Expertise</span>
           <h2 className="section-title reveal delay-1">
-            A table beneath the <em>stars</em>
+            A stack we <em>master</em>
           </h2>
           <p className="reveal delay-2">
-            Fire-cooked feasts, foraged desert botanicals, and vintages chosen
-            to meet the cool of the night.
+            From cloud platforms to modern application frameworks, our engineers
+            work fluently across the technologies your business runs on.
           </p>
         </div>
 
         <div className="bento reveal delay-1">
           <div className="bento-item bento-large">
-            <img src={assets.dining} alt="Open-fire desert dining" />
+            <img src={assets.expertise} alt="Cloud infrastructure engineering" />
             <div className="bento-overlay">
               <h3>
-                The <em>Fire</em> Table
+                Cloud <em>Infrastructure</em>
               </h3>
-              <p>Whole-lamb mechoui roasted over embers at dusk</p>
+              <p>AWS · Azure · GCP · Kubernetes · Terraform</p>
             </div>
           </div>
 
           <div className="bento-item">
-            <img src={assets.suiteOasis} alt="Botanical cocktails" />
+            <img src={assets.serviceCloud} alt="Application development" />
             <div className="bento-overlay">
               <h3>
-                Desert <em>Botanica</em>
+                App <em>Development</em>
               </h3>
-              <p>Foraged infusions & rare spirits</p>
+              <p>React · Node · Python · .NET</p>
             </div>
           </div>
 
           <div className="bento-item">
-            <img src={assets.philosophy} alt="Private dune dinner" />
+            <img src={assets.serviceSecurity} alt="Data and AI" />
             <div className="bento-overlay">
               <h3>
-                Dune <em>Suppers</em>
+                Data &amp; <em>AI</em>
               </h3>
-              <p>Private tables set upon the sand</p>
+              <p>Pipelines, analytics & automation</p>
             </div>
           </div>
         </div>
@@ -372,48 +372,48 @@ function Dining() {
   )
 }
 
-/* ========================== EXCURSIONS =================================== */
-const EXCURSIONS = [
+/* ============================ PROCESS =================================== */
+const PROCESS = [
   {
-    img: assets.caravan,
-    title: 'Camel',
-    accent: 'Caravan',
-    desc: 'Trace the ancient trade routes at golden hour aboard our heritage caravan, guided by Bedouin storytellers.',
-    tag: '3 hours · Sunset',
-    icon: 'lucide:footprints',
+    img: assets.process1,
+    title: 'Discovery &',
+    accent: 'Strategy',
+    desc: 'We audit your environment, surface risks, and design a roadmap aligned to your business goals and budget.',
+    tag: 'Step · Assess',
+    icon: 'lucide:search',
   },
   {
-    img: assets.stargazing,
-    title: 'Desert',
-    accent: 'Stargazing',
-    desc: 'An astronomer-led night beneath one of the darkest skies on earth, with telescopes and warm spiced tea.',
-    tag: '2 hours · Nightly',
-    icon: 'lucide:telescope',
+    img: assets.process2,
+    title: 'Build &',
+    accent: 'Migrate',
+    desc: 'We implement, migrate, and integrate with minimal disruption — clear milestones, clean handovers, no drama.',
+    tag: 'Step · Deliver',
+    icon: 'lucide:code-2',
   },
   {
-    img: assets.sandboarding,
-    title: 'Dune',
-    accent: 'Sandboarding',
-    desc: 'Carve down the great western dunes on hand-waxed boards, with a champagne pause at the summit.',
-    tag: '2 hours · Morning',
-    icon: 'lucide:wind',
+    img: assets.process3,
+    title: 'Manage &',
+    accent: 'Optimize',
+    desc: 'We monitor, support, and continuously improve your systems as a long-term partner invested in your uptime.',
+    tag: 'Step · Operate',
+    icon: 'lucide:refresh-cw',
   },
 ]
 
-function Excursions() {
+function Process() {
   return (
-    <section className="night-section excursions" id="excursions">
+    <section className="night-section excursions" id="process">
       <div className="night-glow"></div>
       <div className="container">
         <div className="section-head">
-          <span className="eyebrow reveal">Excursions</span>
+          <span className="eyebrow reveal">How We Work</span>
           <h2 className="section-title reveal delay-1">
-            Venture into the <em>vast</em>
+            From strategy to <em>steady state</em>
           </h2>
         </div>
 
         <div className="excursion-list">
-          {EXCURSIONS.map((e, i) => (
+          {PROCESS.map((e, i) => (
             <article className="excursion-card reveal" key={e.accent}>
               <div className="excursion-media">
                 <img src={e.img} alt={`${e.title} ${e.accent}`} />
@@ -439,38 +439,38 @@ function Excursions() {
   )
 }
 
-/* ============================ RESERVE ==================================== */
-const RESERVE_PERKS = [
-  'Private airport transfer by 4x4',
-  'Daily desert breakfast & sunset ritual',
-  'Dedicated personal concierge',
+/* ============================ CONTACT =================================== */
+const CONTACT_PERKS = [
+  'Free initial IT assessment',
+  'No long-term lock-in contracts',
+  'A dedicated account engineer',
 ]
 
-function Reserve() {
+function Contact() {
   const onSubmit = (e) => {
     e.preventDefault()
     e.currentTarget.reset()
-    alert('Thank you — our concierge will be in touch to confirm your escape.')
+    alert('Thanks! Our team will get back to you within one business day.')
   }
 
   return (
-    <section className="reserve" id="reserve">
+    <section className="reserve" id="contact">
       <div className="reserve-bg">
-        <img src={assets.reserve} alt="Sirocco at dusk" />
+        <img src={assets.contact} alt="HEXCYRA offices at dusk" />
       </div>
 
       <div className="container reserve-grid">
         <div className="reserve-copy">
-          <span className="eyebrow reveal">Reserve</span>
+          <span className="eyebrow reveal">Contact</span>
           <h2 className="section-title reveal delay-1">
-            Begin your <em>descent</em> into the sands
+            Let&rsquo;s build something <em>reliable</em>
           </h2>
           <p className="reveal delay-2">
-            Availability is intentionally limited so that stillness is never
-            crowded. Share your dates and our concierge will craft the rest.
+            Tell us about your systems and goals. We&rsquo;ll respond within one
+            business day with a tailored plan — no obligation.
           </p>
           <ul className="reserve-perks reveal delay-3">
-            {RESERVE_PERKS.map((p) => (
+            {CONTACT_PERKS.map((p) => (
               <li key={p}>
                 <iconify-icon icon="lucide:check"></iconify-icon>
                 {p}
@@ -481,9 +481,9 @@ function Reserve() {
 
         <form className="reserve-card reveal delay-2" onSubmit={onSubmit}>
           <h3>
-            Request an <em>invitation</em>
+            Request a <em>consultation</em>
           </h3>
-          <p>No payment required to enquire.</p>
+          <p>No obligation. We reply within 24 hours.</p>
 
           <div className="field">
             <label htmlFor="name">Full name</label>
@@ -491,27 +491,28 @@ function Reserve() {
           </div>
 
           <div className="field">
-            <label htmlFor="email">Email</label>
-            <input id="email" type="email" placeholder="you@email.com" required />
+            <label htmlFor="email">Work email</label>
+            <input id="email" type="email" placeholder="you@company.com" required />
           </div>
 
           <div className="field-row">
             <div className="field">
-              <label htmlFor="arrival">Arrival</label>
-              <input id="arrival" type="date" required />
+              <label htmlFor="company">Company</label>
+              <input id="company" type="text" placeholder="Company name" required />
             </div>
             <div className="field">
-              <label htmlFor="suite">Suite</label>
-              <select id="suite" defaultValue="Dune">
-                <option>The Dune</option>
-                <option>The Oasis</option>
-                <option>The Riad</option>
+              <label htmlFor="service">Service</label>
+              <select id="service" defaultValue="Managed IT">
+                <option>Managed IT</option>
+                <option>Cloud &amp; DevOps</option>
+                <option>Cybersecurity</option>
+                <option>Other / Not sure</option>
               </select>
             </div>
           </div>
 
           <button className="reserve-submit" type="submit">
-            Request Invitation
+            Request Consultation
           </button>
         </form>
       </div>
@@ -528,51 +529,52 @@ function Footer() {
           <div className="footer-brand">
             <div className="nav-logo">
               <span className="mark">
-                <iconify-icon icon="lucide:sun"></iconify-icon>
+                <iconify-icon icon="lucide:hexagon"></iconify-icon>
               </span>
-              Sirocco
+              HEXCYRA
             </div>
             <p>
-              A luxury desert retreat where sculpted dunes, starlit skies, and
-              quiet indulgence meet. Reserve your escape into the sands.
+              HEXCYRA is an IT services company delivering managed
+              infrastructure, cloud engineering, cybersecurity, and 24/7 support
+              to growing businesses.
             </p>
           </div>
 
           <div className="footer-col">
-            <h4>Explore</h4>
+            <h4>Services</h4>
             <ul>
-              <li><a href="#philosophy">Philosophy</a></li>
-              <li><a href="#suites">Suites</a></li>
-              <li><a href="#wellness">Wellness</a></li>
-              <li><a href="#dining">Dining</a></li>
+              <li><a href="#services">Managed IT</a></li>
+              <li><a href="#services">Cloud &amp; DevOps</a></li>
+              <li><a href="#services">Cybersecurity</a></li>
+              <li><a href="#expertise">Consulting</a></li>
             </ul>
           </div>
 
           <div className="footer-col">
-            <h4>Visit</h4>
+            <h4>Company</h4>
             <ul>
-              <li><a href="#excursions">Excursions</a></li>
-              <li><a href="#reserve">Reserve</a></li>
-              <li><a href="#reserve">Private Events</a></li>
-              <li><a href="#reserve">Journal</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#process">Process</a></li>
+              <li><a href="#support">Support</a></li>
+              <li><a href="#contact">Contact</a></li>
             </ul>
           </div>
 
           <div className="footer-col">
             <h4>Contact</h4>
             <ul>
-              <li><a href="mailto:concierge@sirocco.desert">concierge@sirocco.desert</a></li>
-              <li><a href="tel:+000000000">+000 000 0000</a></li>
-              <li><a href="#reserve">The Western Erg</a></li>
+              <li><a href="mailto:hello@hexcyra.com">hello@hexcyra.com</a></li>
+              <li><a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+              <li><a href="#contact">Remote &amp; On-site</a></li>
             </ul>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Sirocco Desert Retreat. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} HEXCYRA. All rights reserved.</span>
           <div className="footer-social">
-            <a href="#top" aria-label="Instagram"><iconify-icon icon="lucide:instagram"></iconify-icon></a>
-            <a href="#top" aria-label="Facebook"><iconify-icon icon="lucide:facebook"></iconify-icon></a>
+            <a href="#top" aria-label="LinkedIn"><iconify-icon icon="lucide:linkedin"></iconify-icon></a>
+            <a href="#top" aria-label="GitHub"><iconify-icon icon="lucide:github"></iconify-icon></a>
             <a href="#top" aria-label="Twitter"><iconify-icon icon="lucide:twitter"></iconify-icon></a>
           </div>
         </div>
@@ -592,13 +594,13 @@ export default function App() {
       <Nav isScrolled={isScrolled} isNavDark={isNavDark} />
       <main>
         <Hero scrollY={scrollY} />
-        <Philosophy />
-        <Suites />
+        <About />
+        <Services />
         <Transition innerRef={transitionRef} />
-        <Wellness />
-        <Dining />
-        <Excursions />
-        <Reserve />
+        <Support />
+        <Expertise />
+        <Process />
+        <Contact />
       </main>
       <Footer />
     </>
