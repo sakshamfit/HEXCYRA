@@ -1,141 +1,25 @@
-# HEXCYRA — Independent Creative Studio
+# Lumina — Financial workspace
 
-A single-page site for **HEXCYRA — Independent Creative Studio**, built with
-**Tailwind CSS** and **vanilla JavaScript**. No frameworks and no build step at runtime:
-open `index.html` and it works. Deployment is still a two-command build (`npm run build`)
-that compiles the CSS and stages the files into `public/` — see [Deploy](#deploy-vercel).
+A responsive Lumina SaaS landing page built with Tailwind CSS and vanilla JavaScript. It includes an ambient aura background, image collage, enterprise feature cards, a finance dashboard preview, pricing and integrations, customer proof, and responsive navigation.
 
-```
-.
-├── index.html                  # the whole site — 9 sections in the exact reference order
-├── assets/
-│   ├── css/styles.css          # compiled Tailwind output (committed, served as-is)
-│   └── js/main.js              # observers, header state, mobile menu, accordions
-├── src/input.css               # Tailwind source: @tailwind directives + @layer base/components
-├── scripts/build-static.mjs    # assembles the deployable bundle into ./public
-├── tailwind.config.js          # Inter font stack, extended opacity scale, custom keyframes
-├── vercel.json                 # framework "Other", output dir public, cache headers
-├── public/                     # generated build output — gitignored, never edited by hand
-└── package.json                # tailwindcss CLI scripts
+## Run locally
+
+```sh
+npm install
+npm run build
+npm run serve
 ```
 
-## Run it
+The page is authored in `index.html`, with custom styles in `src/input.css` and interactions in `assets/js/main.js`. `npm run build` compiles the Tailwind stylesheet and stages the static site into `public/` for Vercel. The compiled stylesheet is committed so the page can also be opened directly.
 
-```bash
-npm install          # installs the Tailwind CLI (devDependency)
-npm run serve        # static server on http://0.0.0.0:8080 (serves the repo root)
-npm run dev:css      # rebuild assets/css/styles.css on every markup change
-npm run build        # build:css + build:static
-npm run build:css    # one-off minified Tailwind build
-npm run build:static # copy index.html + assets/ into ./public
-```
+## Background scene
 
-`assets/css/styles.css` is generated, but it is committed on purpose so the page can be
-served as a plain static file with no build step. Re-run `npm run build:css` after editing
-markup or `src/input.css`.
+The CSS aura and glow geometry render without external setup. To enable a published Unicorn Studio scene, add its project ID as `data-us-project` to an element inside `.aura-background-component`; the JavaScript initializes the published scene when that ID is present. The Unicorn Studio script is pinned to v1.4.29.
 
-## Deploy (Vercel)
+## Accessibility and responsive behavior
 
-The repo root doubles as the site root, but static hosts want the *output* in a directory
-of its own. `npm run build` therefore ends with `build:static`, which copies the shipping
-files into `public/` — the directory `vercel.json` names as the output:
-
-```jsonc
-{
-  "framework": null,          // "Other" preset — no framework here
-  "buildCommand": "npm run build",
-  "outputDirectory": "public"
-}
-```
-
-`public/` is gitignored and rebuilt on every deploy, so `index.html` and `assets/` stay the
-single source of truth and nothing is duplicated in the repo. Vercel needs no dashboard
-overrides: the checked-in `vercel.json` wins. To preview the exact deployable bundle
-locally, serve `public/` instead of the root:
-
-```bash
-npm run build && python3 -m http.server 8080 --bind 0.0.0.0 --directory public
-```
-
-## Runtime dependencies (loaded from CDN by the browser)
-
-| Dependency | URL |
-| --- | --- |
-| Lucide icons | `https://unpkg.com/lucide@latest` |
-| Google Fonts — Inter 400 / 500 / 600 | imported at the top of `src/input.css` |
-
-`lucide@latest` is now v1, which changed two things that this repo handles explicitly:
-
-- `createIcons()` **throws** when called without an icons object, so `assets/js/main.js`
-  calls `lucide.createIcons({ icons: lucide.icons })` (with a v0-style fallback and a
-  `try/catch` so a blocked CDN can never break the rest of the page script).
-- Brand icons (`instagram`, `linkedin`, `twitter`, `dribbble`) were **removed** from
-  Lucide v1. Those four marks are drawn as inline SVG in Lucide's own 24×24 / 2px stroke
-  grammar, tagged `data-brand-icon`.
-
-## Fidelity notes (the quirks are intentional)
-
-- **Palette is strictly hex:** `#111213` dark, `#f06a18` hero orange, `#e9e7e1` work
-  off-white, `#ff6a1a` accent orange (never stock Tailwind `orange-*`).
-- **`#work` is nested inside an `#e9e7e1` container** even though the site is dark themed:
-  `<div class="bg-[#e9e7e1] text-[#111213]"><section id="work">…</section></div>`.
-- **Navigation highlighting** uses an `IntersectionObserver` with
-  `rootMargin: '-35% 0px -55% 0px'` — the active link swaps `text-white/45` →
-  `text-[#f4f2ed]` and scales in its `#ff6a1a` underline.
-- **Project index rows** layer hover colours with `text-white/45` +
-  `group-hover:text-[#ff6a1a]/70` spans alongside a `group-hover:text-[#ff6a1a]` title.
-- **Font is Inter only** — `fontFamily.sans` is overridden in `tailwind.config.js` and
-  `body` also declares `font-family: 'Inter', …` in `@layer base`.
-- **Skip link** stays `z-[100]` and `-translate-y-24`, sliding to `focus:translate-y-0`
-  with `opacity-0 → focus:opacity-100`.
-- **Selection colour** is `#ff6a1a` on black — via `selection:bg-[#ff6a1a]
-  selection:text-black` on `<body>` and a `::selection` rule in CSS.
-- **Hero** is `min-h-screen relative overflow-hidden`; the image layer uses
-  `mix-blend-multiply` over `bg-[#f06a18]`, with an absolute
-  `bg-gradient-to-b from-black/5 via-transparent to-black/40` overlay above it. Hero copy
-  is bottom-aligned (`flex flex-col justify-end`, `pb-8 pt-28`) inside a `max-w-5xl` block.
-- **Journal images** are `grayscale` by default and go `group-hover:grayscale-0` with a
-  `group-hover:scale-[1.05]` over `duration-700`.
-- **Process accordion allows exactly one open item**; the FAQ accordion toggles
-  independently. Both swap a Lucide `plus` ↔ `minus` icon and keep `aria-expanded` /
-  `aria-controls` / `role="region"` in sync.
-
-## Interaction map (`assets/js/main.js`)
-
-| Behaviour | Detail |
-| --- | --- |
-| Header on scroll | past `scrollY > 100`: adds `bg-[#111213]/90`, `backdrop-blur-md`, `border-white/15`; removes `border-transparent`. rAF-throttled passive listener. |
-| Hero entrance | every `[data-hero]` goes `translateY(1.5rem) → 0` and `opacity 0 → 1` with a **105 ms** stagger. |
-| Scroll reveals | every `[data-reveal]` goes `translateY(22px) → 0` and `opacity 0 → 1`, honouring per-element `data-reveal-delay`. |
-| Mobile menu | `hidden` ↔ `flex` on `#mobile-menu`, `overflow-hidden` on `<body>`, `aria-expanded` + menu/close icon swap, closes on link click, `Escape`, and ≥1024 px resize. |
-| Accordions | `.process-button` / `.faq-button` toggle their `.process-detail` / `.faq-answer` panels. |
-
-## Accessibility & motion
-
-- Landmarks and one `h1`, sections carry `scroll-mt-24` so anchors clear the fixed header.
-- Accordions expose `aria-expanded`, `aria-controls` and `role="region"`.
-- `prefers-reduced-motion: reduce` disables the reveal/hero transforms, collapses transition
-  durations, and the JS skips the observers entirely (elements render visible immediately).
-- Without JavaScript, `.no-js` in `src/input.css` reveals everything, so no content is
-  stranded at `opacity: 0`.
-- Focus rings use `#ff6a1a`, switching to `#111213` inside the off-white and orange
-  sections where orange would disappear.
-
-## Assets
-
-Hero, four project images and three journal images are hot-linked from the reference asset
-map (Supabase public storage) at their original `_3840w.png` URLs, with `loading="lazy"` +
-`decoding="async"` below the fold and `fetchpriority="high"` on the hero.
-
-## Verification
-
-Two throwaway harnesses were used during development (they live outside the repo):
-
-- **Class audit** — every class token in `index.html` and `main.js` (441 tokens) is checked
-  against the compiled stylesheet, so no utility silently fails to generate. This is what
-  caught `bg-[#111213]/98`: `98` is not in Tailwind's default opacity scale, so the scale is
-  widened in `tailwind.config.js` rather than rewriting the reference class string.
-- **jsdom behaviour suite** — 61 assertions covering icon rendering, the 105 ms hero
-  stagger, both observers (including the exact `-35% 0px -55% 0px` root margin), header
-  scroll classes, mobile-menu state, and both accordions; re-run under
-  `prefers-reduced-motion` (59 assertions).
+- Mobile navigation opens and closes with button, Escape, and link activation.
+- Pricing switches between monthly and annual prices.
+- Sections reveal with IntersectionObserver; reduced-motion settings show content immediately.
+- Dashboard and comparison tables retain horizontal scrolling on narrow screens, with scrollbar chrome hidden.
+- If external icon scripts fail, layout and page navigation remain usable.
