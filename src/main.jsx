@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import 'iconify-icon'
 import App from './App.jsx'
 import './index.css'
 
