@@ -1,8 +1,8 @@
 {
-  "name": "sirocco",
+  "name": "hexcyra",
   "version": "1.0.0",
   "private": true,
-  "description": "Sirocco — Luxury Desert Retreat. Single-page site built with React and Vite.",
+  "description": "HEXCYRA — Enterprise IT & Managed Services fullscreen landing page built with React, Tailwind CSS, and Lucide React.",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "iconify-icon": "^2.1.0",
+    "autoprefixer": "^10.6.1",
+    "lucide-react": "^1.48.0",
+    "postcss": "^8.5.28",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
