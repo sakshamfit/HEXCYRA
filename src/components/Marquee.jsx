@@ -11,7 +11,7 @@ export default function Marquee() {
   const track = [...marqueeItems, ...marqueeItems]
 
   return (
-    <section aria-label="What we do" className="relative overflow-hidden py-10 md:py-14">
+    <section aria-label="Capabilities" className="relative overflow-hidden py-10 md:py-14">
       <div className="-rotate-1 border-y-2 border-black bg-lime-300 py-4 md:py-6">
         <div className="flex w-max animate-marquee items-center">
           {track.map((item, i) => (

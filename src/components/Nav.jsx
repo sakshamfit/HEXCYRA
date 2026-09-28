@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ArrowRight, Menu, X } from 'lucide-react'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { brand, navLinks } from '../siteData.js'
 import { useScrolled } from '../hooks.js'
 
@@ -54,15 +54,15 @@ export default function Nav() {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* "Let's Talk" — fuchsia panel slides in from the left on hover */}
+            {/* CTA — fuchsia panel slides in from the left on hover */}
             <button
               onClick={() => go('contact')}
               className="group relative hidden overflow-hidden rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white md:inline-flex"
             >
               <span className="absolute inset-0 origin-left scale-x-0 bg-fuchsia-500 transition-transform duration-500 ease-pop group-hover:scale-x-100" />
               <span className="relative flex items-center gap-2">
-                Let&apos;s Talk
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                Start a Project
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </span>
             </button>
 
@@ -108,8 +108,8 @@ export default function Nav() {
               onClick={() => go('contact')}
               className="mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-fuchsia-500"
             >
-              Let&apos;s Talk
-              <ArrowRight className="h-4 w-4" />
+              Start a Project
+              <ArrowUpRight className="h-4 w-4" />
             </button>
           </div>
         </div>

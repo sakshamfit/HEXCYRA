@@ -2,19 +2,22 @@ import React from 'react'
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
 import Marquee from './components/Marquee.jsx'
+import Intro from './components/Intro.jsx'
+import Solutions from './components/Solutions.jsx'
+import Approach from './components/Approach.jsx'
 import Work from './components/Work.jsx'
-import Services from './components/Services.jsx'
-import Stats from './components/Stats.jsx'
-import Studio from './components/Studio.jsx'
-import Process from './components/Process.jsx'
-import Footer from './components/Footer.jsx'
+import Clients from './components/Clients.jsx'
+import About from './components/About.jsx'
+import Contact from './components/Contact.jsx'
 import { useReveal } from './hooks.js'
 
 /* ==========================================================================
-   HEXCYRA — IT & Managed Services
-   UI recreated to the "digital agency" reference (playful, high-contrast,
-   organic-modern) while every piece of copy, pricing and imagery still comes
-   from the previous build's data set (src/siteData.js + /public/img).
+   HEXCYRA — Technology. Security. Growth.
+   UI: the digital-agency reference (playful, high-contrast, organic-modern).
+   Content: the supplied HEXCYRA copy, in its original section order —
+   hero · 01 what we do · 02 solutions · 03 approach · 04 selected work ·
+   05 who we work with · 06 about · 07 academy · 08 contact.
+   No imagery, no invented numbers.
    ========================================================================== */
 export default function App() {
   useReveal()
@@ -26,14 +29,15 @@ export default function App() {
       <main>
         <Hero />
         <Marquee />
+        <Intro />
+        <Solutions />
+        <Approach />
         <Work />
-        <Services />
-        <Stats />
-        <Studio />
-        <Process />
+        <Clients />
+        <About />
       </main>
 
-      <Footer />
+      <Contact />
     </div>
   )
 }
