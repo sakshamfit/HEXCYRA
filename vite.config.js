@@ -14,6 +14,17 @@ export default defineConfig({
       '@': path.resolve(dirname, './src'),
     },
   },
+  build: {
+    target: 'es2019',
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+        },
+      },
+    },
+  },
   server: {
     host: true,
     port: 5173,

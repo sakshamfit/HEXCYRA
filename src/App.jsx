@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
 import Marquee from './components/Marquee.jsx'
-import Showcase from './components/Showcase.jsx'
 import Intro from './components/Intro.jsx'
 import Solutions from './components/Solutions.jsx'
 import Approach from './components/Approach.jsx'
@@ -11,6 +10,24 @@ import Clients from './components/Clients.jsx'
 import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
 import { useReveal } from './hooks.js'
+
+/* The showcase band carries framer-motion (~90 kB gzip). Splitting it keeps
+   that weight out of the critical path so the page paints immediately. */
+const Showcase = lazy(() => import('./components/Showcase.jsx'))
+
+function ShowcaseFallback() {
+  return (
+    <section
+      aria-hidden="true"
+      className="flex h-screen min-h-[640px] w-full items-center justify-center bg-[#FAFAFA]"
+    >
+      <span className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-lime-500" />
+        Loading showcase
+      </span>
+    </section>
+  )
+}
 
 /* ==========================================================================
    HEXCYRA — Technology. Security. Growth.
@@ -31,7 +48,9 @@ export default function App() {
       <main>
         <Hero />
         <Marquee />
-        <Showcase />
+        <Suspense fallback={<ShowcaseFallback />}>
+          <Showcase />
+        </Suspense>
         <Intro />
         <Solutions />
         <Approach />
