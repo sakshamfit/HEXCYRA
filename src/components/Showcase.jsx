@@ -2,31 +2,22 @@ import React from 'react'
 import ScrollMorphHero from '@/components/ui/scroll-morph-hero'
 import { brand, hero, marqueeItems, solutions } from '../siteData.js'
 
-/* Twenty tiles in the site's own palette. `no` is the only text on the front
-   face; the back shows the brand mark. No photography.
-   To use photos instead, add `src` to any tile — the card then renders it
-   exactly like the original component:
-     { no: '01', src: 'https://…/photo.jpg', label: 'Details' }
-   Steps 1-3 below are what the deck does on entry: scatter → line → circle,
-   then it morphs into the bottom arc as you keep scrolling. */
-const TONES = [
-  'from-fuchsia-500 to-indigo-600',
-  'from-indigo-500 to-sky-500',
-  'from-lime-300 to-emerald-400',
-  'from-rose-500 to-fuchsia-500',
-  'from-orange-400 to-amber-300',
-  'from-teal-400 to-sky-500',
-  'from-violet-500 to-purple-600',
-  'from-slate-700 to-slate-900',
-  'from-amber-300 to-lime-300',
-  'from-sky-400 to-indigo-500',
+/* Six minimal photographs, cycled across twenty tiles. Each is ~11-14 kB and
+   they are fetched lazily, after the showcase chunk itself has arrived.
+   Card fronts show the photo; card backs carry the tile number and the
+   capability name. */
+const DECK_IMAGES = [
+  '/img/deck-1.jpg',
+  '/img/deck-2.jpg',
+  '/img/deck-3.jpg',
+  '/img/deck-4.jpg',
+  '/img/deck-5.jpg',
+  '/img/deck-6.jpg',
 ]
 
-/* 20 tiles — six come from the capability list, so the deck carries the
-   site's own words on its card backs. */
 const DECK = Array.from({ length: 20 }, (_, i) => ({
   no: String(i + 1).padStart(2, '0'),
-  tone: TONES[i % TONES.length],
+  src: DECK_IMAGES[i % DECK_IMAGES.length],
   label: marqueeItems[i % marqueeItems.length],
 }))
 

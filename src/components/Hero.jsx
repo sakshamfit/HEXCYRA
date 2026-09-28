@@ -1,12 +1,13 @@
 import React from 'react'
 import { ArrowDown } from 'lucide-react'
-import { hero } from '../siteData.js'
+import AnimatedHero from '@/components/ui/animated-hero'
+import { hero, marqueeItems } from '../siteData.js'
 
 /* ==========================================================================
    SECTION 2 — HERO
    Type-led, blob-backed opening: purple blob top-right (animate-pulse) and
-   lime blob bottom-left, both blur-3xl at 40% opacity. No imagery — the
-   "system" panel is built purely from borders, gradients and type.
+   lime blob bottom-left, both blur-3xl at 40% opacity. No background
+   photography — the headline carries the animation instead.
    ========================================================================== */
 export default function Hero() {
   const go = (id) =>
@@ -27,7 +28,7 @@ export default function Hero() {
               {hero.badge}
             </span>
 
-            {/* Headline */}
+            {/* Headline — supplied copy, static */}
             <h1 className="mt-7 font-display text-6xl md:text-8xl lg:text-9xl font-extrabold leading-[0.95] tracking-tight text-slate-900">
               {hero.titleLines[0]}
               <br />
@@ -37,6 +38,17 @@ export default function Hero() {
               <br />
               {hero.titleTail}
             </h1>
+
+            {/* Rolling capability line — the animated-hero pattern, cycling the
+                six capabilities from the supplied content. */}
+            <AnimatedHero
+              staticText="Expertise in"
+              words={marqueeItems}
+              interval={2400}
+              className="mt-8"
+              headingClassName="text-3xl md:text-5xl leading-[1.05] text-slate-900"
+              rollingClassName="h-[1.3em]"
+            />
           </div>
 
           {/* Copy / call-to-action column */}
