@@ -138,6 +138,12 @@
     transform: scale(1.02) rotate(-1deg);
   }
 
+  /* 3D perspective helper used by the scroll-morph deck (Tailwind 4 ships
+     "perspective-1000" as a first-class utility; Tailwind 3 does not). */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
   /* Vertical (rotated) display type used by the rose work card. */
   .text-vertical {
     writing-mode: vertical-rl;

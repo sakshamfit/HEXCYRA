@@ -2,6 +2,7 @@ import React from 'react'
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
 import Marquee from './components/Marquee.jsx'
+import Showcase from './components/Showcase.jsx'
 import Intro from './components/Intro.jsx'
 import Solutions from './components/Solutions.jsx'
 import Approach from './components/Approach.jsx'
@@ -15,8 +16,9 @@ import { useReveal } from './hooks.js'
    HEXCYRA — Technology. Security. Growth.
    UI: the digital-agency reference (playful, high-contrast, organic-modern).
    Content: the supplied HEXCYRA copy, in its original section order —
-   hero · 01 what we do · 02 solutions · 03 approach · 04 selected work ·
-   05 who we work with · 06 about · 07 academy · 08 contact.
+   hero · marquee · showcase · 01 what we do · 02 solutions · 03 approach ·
+   04 selected work · 05 who we work with · 06 about · 07 academy ·
+   08 contact.
    No imagery, no invented numbers.
    ========================================================================== */
 export default function App() {
@@ -29,6 +31,7 @@ export default function App() {
       <main>
         <Hero />
         <Marquee />
+        <Showcase />
         <Intro />
         <Solutions />
         <Approach />
