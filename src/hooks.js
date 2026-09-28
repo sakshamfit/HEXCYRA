@@ -2,9 +2,8 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 
 /* -------------------------------------------------------------------------
    useReveal — attaches IntersectionObserver reveal behaviour to all elements
-   carrying the `.reveal` class inside the given root (defaults to document).
-   Adds `.visible` once an element crosses the viewport threshold, then unob-
-   serves it so the transition only plays once.
+   carrying the `.reveal` class. Adds `.visible` once an element crosses the
+   viewport threshold, then unobserves it so the transition only plays once.
    ------------------------------------------------------------------------- */
 export function useReveal() {
   useEffect(() => {
@@ -23,12 +22,41 @@ export function useReveal() {
           }
         })
       },
-      { threshold: 0.15, rootMargin: '0px 0px -8% 0px' },
+      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
     )
 
     els.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [])
+  })
+}
+
+/* -------------------------------------------------------------------------
+   useScrolled — rAF-throttled scroll listener. Flips to true once the page
+   passes `threshold` px, which is what swaps the nav pill from
+   bg-white/80 to bg-white/95 + shadow-lg.
+   ------------------------------------------------------------------------- */
+export function useScrolled(threshold = 50) {
+  const [scrolled, setScrolled] = useState(false)
+  const ticking = useRef(false)
+
+  const update = useCallback(() => {
+    setScrolled((window.scrollY || window.pageYOffset) > threshold)
+    ticking.current = false
+  }, [threshold])
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!ticking.current) {
+        ticking.current = true
+        requestAnimationFrame(update)
+      }
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [update])
+
+  return scrolled
 }
 
 /* -------------------------------------------------------------------------
@@ -84,47 +112,4 @@ export function useCounter(target, { duration = 1800, decimals = 0 } = {}) {
     decimals > 0 ? value.toFixed(decimals) : Math.round(value).toString()
 
   return { ref, display }
-}
-
-/* -------------------------------------------------------------------------
-   useScrollState — single rAF-throttled scroll listener (via a `ticking`
-   flag). Produces:
-     - scrollY  : latest scroll offset (for hero parallax)
-     - isScrolled: window scrolled past 60px
-     - isNavDark : window scrolled past (transition section top - 200px)
-   `transitionRef` points at the day→night transition section.
-   ------------------------------------------------------------------------- */
-export function useScrollState(transitionRef) {
-  const [scrollY, setScrollY] = useState(0)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isNavDark, setIsNavDark] = useState(false)
-  const ticking = useRef(false)
-
-  const update = useCallback(() => {
-    const y = window.scrollY || window.pageYOffset
-    setScrollY(y)
-    setIsScrolled(y > 60)
-
-    const node = transitionRef.current
-    if (node) {
-      const threshold = node.offsetTop - 200
-      setIsNavDark(y > threshold)
-    }
-    ticking.current = false
-  }, [transitionRef])
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (!ticking.current) {
-        ticking.current = true
-        requestAnimationFrame(update)
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    // Run once to establish initial state.
-    update()
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [update])
-
-  return { scrollY, isScrolled, isNavDark }
 }
