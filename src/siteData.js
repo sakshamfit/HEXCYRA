@@ -117,6 +117,55 @@ export const approach = {
     { no: '03', title: 'Build', desc: 'Design and development with regular, visible progress.' },
     { no: '04', title: 'Improve', desc: 'Launch, measure, secure and keep making it better.' },
   ],
+  /* Shape consumed by the radial orbital timeline. `icon` is resolved to a
+     Lucide component in the section; `status` / `energy` drive the node
+     visuals only and are free to change per step. */
+  timeline: [
+    {
+      id: 1,
+      title: 'Understand',
+      date: 'Step 01',
+      content: 'Business context, audience, current setup and goals.',
+      category: 'Understand',
+      icon: 'search',
+      relatedIds: [2],
+      status: 'completed',
+      energy: 100,
+    },
+    {
+      id: 2,
+      title: 'Plan',
+      date: 'Step 02',
+      content: 'Scope, structure, priorities and a clear route forward.',
+      category: 'Plan',
+      icon: 'plan',
+      relatedIds: [1, 3],
+      status: 'completed',
+      energy: 85,
+    },
+    {
+      id: 3,
+      title: 'Build',
+      date: 'Step 03',
+      content: 'Design and development with regular, visible progress.',
+      category: 'Build',
+      icon: 'code',
+      relatedIds: [2, 4],
+      status: 'in-progress',
+      energy: 65,
+    },
+    {
+      id: 4,
+      title: 'Improve',
+      date: 'Step 04',
+      content: 'Launch, measure, secure and keep making it better.',
+      category: 'Improve',
+      icon: 'improve',
+      relatedIds: [3],
+      status: 'pending',
+      energy: 45,
+    },
+  ],
 }
 
 /* ----------------------------------------------------- 04 / Selected work */
