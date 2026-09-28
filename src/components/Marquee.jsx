@@ -3,16 +3,23 @@ import { Star } from 'lucide-react'
 import { marqueeItems } from '../siteData.js'
 
 /* ==========================================================================
-   SECTION 3 — MARQUEE
+   MARQUEE
    Lime strip, border-y-2 border-black, tilted -1deg on the container and a
    continuous 20s linear translateX(0% → -50%) loop over a duplicated track.
+   `bare` drops the section padding and the strip's own fill, so the strip can
+   sit on a surface that already carries the colour (the portal's far side).
    ========================================================================== */
-export default function Marquee() {
+export default function Marquee({ bare = false }) {
   const track = [...marqueeItems, ...marqueeItems]
 
   return (
-    <section aria-label="Capabilities" className="relative overflow-hidden py-10 md:py-14">
-      <div className="-rotate-1 border-y-2 border-black bg-lime-300 py-4 md:py-6">
+    <section
+      aria-label="Capabilities"
+      className={`relative overflow-hidden ${bare ? '' : 'py-10 md:py-14'}`}
+    >
+      <div
+        className={`-rotate-1 border-y-2 border-black ${bare ? 'bg-transparent' : 'bg-lime-300'} py-4 md:py-6`}
+      >
         <div className="flex w-max animate-marquee items-center">
           {track.map((item, i) => (
             <div key={`${item}-${i}`} className="flex shrink-0 items-center">
