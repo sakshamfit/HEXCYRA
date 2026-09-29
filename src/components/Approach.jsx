@@ -29,6 +29,8 @@ export default function Approach({ heading: Heading = 'h2' }) {
       <Timeline
         id="process-timeline"
         title={approach.title}
+        accent={approach.accent}
+        headingTag={Heading}
         periodLabel={approach.kicker}
         lead={approach.lead}
         milestones={milestones}

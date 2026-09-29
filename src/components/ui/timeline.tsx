@@ -17,6 +17,8 @@ export interface TimelineMilestone {
 
 export interface TimelineProps {
   title?: string;
+  accent?: string;
+  headingTag?: "h1" | "h2" | "h3";
   periodLabel?: string;
   lead?: string;
   milestones?: TimelineMilestone[];
@@ -24,8 +26,6 @@ export interface TimelineProps {
   textColor?: string;
   mutedTextColor?: string;
   activeColor?: string;
-  imageUrl?: string;
-  imageAlt?: string;
   duration?: number;
   className?: string;
   id?: string;
@@ -76,6 +76,8 @@ const DEFAULT_MILESTONES: TimelineMilestone[] = [
 
 export const Timeline: React.FC<TimelineProps> = ({
   title = "The Process",
+  accent = "in motion.",
+  headingTag = "h2",
   periodLabel = "Step 01 — Step 04",
   lead = "No unnecessary layers. We understand the requirement, shape the solution, show you what it looks like, then build and support it.",
   milestones = DEFAULT_MILESTONES,
@@ -83,14 +85,19 @@ export const Timeline: React.FC<TimelineProps> = ({
   textColor = "#ffffff",
   mutedTextColor = "#94a3b8",
   activeColor = "#a3e635",
-  imageUrl = "/img/work-business.jpg",
-  imageAlt = "HEXCYRA process architecture",
+  duration = 1.4,
   className,
   id = "timeline",
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const HeadingTag = headingTag;
   const trackRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  // While a programmatic scroll is in flight the scroll-sync handler must not
+  // re-derive activeIndex from the intermediate positions — otherwise the
+  // progress fill gets yanked back and forth while gliding to the target.
+  const programmaticScrollRef = useRef(false);
+  const programmaticTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const scrollToIndex = useCallback((index: number) => {
     const clamped = Math.max(0, Math.min(milestones.length - 1, index));
@@ -99,6 +106,12 @@ export const Timeline: React.FC<TimelineProps> = ({
     if (trackRef.current) {
       const card = trackRef.current.children[clamped] as HTMLElement;
       if (card) {
+        programmaticScrollRef.current = true;
+        if (programmaticTimerRef.current) clearTimeout(programmaticTimerRef.current);
+        // Safety valve for browsers without scrollend / cancelled scrolls.
+        programmaticTimerRef.current = setTimeout(() => {
+          programmaticScrollRef.current = false;
+        }, 1200);
         card.scrollIntoView({
           behavior: "smooth",
           block: "nearest",
@@ -116,7 +129,17 @@ export const Timeline: React.FC<TimelineProps> = ({
     const track = trackRef.current;
     if (!track) return;
 
+    const releaseLock = () => {
+      programmaticScrollRef.current = false;
+      if (programmaticTimerRef.current) {
+        clearTimeout(programmaticTimerRef.current);
+        programmaticTimerRef.current = null;
+      }
+    };
+
     const handleScroll = () => {
+      if (programmaticScrollRef.current) return;
+
       const cards = Array.from(track.children) as HTMLElement[];
       const trackCenter = track.scrollLeft + track.offsetWidth / 2;
 
@@ -136,7 +159,12 @@ export const Timeline: React.FC<TimelineProps> = ({
     };
 
     track.addEventListener("scroll", handleScroll, { passive: true });
-    return () => track.removeEventListener("scroll", handleScroll);
+    track.addEventListener("scrollend", releaseLock);
+    return () => {
+      track.removeEventListener("scroll", handleScroll);
+      track.removeEventListener("scrollend", releaseLock);
+      if (programmaticTimerRef.current) clearTimeout(programmaticTimerRef.current);
+    };
   }, []);
 
   return (
@@ -152,7 +180,7 @@ export const Timeline: React.FC<TimelineProps> = ({
 
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Header Row */}
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between border-b border-white/10 pb-12">
+        <div className="reveal flex flex-col gap-8 md:flex-row md:items-end md:justify-between border-b border-white/10 pb-12">
           <div className="max-w-2xl">
             <span
               className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-widest ring-1 ring-white/15 backdrop-blur-md"
@@ -162,12 +190,12 @@ export const Timeline: React.FC<TimelineProps> = ({
               {periodLabel}
             </span>
 
-            <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.12] tracking-tight md:text-6xl text-white">
+            <HeadingTag className="mt-6 font-display text-4xl font-extrabold leading-[1.12] tracking-tight md:text-6xl text-white">
               {title}{" "}
               <span className="bg-gradient-to-r from-lime-300 to-emerald-400 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
-                in motion.
+                {accent}
               </span>
-            </h2>
+            </HeadingTag>
 
             <p className="mt-4 text-base leading-relaxed text-white/70 md:text-lg">
               {lead}
@@ -195,24 +223,29 @@ export const Timeline: React.FC<TimelineProps> = ({
           </div>
         </div>
 
-        {/* Timeline Horizontal Progress Bar */}
-        <div className="relative mt-12 w-full">
+        {/* Timeline Horizontal Progress Bar — the fill stops exactly on the
+            active stepper dot (both share the same geometry: 56px edge
+            offsets with justify-between 56px cells). */}
+        <div className="reveal relative mt-12 w-full" style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
           <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-lime-400 via-fuchsia-500 to-indigo-400 transition-all duration-500 ease-out"
+              className="h-full bg-gradient-to-r from-lime-400 via-fuchsia-500 to-indigo-400 transition-all ease-out"
               style={{
-                width: `${((activeIndex + 1) / milestones.length) * 100}%`,
+                width: `calc(56px + ${activeIndex} * (100% - 112px) / ${Math.max(1, milestones.length - 1)})`,
+                transitionDuration: `${duration}s`,
               }}
             />
           </div>
 
           {/* Stepper Dots */}
-          <div className="flex justify-between -mt-2">
+          <div className="flex justify-between px-7 -mt-2">
             {milestones.map((m, i) => (
               <button
                 key={`dot-${m.id || i}`}
                 onClick={() => scrollToIndex(i)}
-                className="group flex flex-col items-center cursor-pointer focus:outline-none"
+                aria-label={`Go to ${m.period}`}
+                aria-current={i === activeIndex}
+                className="group flex w-14 flex-col items-center cursor-pointer focus:outline-none"
               >
                 <span
                   className={cn(
@@ -222,7 +255,7 @@ export const Timeline: React.FC<TimelineProps> = ({
                       : "border-white/30 bg-black group-hover:border-white/60"
                   )}
                 />
-                <span className="mt-2 text-[10px] font-mono uppercase tracking-wider text-white/50 group-hover:text-white transition-colors">
+                <span className="mt-2 whitespace-nowrap text-[10px] font-mono uppercase tracking-wider text-white/50 group-hover:text-white transition-colors">
                   {m.period}
                 </span>
               </button>
@@ -235,7 +268,7 @@ export const Timeline: React.FC<TimelineProps> = ({
           ref={trackRef}
           tabIndex={0}
           aria-label="Process timeline track"
-          className="no-scrollbar mt-12 flex gap-6 overflow-x-auto pb-8 pt-4 snap-x snap-mandatory focus:outline-none"
+          className="no-scrollbar mt-12 flex gap-6 overflow-x-auto pb-8 pt-4 snap-x snap-mandatory focus:outline-none [-webkit-mask-image:linear-gradient(to_right,transparent,black_3%,black_calc(100%_-_3rem),transparent)] [mask-image:linear-gradient(to_right,transparent,black_3%,black_calc(100%_-_3rem),transparent)]"
         >
           {milestones.map((milestone, idx) => {
             const isActive = idx === activeIndex;
@@ -244,13 +277,30 @@ export const Timeline: React.FC<TimelineProps> = ({
                 key={milestone.id || idx}
                 onClick={() => scrollToIndex(idx)}
                 className={cn(
-                  "group relative shrink-0 snap-center rounded-[2.5rem] border p-8 transition-all duration-500 cursor-pointer",
+                  "group relative reveal shrink-0 snap-center rounded-[2.5rem] border p-8 transition-all duration-500 cursor-pointer",
                   "w-[85vw] sm:w-[420px] md:w-[460px]",
                   isActive
-                    ? "border-lime-400/80 bg-white/[0.08] shadow-2xl shadow-lime-400/10 scale-[1.01]"
+                    ? "bg-white/[0.08] shadow-2xl shadow-lime-400/10"
                     : "border-white/10 bg-white/[0.03] hover:border-white/25 hover:bg-white/[0.05]"
                 )}
+                style={
+                  {
+                    "--reveal-delay": `${idx * 90}ms`,
+                    ...(isActive
+                      ? { borderColor: milestone.accentColor || activeColor }
+                      : null),
+                  } as React.CSSProperties
+                }
               >
+                {/* Stem — the active card reaches up toward the progress
+                    track, lit in its own accent. */}
+                {isActive && (
+                  <span
+                    className="absolute -top-4 left-1/2 h-4 w-px -translate-x-1/2 rounded-full"
+                    style={{ backgroundColor: milestone.accentColor || activeColor }}
+                  />
+                )}
+
                 {/* Milestone Card Top Row */}
                 <div className="flex items-center justify-between border-b border-white/10 pb-5">
                   <div className="flex items-center gap-3">
@@ -276,15 +326,21 @@ export const Timeline: React.FC<TimelineProps> = ({
                   <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider bg-white/10 text-white/70">
                     {milestone.status === "completed" ? (
                       <CheckCircle2 className="h-3 w-3 text-lime-400" />
+                    ) : milestone.status === "active" ? (
+                      <Clock className="h-3 w-3 animate-pulse text-fuchsia-400" />
                     ) : (
-                      <Clock className="h-3 w-3 text-fuchsia-400 animate-spin" />
+                      <Clock className="h-3 w-3 text-white/40" />
                     )}
                     {milestone.date}
                   </span>
                 </div>
 
-                {/* Milestone Content */}
-                <div className="mt-6">
+                {/* Milestone Content — re-plays the existing fade-slide-up
+                    entrance whenever this card becomes the active one */}
+                <div
+                  key={`copy-${isActive ? activeIndex : "idle"}`}
+                  className={cn("mt-6", isActive && "animate-fadeSlideUp")}
+                >
                   <h3 className="font-display text-2xl font-extrabold text-white tracking-tight group-hover:text-lime-300 transition-colors">
                     {milestone.title}
                   </h3>

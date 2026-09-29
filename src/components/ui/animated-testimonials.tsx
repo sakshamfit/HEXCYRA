@@ -3,7 +3,7 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { cn } from "@/lib/utils";
 
 export type Testimonial = {
@@ -11,6 +11,10 @@ export type Testimonial = {
   name: string;
   designation: string;
   src: string;
+};
+
+const randomRotateY = () => {
+  return Math.floor(Math.random() * 21) - 10;
 };
 
 export const AnimatedTestimonials = ({
@@ -24,6 +28,14 @@ export const AnimatedTestimonials = ({
 }) => {
   const [active, setActive] = useState(0);
 
+  // One rotation per card, fixed for the component's lifetime. Re-rolling the
+  // random value on every render made the stacked background cards re-animate
+  // on each switch — a big source of the perceived lag.
+  const rotations = useMemo(
+    () => (testimonials || []).map(() => randomRotateY()),
+    [testimonials],
+  );
+
   const handleNext = useCallback(() => {
     setActive((prev) => (prev + 1) % testimonials.length);
   }, [testimonials.length]);
@@ -36,16 +48,15 @@ export const AnimatedTestimonials = ({
     return index === active;
   };
 
+  // `active` in the deps means every switch — autoplay or a manual click —
+  // restarts the countdown, so the next slide never yanks control away mid
+  // interaction.
   useEffect(() => {
     if (autoplay && testimonials.length > 1) {
-      const interval = setInterval(handleNext, 5000);
-      return () => clearInterval(interval);
+      const timeout = setTimeout(handleNext, 5000);
+      return () => clearTimeout(timeout);
     }
-  }, [autoplay, handleNext, testimonials.length]);
-
-  const randomRotateY = () => {
-    return Math.floor(Math.random() * 21) - 10;
-  };
+  }, [autoplay, handleNext, testimonials.length, active]);
 
   if (!testimonials || testimonials.length === 0) {
     return null;
@@ -65,28 +76,24 @@ export const AnimatedTestimonials = ({
                   initial={{
                     opacity: 0,
                     scale: 0.9,
-                    z: -100,
-                    rotate: randomRotateY(),
+                    rotate: rotations[index] ?? -8,
                   }}
                   animate={{
                     opacity: isActive(index) ? 1 : 0.7,
                     scale: isActive(index) ? 1 : 0.95,
-                    z: isActive(index) ? 0 : -100,
-                    rotate: isActive(index) ? 0 : randomRotateY(),
+                    rotate: isActive(index) ? 0 : rotations[index] ?? -8,
                     zIndex: isActive(index)
                       ? 999
                       : testimonials.length + 2 - index,
-                    y: isActive(index) ? [0, -80, 0] : 0,
                   }}
                   exit={{
                     opacity: 0,
                     scale: 0.9,
-                    z: 100,
-                    rotate: randomRotateY(),
+                    rotate: rotations[index] ?? 8,
                   }}
                   transition={{
-                    duration: 0.4,
-                    ease: "easeInOut",
+                    duration: 0.35,
+                    ease: "easeOut",
                   }}
                   className="absolute inset-0 origin-bottom"
                 >
@@ -96,6 +103,9 @@ export const AnimatedTestimonials = ({
                     width={500}
                     height={500}
                     draggable={false}
+                    // The first few cards are eager so a switch never waits
+                    // on a decode — that stall read as stutter.
+                    priority={index < 2}
                     className="h-full w-full rounded-3xl object-cover object-center shadow-xl"
                   />
                 </motion.div>
@@ -134,19 +144,17 @@ export const AnimatedTestimonials = ({
                 <motion.span
                   key={index}
                   initial={{
-                    filter: "blur(10px)",
                     opacity: 0,
-                    y: 5,
+                    y: 6,
                   }}
                   animate={{
-                    filter: "blur(0px)",
                     opacity: 1,
                     y: 0,
                   }}
                   transition={{
-                    duration: 0.2,
-                    ease: "easeInOut",
-                    delay: 0.02 * index,
+                    duration: 0.18,
+                    ease: "easeOut",
+                    delay: 0.012 * index,
                   }}
                   className="inline-block"
                 >
