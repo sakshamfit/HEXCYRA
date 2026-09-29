@@ -4,6 +4,7 @@ import Hero from './components/Hero.jsx'
 import Marquee from './components/Marquee.jsx'
 import Intro from './components/Intro.jsx'
 import Clients from './components/Clients.jsx'
+import StaggerTestimonials from './components/ui/stagger-testimonials'
 import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
 import SiteFooter from './components/SiteFooter.jsx'
@@ -79,6 +80,7 @@ export default function App() {
         </Suspense>
         <Intro />
         <Clients />
+        <StaggerTestimonials />
         <About heading="h2" />
       </main>
 

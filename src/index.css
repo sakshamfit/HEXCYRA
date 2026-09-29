@@ -156,6 +156,38 @@
     writing-mode: vertical-rl;
     text-orientation: mixed;
   }
+
+  /* Stagger Testimonials infinite vertical animation */
+  @keyframes marquee-vertical {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  @keyframes marquee-vertical-reverse {
+    0% {
+      transform: translateY(-50%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+
+  .animate-marquee-vertical {
+    animation: marquee-vertical var(--marquee-duration, 38s) linear infinite;
+  }
+
+  .animate-marquee-vertical-reverse {
+    animation: marquee-vertical-reverse var(--marquee-duration, 44s) linear infinite;
+  }
+
+  .pause-on-hover:hover,
+  .pause-on-hover:hover * {
+    animation-play-state: paused;
+  }
 }
 
 /* ==========================================================================
@@ -168,6 +200,8 @@
 
   .animate-marquee,
   .animate-marquee-slow,
+  .animate-marquee-vertical,
+  .animate-marquee-vertical-reverse,
   .animate-floaty,
   .animate-bounce,
   .animate-pulse {
