@@ -2,45 +2,181 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #000;
-  color: #fff;
-}
-
-@keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
+/* ==========================================================================
+   BASE — global type + page behaviour
+   ========================================================================== */
+@layer base {
+  /* shadcn/ui design tokens (light theme) — consumed by tailwind.config.js
+     so the copied ui/ primitives resolve bg-primary, bg-card, border-input… */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
   }
-  to {
+
+  /* Bare `border` utilities (used by the shadcn Card) inherit --border. */
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* keeps anchored sections clear of the fixed pill nav */
+    scroll-padding-top: 7rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-white font-sans text-slate-900 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight;
+  }
+
+  /* Non-standard scrollbar: 8px, ink thumb, invisible track. */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #0f172a;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d946ef;
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #0f172a transparent;
+  }
+}
+
+/* ==========================================================================
+   UTILITIES — fidelity classes called out by the design spec
+   ========================================================================== */
+@layer utilities {
+  /* Hide scrollbars while keeping the element scrollable. */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE / Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* 2% scale + -1deg tilt with the signature overshoot easing. */
+  .hover-pop {
+    transition:
+      transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+      border-color 0.6s ease;
+    will-change: transform;
+  }
+
+  /* Scroll-reveal (driven by useReveal / IntersectionObserver).
+     Stagger is passed in as --reveal-delay so the delay never leaks into the
+     hover transition. Declared AFTER .hover-pop: on cards that carry both
+     classes this rule must win while the card is still hidden. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+  }
+
+  .reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Once revealed, a .hover-pop card switches back to the pop timing. */
+  .reveal.visible.hover-pop {
+    transition:
+      transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+      border-color 0.6s ease;
+  }
+
+  /* Declared last so the hover transform beats `.reveal.visible`. */
+  .hover-pop:hover,
+  .reveal.visible.hover-pop:hover {
+    transform: scale(1.02) rotate(-1deg);
+  }
+
+  /* 3D perspective helper used by the scroll-morph deck (Tailwind 4 ships
+     "perspective-1000" as a first-class utility; Tailwind 3 does not). */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  /* Same story for the capabilities panel: it asks for "aspect-4/3", which
+     Tailwind 3 spells aspect-[4/3]. Declared here so the component can keep
+     the Tailwind 4 class name. */
+  .aspect-4\/3 {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Vertical (rotated) display type used by the rose work card. */
+  .text-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
 }
 
-/* Custom scrollbar for drawers/modals */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
+/* ==========================================================================
+   MOTION SAFETY — honour reduced-motion preferences
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.4);
-}
+  .animate-marquee,
+  .animate-marquee-slow,
+  .animate-floaty,
+  .animate-bounce,
+  .animate-pulse {
+    animation: none !important;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.4);
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

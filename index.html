@@ -1,24 +1,55 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="HEXCYRA — Enterprise IT & Managed Services. Managed infrastructure, cloud engineering, cybersecurity, and 24/7 monitoring."
+      content="HEXCYRA builds digital experiences, business technology and security solutions for growing businesses."
     />
-    <title>HEXCYRA — IT &amp; Managed Services</title>
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="robots" content="index, follow" />
+    <title>HEXCYRA — Technology. Security. Growth.</title>
 
-    <!-- Google Fonts: Geist (weights 300-700) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="HEXCYRA" />
+    <meta property="og:title" content="HEXCYRA — Technology. Security. Growth." />
+    <meta
+      property="og:description"
+      content="We design, build and secure the technology that helps businesses work better, look sharper and grow with confidence."
+    />
+    <meta property="og:url" content="%SITE%/" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "HEXCYRA",
+        "url": "%SITE%/",
+        "description": "Technology. Security. Growth.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "HEXCYRA",
+          "url": "%SITE%/",
+          "email": "hello@hexcyra.com",
+          "slogan": "Technology. Security. Growth."
+        }
+      }
+    </script>
+
+    <!-- Google Fonts: Outfit (display, 600-900) + Plus Jakarta Sans (body, 400-700) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body class="bg-black text-white selection:bg-white selection:text-black">
+  <body
+    class="bg-white font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900"
+  >
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
