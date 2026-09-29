@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react'
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
 import Marquee from './components/Marquee.jsx'
+import Approach from './components/Approach.jsx'
 import Intro from './components/Intro.jsx'
 import Clients from './components/Clients.jsx'
 import StaggerTestimonials from './components/ui/stagger-testimonials'
@@ -78,6 +79,7 @@ export default function App() {
         <Suspense fallback={<ShowcaseFallback />}>
           <Showcase />
         </Suspense>
+        <Approach heading="h2" />
         <Intro />
         <Clients />
         <StaggerTestimonials />
