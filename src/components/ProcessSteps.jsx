@@ -25,10 +25,10 @@ export default function ProcessSteps({ active = -1, onSelect, id = 'steps' }) {
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
             <h2
               id={`${id}-heading`}
-              className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight md:text-5xl lg:col-span-7"
+              className="font-display text-4xl font-extrabold leading-[1.12] tracking-tight md:text-5xl lg:col-span-7"
             >
               The same four steps,{' '}
-              <span className="bg-gradient-to-r from-lime-300 to-emerald-400 bg-clip-text pr-2 italic text-transparent">
+              <span className="bg-gradient-to-r from-lime-300 to-emerald-400 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
                 every time.
               </span>
             </h2>

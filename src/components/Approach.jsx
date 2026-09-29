@@ -52,9 +52,9 @@ export default function Approach({ heading: Heading = 'h2' }) {
           </span>
 
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
-            <Heading className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl lg:col-span-7">
+            <Heading className="font-display text-4xl font-extrabold leading-[1.12] tracking-tight md:text-6xl lg:col-span-7">
               {approach.title}{' '}
-              <span className="bg-gradient-to-r from-lime-300 to-emerald-400 bg-clip-text pr-2 italic text-transparent">
+              <span className="bg-gradient-to-r from-lime-300 to-emerald-400 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
                 {approach.accent}
               </span>
             </Heading>

@@ -44,9 +44,9 @@ export default function Work() {
           </span>
 
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
-            <h2 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-6xl lg:col-span-7">
+            <h2 className="font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-slate-900 md:text-6xl lg:col-span-7">
               {work.title}{' '}
-              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-2 italic text-transparent">
+              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
                 {work.accent}
               </span>
             </h2>
@@ -75,10 +75,10 @@ export default function Work() {
             </header>
 
             <div className="relative mt-10">
-              <h3 className="font-display text-4xl font-extrabold leading-[0.98] tracking-tight text-white md:text-6xl">
+              <h3 className="font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-white md:text-6xl">
                 {first.headline}
                 <br />
-                <span className="bg-gradient-to-r from-teal-200 to-sky-200 bg-clip-text pr-2 italic text-transparent">
+                <span className="bg-gradient-to-r from-teal-200 to-sky-200 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
                   {first.headlineAccent}
                 </span>
               </h3>

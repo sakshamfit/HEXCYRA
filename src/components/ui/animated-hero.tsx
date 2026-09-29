@@ -93,7 +93,7 @@ export default function AnimatedHero({
 
         {/* Rolling word — the line is clipped so words roll in and out of it. */}
         <span
-          className={cn("relative block overflow-hidden align-bottom", rollingClassName)}
+          className={cn("relative block overflow-hidden align-bottom py-1", rollingClassName)}
           aria-live="polite"
         >
           {words.map((word, i) => {
@@ -103,16 +103,16 @@ export default function AnimatedHero({
                 key={word}
                 aria-hidden={active ? "false" : "true"}
                 className={cn(
-                  "absolute inset-x-0 top-0 block transition-[transform,opacity] duration-700 ease-pop will-change-transform",
-                  active ? "opacity-100" : "opacity-0",
+                  "absolute inset-x-0 top-0 block transition-[transform,opacity] duration-700 ease-pop will-change-transform leading-normal",
+                  active ? "opacity-100" : "opacity-0 pointer-events-none",
                 )}
                 style={{
                   transform: active
                     ? "translateY(0%)"
-                    : `translateY(${i > index ? "100%" : "-100%"})`,
+                    : `translateY(${i > index ? "120%" : "-120%"})`,
                 }}
               >
-                <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-4 italic text-transparent">
+                <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-6 pb-2 inline-block italic text-transparent whitespace-nowrap">
                   {word}
                 </span>
               </span>

@@ -4,6 +4,7 @@ import Hero from './components/Hero.jsx'
 import Marquee from './components/Marquee.jsx'
 import Intro from './components/Intro.jsx'
 import Clients from './components/Clients.jsx'
+import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
 import SiteFooter from './components/SiteFooter.jsx'
 import { useReveal } from './hooks.js'
@@ -78,6 +79,7 @@ export default function App() {
         </Suspense>
         <Intro />
         <Clients />
+        <About heading="h2" />
       </main>
 
       <Contact />

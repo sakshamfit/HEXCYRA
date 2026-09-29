@@ -24,9 +24,9 @@ export default function NotFoundPage() {
               404 · Not found
             </span>
 
-            <h1 className="mt-6 max-w-3xl font-display text-5xl font-extrabold leading-[0.98] tracking-tight text-slate-900 md:text-7xl">
+            <h1 className="mt-6 max-w-3xl font-display text-5xl font-extrabold leading-[1.12] tracking-tight text-slate-900 md:text-7xl">
               This page is not part of{' '}
-              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-2 italic text-transparent">
+              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
                 {brand.name}.
               </span>
             </h1>

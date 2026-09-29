@@ -131,6 +131,7 @@ export default defineConfig({
     // shadcn/ui convention: "@" points at ./src
     alias: {
       '@': path.resolve(dirname, './src'),
+      'next/image': path.resolve(dirname, './src/components/ui/image.tsx'),
     },
   },
   build: {

@@ -101,11 +101,11 @@ function FlipCard({
 
                 {/* Back Face */}
                 <div
-                    className="absolute inset-0 h-full w-full overflow-hidden rounded-xl shadow-lg bg-gray-900 flex flex-col items-center justify-center p-4 border border-gray-700"
+                    className="absolute inset-0 h-full w-full overflow-hidden rounded-xl shadow-lg bg-gray-900 flex flex-col items-center justify-center px-1.5 py-2 border border-gray-700"
                     style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                 >
-                    <div className="text-center">
-                        <p className="text-[8px] font-bold text-blue-400 uppercase tracking-widest mb-1">
+                    <div className="text-center w-full px-0.5">
+                        <p className="text-[7px] font-bold text-blue-400 uppercase tracking-wider mb-1 leading-tight break-words">
                             {item.label ?? "HEXCYRA"}
                         </p>
                         <p className="text-xs font-medium text-white">{item.no}</p>

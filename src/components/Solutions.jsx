@@ -21,9 +21,9 @@ export default function Solutions({ heading: Heading = 'h2' }) {
           </span>
 
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
-            <Heading className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-6xl lg:col-span-7">
+            <Heading className="font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-slate-900 md:text-6xl lg:col-span-7">
               {solutions.title}{' '}
-              <span className="bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text pr-2 italic text-transparent">
+              <span className="bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
                 {solutions.accent}
               </span>
             </Heading>

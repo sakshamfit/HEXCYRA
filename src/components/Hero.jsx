@@ -32,10 +32,10 @@ export default function Hero() {
             </span>
 
             {/* Headline — supplied copy, static */}
-            <h1 className="mt-7 font-display text-6xl md:text-8xl lg:text-9xl font-extrabold leading-[0.95] tracking-tight text-slate-900">
+            <h1 className="mt-7 font-display text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold leading-[1.05] sm:leading-[1.0] md:leading-[0.98] tracking-tight text-slate-900">
               {hero.titleLines[0]}
               <br />
-              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-4 italic text-transparent">
+              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-4 pb-1 inline-block italic text-transparent">
                 {hero.highlight}
               </span>
               <br />
@@ -49,8 +49,8 @@ export default function Hero() {
               words={marqueeItems}
               interval={2400}
               className="mt-8"
-              headingClassName="text-3xl md:text-5xl leading-[1.05] text-slate-900"
-              rollingClassName="h-[1.3em]"
+              headingClassName="text-2xl sm:text-4xl md:text-5xl leading-snug text-slate-900"
+              rollingClassName="h-[1.55em]"
             />
           </div>
 

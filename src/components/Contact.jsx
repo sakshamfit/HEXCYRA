@@ -27,9 +27,9 @@ export default function Contact({ heading: Heading = 'h2' }) {
             {contact.kicker}
           </span>
 
-          <Heading className="mt-6 font-display text-4xl font-extrabold leading-[1.02] tracking-tight md:text-6xl">
+          <Heading className="mt-6 font-display text-4xl font-extrabold leading-[1.12] tracking-tight md:text-6xl">
             {contact.title}{' '}
-            <span className="bg-gradient-to-r from-fuchsia-400 to-indigo-400 bg-clip-text pr-2 italic text-transparent">
+            <span className="bg-gradient-to-r from-fuchsia-400 to-indigo-400 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
               {contact.accent}
             </span>
           </Heading>
