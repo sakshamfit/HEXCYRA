@@ -1,6 +1,6 @@
 import React from 'react'
 import { ArrowUpRight } from 'lucide-react'
-import { solutions } from '../siteData.js'
+import { routes, solutions } from '../siteData.js'
 import { Icon } from '../icons.jsx'
 
 /* ==========================================================================
@@ -9,9 +9,7 @@ import { Icon } from '../icons.jsx'
    column sits a little higher on desktop (md:-translate-y-4) so the rows
    never line up perfectly, and one card is inverted to slate-900.
    ========================================================================== */
-export default function Solutions() {
-  const go = (id) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+export default function Solutions({ heading: Heading = 'h2' }) {
 
   return (
     <section id="solutions" className="relative py-20 md:py-28">
@@ -23,12 +21,12 @@ export default function Solutions() {
           </span>
 
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
-            <h2 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-6xl lg:col-span-7">
+            <Heading className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-6xl lg:col-span-7">
               {solutions.title}{' '}
               <span className="bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text pr-2 italic text-transparent">
                 {solutions.accent}
               </span>
-            </h2>
+            </Heading>
             <p className="max-w-xl text-base leading-relaxed text-slate-600 lg:col-span-5">
               {solutions.lead}
             </p>
@@ -78,15 +76,15 @@ export default function Solutions() {
                   </p>
                 </div>
 
-                <button
-                  onClick={() => go('contact')}
+                <a
+                  href={routes.contact}
                   className={`mt-8 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest transition-colors ${
                     featured ? 'text-lime-300 hover:text-white' : 'text-slate-500 hover:text-fuchsia-600'
                   }`}
                 >
                   Explore
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 ease-pop group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </button>
+                </a>
               </article>
             )
           })}

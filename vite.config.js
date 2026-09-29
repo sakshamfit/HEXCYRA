@@ -1,32 +1,132 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
-/* Clean-URL canonicals.
-   Vite rewrites every <link href> in an HTML entry as an asset reference and
-   reads it from disk, so a directory-shaped URL such as `/work/` fails the
-   build with EISDIR. Injecting the tag after that pass keeps the clean URL in
-   the markup. The domain is never hard-coded: a relative canonical resolves
-   against the deployment host, which is the one thing that is known. */
-const CANONICAL = { '/work/index.html': '/work/' }
-const canonicalPlugin = {
-  name: 'hexcyra-canonical',
+/* The deployment host. It appears in canonicals, Open Graph URLs, the sitemap
+   and robots.txt — nowhere else, and never in the React code. Override it at
+   build time if the domain changes:  SITE_URL=https://… npm run build */
+const SITE = process.env.SITE_URL || 'https://hexcyra.com'
+
+/* One document per index page. The key is the built file, the value is the URL
+   it answers on: every page is a directory index, so every URL ends in a
+   slash and there is exactly one canonical form of each. */
+const DOCUMENTS = {
+  '/index.html': '/',
+  '/solutions/index.html': '/solutions/',
+  '/work/index.html': '/work/',
+  '/approach/index.html': '/approach/',
+  '/about/index.html': '/about/',
+  '/contact/index.html': '/contact/',
+  '/404.html': '/404.html',
+}
+
+/* Only the pages that belong in a sitemap. */
+const INDEXED = ['/', '/solutions/', '/work/', '/approach/', '/about/', '/contact/']
+
+/* ---------------------------------------------------------------------------
+   Two build-time jobs Vite cannot do on its own:
+
+   1. Vite rewrites every <link href> in an HTML entry as an asset reference
+      and reads it from disk, so a directory-shaped URL such as /work/ fails
+      the build with EISDIR. Injecting the canonical after that pass keeps the
+      clean URL in the markup.
+   2. sitemap.xml and robots.txt need absolute URLs, and every document carries
+      a %SITE% placeholder rather than a host baked into the source.
+   --------------------------------------------------------------------------- */
+const sitePlugin = {
+  name: 'hexcyra-site',
   transformIndexHtml: {
     order: 'post',
     handler(html, ctx) {
-      const path = CANONICAL[ctx.path]
+      const path = DOCUMENTS[ctx.path]
       if (!path) return html
-      return html.replace('</head>', `    <link rel="canonical" href="${path}" />\n  </head>`)
+      return html
+        .replaceAll('%SITE%', SITE)
+        .replace('</head>', `    <link rel="canonical" href="${SITE}${path}" />\n  </head>`)
     },
   },
+  /* Both hooks register the middleware in front of Vite's own layers — the
+     hooks run before the internal stack is installed, so an unknown page URL
+     is answered before Vite ends the response with its empty 404. */
+  configureServer(server) {
+    server.middlewares.use(pageFallback(path.resolve(dirname, 'dist')))
+  },
+  configurePreviewServer(server) {
+    server.middlewares.use(pageFallback(path.resolve(dirname, 'dist')))
+  },
+  generateBundle() {
+    const today = new Date().toISOString().slice(0, 10)
+    const urls = INDEXED.map(
+      (route) => `  <url>
+    <loc>${SITE}${route}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${route === '/' ? 'weekly' : 'monthly'}</changefreq>
+    <priority>${route === '/' ? '1.0' : '0.8'}</priority>
+  </url>`,
+    ).join('\n')
+
+    this.emitFile({
+      type: 'asset',
+      fileName: 'sitemap.xml',
+      source: `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls}
+</urlset>
+`,
+    })
+
+    this.emitFile({
+      type: 'asset',
+      fileName: 'robots.txt',
+      source: `User-agent: *
+Allow: /
+
+Sitemap: ${SITE}/sitemap.xml
+`,
+    })
+  },
+}
+
+/* The servers should answer like the static host does:
+     - /solutions redirects to /solutions/  (canonical form),
+     - an unknown page URL gets 404.html with a 404 status,
+     - missing assets keep their plain 404.
+   Registered in front of Vite's own layers, which end a 404 response before
+   anything added behind them can speak. Pages that exist are passed through
+   untouched. */
+const pageFallback = (distDir) => (req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next()
+  const [pathname, query] = (req.url ?? '/').split('?')
+  if (/\/[^/]*\.[^/]+$/.test(pathname)) return next()
+  const rel = pathname.replace(/^\/+/, '')
+  const direct = path.join(distDir, rel)
+  const index = path.join(direct, 'index.html')
+  if (fs.existsSync(direct) && fs.statSync(direct).isFile()) return next()
+  if (fs.existsSync(index)) {
+    if (rel && !pathname.endsWith('/')) {
+      res.statusCode = 301
+      res.setHeader('Location', `${pathname}/${query ? `?${query}` : ''}`)
+      return res.end()
+    }
+    return next()
+  }
+  const notFound = path.join(distDir, '404.html')
+  if (!fs.existsSync(notFound)) return next()
+  res.statusCode = 404
+  res.setHeader('Content-Type', 'text/html; charset=utf-8')
+  fs.createReadStream(notFound).pipe(res)
 }
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), canonicalPlugin],
+  /* A real multi-page site: an unknown URL has to reach 404.html, the way it
+     does on the host, instead of falling back to the home page. */
+  appType: 'mpa',
+  plugins: [react(), sitePlugin],
   resolve: {
     // shadcn/ui convention: "@" points at ./src
     alias: {
@@ -37,13 +137,18 @@ export default defineConfig({
     target: 'es2019',
     cssCodeSplit: true,
     rollupOptions: {
-      /* Two documents. The /work/ index is its own HTML file so the machine
-         (and the three.js chunk behind it) can never be preloaded by the home
-         page — the boundary is in the build graph, not in runtime code.
-         work/index.html builds to dist/work/index.html, i.e. the clean /work/. */
+      /* One HTML document per index page, so the section a page owns is in
+         that page's markup and nothing is reachable from a page it does not
+         belong to. Five of the six documents share src/entry-page.jsx and
+         therefore one chunk; the home page has its own entry. */
       input: {
-        main: path.resolve(dirname, 'index.html'),
-        work: path.resolve(dirname, 'work/index.html'),
+        index: path.resolve(dirname, 'index.html'),
+        'solutions/index': path.resolve(dirname, 'solutions/index.html'),
+        'work/index': path.resolve(dirname, 'work/index.html'),
+        'approach/index': path.resolve(dirname, 'approach/index.html'),
+        'about/index': path.resolve(dirname, 'about/index.html'),
+        'contact/index': path.resolve(dirname, 'contact/index.html'),
+        404: path.resolve(dirname, '404.html'),
       },
       output: {
         manualChunks: {

@@ -9,12 +9,25 @@ export const brand = {
   tagline: 'Technology. Security. Growth.',
 }
 
+/* One index page per section of the supplied document. `id` is the section
+   anchor (the home page used to carry every section at once), `path` is the
+   page it now lives on. */
 export const navLinks = [
-  { id: 'solutions', label: 'Solutions' },
-  { id: 'work', label: 'Work' },
-  { id: 'approach', label: 'Approach' },
-  { id: 'about', label: 'About' },
+  { id: 'solutions', label: 'Solutions', path: '/solutions/' },
+  { id: 'work', label: 'Work', path: '/work/' },
+  { id: 'approach', label: 'Approach', path: '/approach/' },
+  { id: 'about', label: 'About', path: '/about/' },
 ]
+
+/* The page that carries each section, for the nav, the footer and the audits. */
+export const routes = {
+  home: '/',
+  solutions: '/solutions/',
+  work: '/work/',
+  approach: '/approach/',
+  about: '/about/',
+  contact: '/contact/',
+}
 
 /* ------------------------------------------------------------------ Hero */
 export const hero = {
@@ -270,10 +283,11 @@ export const contact = {
 /* ------------------------------------------------------------- Footer */
 export const footer = {
   links: [
-    { label: 'Solutions', target: 'solutions' },
-    { label: 'Work', target: 'work' },
-    { label: 'About', target: 'about' },
-    { label: 'Contact', target: 'contact' },
+    { label: 'Solutions', path: '/solutions/' },
+    { label: 'Work', path: '/work/' },
+    { label: 'Approach', path: '/approach/' },
+    { label: 'About', path: '/about/' },
+    { label: 'Contact', path: '/contact/' },
   ],
   copyright: '© 2026 HEXCYRA',
   location: 'Gorakhpur · India · Beyond',

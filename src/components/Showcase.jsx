@@ -1,6 +1,7 @@
 import React from 'react'
+import { ArrowUpRight } from 'lucide-react'
 import ScrollMorphHero from '@/components/ui/scroll-morph-hero'
-import { brand, hero, marqueeItems, solutions } from '../siteData.js'
+import { brand, hero, marqueeItems, routes, solutions } from '../siteData.js'
 
 /* Six minimal photographs, cycled across twenty tiles. Each is ~11-14 kB and
    they are fetched lazily, after the showcase chunk itself has arrived.
@@ -40,6 +41,18 @@ export default function Showcase() {
           arcTitle={hero.secondaryCta}
           arcBody={solutions.lead}
         />
+      </div>
+
+      {/* The arc headline is type, not a control, so the route out of the
+          showcase is a real link in the flow of the page. */}
+      <div className="flex justify-center px-6 pb-16">
+        <a
+          href={routes.solutions}
+          className="group inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white transition-transform duration-300 ease-pop hover:scale-105"
+        >
+          {hero.secondaryCta}
+          <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+        </a>
       </div>
 
       {/* Text equivalent for screen readers and crawlers. */}

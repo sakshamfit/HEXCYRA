@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — HEXCYRA</title>
+    <meta name="description" content="This page is not part of HEXCYRA. Solutions, work, approach, about and contact are one click away." />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="robots" content="noindex, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="HEXCYRA" />
+    <meta property="og:title" content="Page not found — HEXCYRA" />
+    <meta property="og:description" content="This page is not part of HEXCYRA. Solutions, work, approach, about and contact are one click away." />
+    <meta property="og:url" content="%SITE%/404.html" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Page not found — HEXCYRA",
+  "url": "%SITE%/404.html",
+  "description": "This page is not part of HEXCYRA.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "HEXCYRA",
+    "url": "%SITE%/"
+  },
+  "about": {
+    "@type": "Organization",
+    "name": "HEXCYRA",
+    "url": "%SITE%/"
+  }
+}
+    </script>
+
+    <!-- rel="canonical" is injected by the hexcyra-canonical plugin in
+         vite.config.js: Vite rewrites every <link href> as an asset reference
+         and a clean URL such as /404.html is a directory on disk. %SITE% is the
+         deployment host, replaced at build time. -->
+
+    <!-- Google Fonts: Outfit (display, 600-900) + Plus Jakarta Sans (body, 400-700) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    data-page="notFound"
+    class="bg-white font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900"
+  >
+    <div id="root"></div>
+    <noscript>
+      <div style="max-width: 42rem; margin: 6rem auto; padding: 0 1.5rem; font-family: system-ui">
+        <h1 style="font-size: 1.75rem; font-weight: 800">Page not found</h1>
+        <p style="margin-top: 1rem; line-height: 1.7">This page is not part of HEXCYRA. Try /solutions/, /work/, /approach/, /about/ or /contact/.</p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/entry-page.jsx"></script>
+  </body>
+</html>

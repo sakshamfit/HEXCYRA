@@ -1,26 +1,31 @@
 import React, { useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
-import { brand, navLinks } from '../siteData.js'
+import { brand, navLinks, routes } from '../siteData.js'
 import { useScrolled } from '../hooks.js'
 
 /* ==========================================================================
-   SECTION 1 — NAVIGATION
+   NAVIGATION
    Fixed wrapper (px-6 py-6) holding a centred white pill. The pill keeps
    backdrop-blur-md at all times and swaps bg-white/80 → bg-white/95 with a
    shadow increase once the page has scrolled past 50px.
+
+   Every item is a real link now that each section is its own index page, so
+   the nav works without JavaScript, and a section can be opened, copied and
+   bookmarked. Clicking the page you are already on returns to its top.
    ========================================================================== */
 export default function Nav() {
   const scrolled = useScrolled(50)
   const [open, setOpen] = useState(false)
+  const here = window.location.pathname
 
-  /* On the home page every target is a section on this document, so it is a
-     smooth scroll. On /work/ only Work and Contact exist here; anything else
-     has to be a real navigation to the home page anchor. */
-  const go = (id) => {
+  /* A real link everywhere except the page you are already on, where it is a
+     return to the top. */
+  const onLink = (path) => (event) => {
     setOpen(false)
-    const target = document.getElementById(id)
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    else window.location.href = `/#${id}`
+    if (here === path) {
+      event.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   return (
@@ -32,10 +37,12 @@ export default function Nav() {
           }`}
         >
           {/* Brand — w-8 h-8 black badge with a white centred letter */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          <a
+            href={routes.home}
+            onClick={onLink(routes.home)}
             className="flex items-center gap-3"
             aria-label={`${brand.name} home`}
+            aria-current={here === routes.home ? 'page' : undefined}
           >
             <span className="grid h-8 w-8 place-items-center rounded-full bg-black font-display text-sm font-bold text-white">
               {brand.initial}
@@ -43,25 +50,31 @@ export default function Nav() {
             <span className="font-display text-lg font-extrabold tracking-tight text-slate-900">
               {brand.name}
             </span>
-          </button>
+          </a>
 
           {/* Desktop links */}
           <div className="hidden items-center gap-8 md:flex">
             {navLinks.map((link) => (
-              <button
+              <a
                 key={link.id}
-                onClick={() => go(link.id)}
-                className="text-sm font-medium text-slate-600 transition-colors hover:text-slate-900"
+                href={link.path}
+                onClick={onLink(link.path)}
+                aria-current={here === link.path ? 'page' : undefined}
+                className={`text-sm font-medium transition-colors hover:text-slate-900 ${
+                  here === link.path ? 'text-slate-900' : 'text-slate-600'
+                }`}
               >
                 {link.label}
-              </button>
+              </a>
             ))}
           </div>
 
           <div className="flex items-center gap-2">
             {/* CTA — fuchsia panel slides in from the left on hover */}
-            <button
-              onClick={() => go('contact')}
+            <a
+              href={routes.contact}
+              onClick={onLink(routes.contact)}
+              aria-current={here === routes.contact ? 'page' : undefined}
               className="group relative hidden overflow-hidden rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white md:inline-flex"
             >
               <span className="absolute inset-0 origin-left scale-x-0 bg-fuchsia-500 transition-transform duration-500 ease-pop group-hover:scale-x-100" />
@@ -69,7 +82,7 @@ export default function Nav() {
                 Start a Project
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </span>
-            </button>
+            </a>
 
             {/* Mobile trigger */}
             <button
@@ -100,22 +113,25 @@ export default function Nav() {
           <div className="rounded-[2rem] border border-slate-100 bg-white/95 p-4 shadow-xl shadow-slate-900/5 backdrop-blur-md">
             <div className="no-scrollbar flex max-h-[60vh] flex-col overflow-y-auto">
               {navLinks.map((link) => (
-                <button
+                <a
                   key={link.id}
-                  onClick={() => go(link.id)}
-                  className="rounded-2xl px-4 py-3 text-left font-display text-2xl font-semibold text-slate-900 transition-colors hover:bg-fuchsia-50"
+                  href={link.path}
+                  onClick={onLink(link.path)}
+                  aria-current={here === link.path ? 'page' : undefined}
+                  className="rounded-2xl px-4 py-3 font-display text-2xl font-semibold text-slate-900 transition-colors hover:bg-fuchsia-50"
                 >
                   {link.label}
-                </button>
+                </a>
               ))}
             </div>
-            <button
-              onClick={() => go('contact')}
+            <a
+              href={routes.contact}
+              onClick={onLink(routes.contact)}
               className="mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-fuchsia-500"
             >
               Start a Project
               <ArrowUpRight className="h-4 w-4" />
-            </button>
+            </a>
           </div>
         </div>
       </header>

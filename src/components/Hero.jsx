@@ -1,7 +1,7 @@
 import React from 'react'
 import { ArrowDown } from 'lucide-react'
 import AnimatedHero from '@/components/ui/animated-hero'
-import { hero, marqueeItems } from '../siteData.js'
+import { hero, marqueeItems, routes } from '../siteData.js'
 
 /* ==========================================================================
    SECTION 2 — HERO
@@ -10,6 +10,9 @@ import { hero, marqueeItems } from '../siteData.js'
    photography — the headline carries the animation instead.
    ========================================================================== */
 export default function Hero() {
+  /* The sections the hero used to scroll to are index pages now, so the two
+     calls to action are real links. The scroll cue stays a scroll: it points
+     at the band below. */
   const go = (id) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
@@ -58,20 +61,20 @@ export default function Hero() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <button
-                onClick={() => go('contact')}
+              <a
+                href={routes.contact}
                 className="rounded-full bg-fuchsia-500 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-fuchsia-500/20 transition-transform duration-300 ease-pop hover:scale-105"
               >
                 {hero.primaryCta}
-              </button>
+              </a>
 
-              <button
-                onClick={() => go('solutions')}
+              <a
+                href={routes.solutions}
                 className="group inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-6 py-3.5 text-sm font-semibold text-slate-900 backdrop-blur transition-colors hover:border-slate-900"
               >
                 {hero.secondaryCta}
                 <ArrowDown className="h-4 w-4 text-fuchsia-500 transition-transform duration-300 ease-pop group-hover:translate-y-0.5" />
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -100,7 +103,7 @@ export default function Hero() {
           </div>
 
           <button
-            onClick={() => go('solutions')}
+            onClick={() => go('what-we-do')}
             className="mt-6 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-widest text-slate-500 transition-colors hover:text-slate-900"
           >
             {hero.scrollCue}

@@ -6,7 +6,7 @@ import { academy, about } from '../siteData.js'
    One dark panel carrying the company story and its timeline, then the
    Academy card in lime. Pure typography — no photography.
    ========================================================================== */
-export default function About() {
+export default function About({ heading: Heading = 'h2' }) {
   return (
     <section id="about" className="relative py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6">
@@ -19,13 +19,13 @@ export default function About() {
                 {about.kicker}
               </span>
 
-              <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.02] tracking-tight md:text-6xl">
+              <Heading className="mt-6 font-display text-4xl font-extrabold leading-[1.02] tracking-tight md:text-6xl">
                 {about.title}
                 <br />
                 <span className="bg-gradient-to-r from-lime-300 to-emerald-400 bg-clip-text pr-2 italic text-transparent">
                   {about.accent}
                 </span>
-              </h2>
+              </Heading>
             </div>
 
             <div className="lg:col-span-6">

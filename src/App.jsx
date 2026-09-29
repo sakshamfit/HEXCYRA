@@ -3,12 +3,9 @@ import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
 import Marquee from './components/Marquee.jsx'
 import Intro from './components/Intro.jsx'
-import Solutions from './components/Solutions.jsx'
-import Approach from './components/Approach.jsx'
-import Work from './components/Work.jsx'
 import Clients from './components/Clients.jsx'
-import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
+import SiteFooter from './components/SiteFooter.jsx'
 import { useReveal } from './hooks.js'
 
 /* Two bands are built on the motion runtime (~40 kB gzip on its own): the
@@ -54,11 +51,14 @@ function FeaturesFallback() {
 /* ==========================================================================
    HEXCYRA — Technology. Security. Growth.
    UI: the digital-agency reference (playful, high-contrast, organic-modern).
-   Content: the supplied HEXCYRA copy, in its original section order —
-   hero · glyph portal (marquee) · showcase · 01 what we do · 02 solutions ·
-   03 approach ·
-   04 selected work · 05 who we work with · 06 about · 07 academy ·
-   08 contact. No invented numbers, no external assets beyond Google Fonts.
+   Content: the supplied HEXCYRA copy, in its original section order — no
+   invented numbers, no external assets beyond Google Fonts.
+
+   The home page is the front door: the hero, the capabilities that can be
+   tried in place, the showcase, what we do and who we work with. Each
+   numbered section of the document now has its own index page —
+   /solutions/, /work/, /approach/, /about/, /contact/ — and the nav and the
+   footer link to them as real documents.
    ========================================================================== */
 export default function App() {
   useReveal()
@@ -77,14 +77,11 @@ export default function App() {
           <Showcase />
         </Suspense>
         <Intro />
-        <Solutions />
-        <Approach />
-        <Work processLink />
         <Clients />
-        <About />
       </main>
 
       <Contact />
+      <SiteFooter />
     </div>
   )
 }

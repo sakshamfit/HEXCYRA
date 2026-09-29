@@ -33,7 +33,7 @@ function useOrbitalRadius() {
    node on the orbit, click a node to open its detail card, connected steps
    pulse and can be jumped to from the card.
    ========================================================================== */
-export default function Approach() {
+export default function Approach({ heading: Heading = 'h2' }) {
   const radius = useOrbitalRadius()
 
   const timelineData = approach.timeline.map((item) => ({
@@ -52,12 +52,12 @@ export default function Approach() {
           </span>
 
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
-            <h2 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl lg:col-span-7">
+            <Heading className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl lg:col-span-7">
               {approach.title}{' '}
               <span className="bg-gradient-to-r from-lime-300 to-emerald-400 bg-clip-text pr-2 italic text-transparent">
                 {approach.accent}
               </span>
-            </h2>
+            </Heading>
             <p className="max-w-xl text-base leading-relaxed text-white/60 lg:col-span-5">
               {approach.lead}
             </p>
