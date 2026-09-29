@@ -79,6 +79,8 @@ function FlipCard({
                             <img
                                 src={item.src}
                                 alt={item.label ?? `hero-${index}`}
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                                decoding="async"
                                 className="h-full w-full object-cover"
                             />
                             <div className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-transparent" />

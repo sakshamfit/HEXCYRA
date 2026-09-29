@@ -42,7 +42,13 @@ function FeatureMedia({
 
   if (isImage) {
     return (
-      <img src={content} alt={alt} className="w-full h-full object-cover" />
+      <img
+        src={content}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        className="w-full h-full object-cover"
+      />
     );
   }
 

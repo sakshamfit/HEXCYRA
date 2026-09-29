@@ -31,7 +31,10 @@ function TileImage({ item, priority }) {
   )
 }
 
-export default function Work() {
+/* `processLink` is set by the home page only: there, the section is the
+   doorway to the /work/ index, which carries the interactive process. On the
+   index itself the link would point at the page you are already on. */
+export default function Work({ processLink = false }) {
   const [first, second, third] = work.items
 
   return (
@@ -183,15 +186,26 @@ export default function Work() {
               <p className="max-w-xl font-display text-2xl font-extrabold leading-snug tracking-tight md:text-4xl">
                 {work.lead}
               </p>
-              <button
-                onClick={() =>
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                }
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition-transform duration-300 ease-pop hover:scale-105"
-              >
-                Start a Project
-                <ArrowUpRight className="h-4 w-4" />
-              </button>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <button
+                  onClick={() =>
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                  }
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition-transform duration-300 ease-pop hover:scale-105"
+                >
+                  Start a Project
+                  <ArrowUpRight className="h-4 w-4" />
+                </button>
+                {processLink && (
+                  <a
+                    href="/work/"
+                    className="group inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white/60"
+                  >
+                    See the process on the work page
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                  </a>
+                )}
+              </div>
             </div>
           </article>
         </div>

@@ -13,9 +13,14 @@ export default function Nav() {
   const scrolled = useScrolled(50)
   const [open, setOpen] = useState(false)
 
+  /* On the home page every target is a section on this document, so it is a
+     smooth scroll. On /work/ only Work and Contact exist here; anything else
+     has to be a real navigation to the home page anchor. */
   const go = (id) => {
     setOpen(false)
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const target = document.getElementById(id)
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    else window.location.href = `/#${id}`
   }
 
   return (

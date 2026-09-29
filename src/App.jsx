@@ -79,7 +79,7 @@ export default function App() {
         <Intro />
         <Solutions />
         <Approach />
-        <Work />
+        <Work processLink />
         <Clients />
         <About />
       </main>

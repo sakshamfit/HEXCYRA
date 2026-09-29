@@ -9,7 +9,13 @@ import { brand, contact, footer } from '../siteData.js'
    form, no photography.
    ========================================================================== */
 export default function Contact() {
-  const go = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  /* Same rule as the nav: scroll when the section is on this page (the home
+     page, or Contact itself on /work/), navigate when it is not. */
+  const go = (id) => {
+    const target = document.getElementById(id)
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    else window.location.href = `/#${id}`
+  }
 
   const mailto = `mailto:${contact.email}?subject=${encodeURIComponent(contact.subject)}`
 
