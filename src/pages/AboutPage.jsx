@@ -3,6 +3,7 @@ import Nav from '../components/Nav.jsx'
 import About from '../components/About.jsx'
 import Clients from '../components/Clients.jsx'
 import StaggerTestimonials from '../components/ui/stagger-testimonials'
+import WorkContactBacklink from '../components/WorkContactBacklink.jsx'
 import PageNext from '../components/PageNext.jsx'
 import SiteFooter from '../components/SiteFooter.jsx'
 import { useReveal } from '../hooks.js'
@@ -23,6 +24,7 @@ export default function AboutPage() {
         <About heading="h1" />
         <Clients />
         <StaggerTestimonials />
+        <WorkContactBacklink />
       </main>
 
       <PageNext page="/about/" />
