@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
-import Portal from './components/Portal.jsx'
+import Marquee from './components/Marquee.jsx'
 import Intro from './components/Intro.jsx'
 import Solutions from './components/Solutions.jsx'
 import Approach from './components/Approach.jsx'
@@ -11,9 +11,13 @@ import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
 import { useReveal } from './hooks.js'
 
-/* The showcase band carries framer-motion (~90 kB gzip). Splitting it keeps
-   that weight out of the critical path so the page paints immediately. */
+/* Two bands are built on the motion runtime (~40 kB gzip on its own): the
+   capabilities panel and the scroll-morph showcase. framer-motion is now the
+   same package as motion, so importing either eagerly pulls the whole runtime
+   into the first chunk. Both are split so the page paints immediately and the
+   runtime is fetched once, in parallel, for the two of them. */
 const Showcase = lazy(() => import('./components/Showcase.jsx'))
+const Features = lazy(() => import('./components/Features.jsx'))
 
 function ShowcaseFallback() {
   return (
@@ -25,6 +29,24 @@ function ShowcaseFallback() {
         <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-lime-500" />
         Loading showcase
       </span>
+    </section>
+  )
+}
+
+function FeaturesFallback() {
+  return (
+    <section
+      aria-hidden="true"
+      className="w-full bg-white py-24"
+    >
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="h-12 w-2/3 animate-pulse rounded-2xl bg-slate-100" />
+        <div className="mt-10 flex flex-col gap-3">
+          {Array.from({ length: 6 }, (_, i) => (
+            <div key={i} className="h-14 animate-pulse rounded-xl bg-slate-50" />
+          ))}
+        </div>
+      </div>
     </section>
   )
 }
@@ -47,7 +69,10 @@ export default function App() {
 
       <main>
         <Hero />
-        <Portal />
+        <Marquee />
+        <Suspense fallback={<FeaturesFallback />}>
+          <Features />
+        </Suspense>
         <Suspense fallback={<ShowcaseFallback />}>
           <Showcase />
         </Suspense>

@@ -144,6 +144,13 @@
     perspective: 1000px;
   }
 
+  /* Same story for the capabilities panel: it asks for "aspect-4/3", which
+     Tailwind 3 spells aspect-[4/3]. Declared here so the component can keep
+     the Tailwind 4 class name. */
+  .aspect-4\/3 {
+    aspect-ratio: 4 / 3;
+  }
+
   /* Vertical (rotated) display type used by the rose work card. */
   .text-vertical {
     writing-mode: vertical-rl;
