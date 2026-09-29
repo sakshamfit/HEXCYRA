@@ -85,7 +85,7 @@ export default function FeaturesWithPanel({
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-16 lg:items-start">
           <div>
-            <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl mb-10">
+            <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl mb-10 leading-[1.12]">
               {title}
             </h2>
 

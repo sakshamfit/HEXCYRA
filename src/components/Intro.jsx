@@ -17,9 +17,9 @@ export default function Intro() {
           </span>
 
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
-            <h2 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-6xl lg:col-span-7">
+            <h2 className="font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-slate-900 md:text-6xl lg:col-span-7">
               {whatWeDo.title}{' '}
-              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-2 italic text-transparent">
+              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
                 {whatWeDo.accent}
               </span>
             </h2>

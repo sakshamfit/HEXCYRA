@@ -16,9 +16,9 @@ export default function Clients() {
             {clients.kicker}
           </span>
 
-          <h2 className="mt-6 max-w-3xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-6xl">
+          <h2 className="mt-6 max-w-3xl font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-slate-900 md:text-6xl">
             {clients.title}{' '}
-            <span className="bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text pr-2 italic text-transparent">
+            <span className="bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
               {clients.accent}
             </span>
           </h2>

@@ -257,6 +257,24 @@ export const about = {
   ],
 }
 
+/* ---------------------------------------------------------- Founders */
+export const founders = [
+  {
+    name: 'Anshuman Pandey',
+    designation: 'CTO · Co-Founder',
+    quote:
+      'Technology should solve real business challenges, not create new ones. At HEXCYRA, we engineer resilient systems, modern digital infrastructure, and security-first architectures that allow ambitious companies to scale with absolute confidence.',
+    src: '/img/founder-anshuman.jpg',
+  },
+  {
+    name: 'Utkarsh Tiwari',
+    designation: 'CEO · Co-Founder',
+    quote:
+      'We founded HEXCYRA to bridge strategy, design, and dependable engineering. Our focus is delivering purposeful digital transformation with complete transparency, uncompromising quality, and long-term value for every client.',
+    src: '/img/founder-utkarsh.jpg',
+  },
+]
+
 /* ---------------------------------------------------------- 07 / Academy */
 export const academy = {
   kicker: '07 / HEXCYRA Academy',

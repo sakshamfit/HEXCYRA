@@ -20,6 +20,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "next/image": [
+        "./src/components/ui/image.tsx"
       ]
     },
     "types": [

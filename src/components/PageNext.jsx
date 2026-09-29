@@ -32,10 +32,10 @@ export default function PageNext({ page }) {
               <span className="h-1.5 w-1.5 rounded-full bg-fuchsia-500" />
               {next.kicker}
             </span>
-            <h2 className="mt-5 max-w-2xl font-display text-3xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-4xl">
+            <h2 className="mt-5 max-w-2xl font-display text-3xl font-extrabold leading-[1.12] tracking-tight text-slate-900 md:text-4xl">
               {next.title}{' '}
               {next.accent && (
-                <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-2 italic text-transparent">
+                <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
                   {next.accent}
                 </span>
               )}
