@@ -21,7 +21,7 @@ export default function WorkContactBacklink({ className = '' }) {
           {/* Primary "Our work" Target */}
           <a
             href={routes.work}
-            className="group/work focus:outline-none"
+            className="group/work focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fuchsia-500"
             aria-label="Explore our selected work and portfolio"
           >
             <CursorBubbleTarget label="explore ↗" className="py-2">
@@ -35,7 +35,7 @@ export default function WorkContactBacklink({ className = '' }) {
           {/* Secondary "Get in touch" Target */}
           <a
             href={routes.contact}
-            className="group/contact focus:outline-none"
+            className="group/contact focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fuchsia-500"
             aria-label="Get in touch to start a project"
           >
             <CursorBubbleTarget label="say hi ✉" className="py-2">

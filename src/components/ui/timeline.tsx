@@ -245,7 +245,7 @@ export const Timeline: React.FC<TimelineProps> = ({
                 onClick={() => scrollToIndex(i)}
                 aria-label={`Go to ${m.period}`}
                 aria-current={i === activeIndex}
-                className="group flex w-14 flex-col items-center cursor-pointer focus:outline-none"
+                className="group flex w-14 flex-col items-center cursor-pointer focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-400"
               >
                 <span
                   className={cn(
@@ -268,7 +268,7 @@ export const Timeline: React.FC<TimelineProps> = ({
           ref={trackRef}
           tabIndex={0}
           aria-label="Process timeline track"
-          className="no-scrollbar mt-12 flex gap-6 overflow-x-auto pb-8 pt-4 snap-x snap-mandatory focus:outline-none [-webkit-mask-image:linear-gradient(to_right,transparent,black_3%,black_calc(100%_-_3rem),transparent)] [mask-image:linear-gradient(to_right,transparent,black_3%,black_calc(100%_-_3rem),transparent)]"
+          className="no-scrollbar mt-12 flex gap-6 overflow-x-auto pb-8 pt-4 snap-x snap-mandatory focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-400/60 [-webkit-mask-image:linear-gradient(to_right,transparent,black_3%,black_calc(100%_-_3rem),transparent)] [mask-image:linear-gradient(to_right,transparent,black_3%,black_calc(100%_-_3rem),transparent)]"
         >
           {milestones.map((milestone, idx) => {
             const isActive = idx === activeIndex;
