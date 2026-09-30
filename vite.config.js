@@ -102,6 +102,10 @@ const pageFallback = (distDir) => (req, res, next) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') return next()
   const [pathname, query] = (req.url ?? '/').split('?')
   if (/\/[^/]*\.[^/]+$/.test(pathname)) return next()
+  /* Vite's own dev modules are extensionless URLs (/@vite/client,
+     /@react-refresh, /@fs/…, /@id/…) — without this pass-through they get
+     swallowed here and every dev page loses HMR and React Refresh. */
+  if (pathname.startsWith('/@') || pathname.startsWith('/__vite')) return next()
   const rel = pathname.replace(/^\/+/, '')
   const direct = path.join(distDir, rel)
   const index = path.join(direct, 'index.html')
