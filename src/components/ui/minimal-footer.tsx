@@ -9,9 +9,9 @@ import {
 
 /* ==========================================================================
    MINIMAL FOOTER — the shared site footer (rendered by SiteFooter).
-   Self-contained: link data mirrors src/siteData.js (routes + footer data),
-   so this ui/ primitive needs no cross-folder imports and carries no
-   invented copy.
+   Self-contained: link data mirrors src/siteData.js (routes + footer data,
+   including the footer.credit line), so this ui/ primitive needs no
+   cross-folder imports and carries no invented copy.
 
    Two adaptations from the pasted source:
    - lucide-react v1 removed brand icons (Facebook/Github/Instagram/Linkedin/
@@ -23,6 +23,13 @@ import {
 
 export function MinimalFooter() {
 	const year = new Date().getFullYear();
+
+	/* Credit line — mirrors footer.credit in src/siteData.js. */
+	const credit = {
+		lead: 'I am made by',
+		name: 'sakshamfit',
+		href: 'https://github.com/sakshamfit',
+	};
 
 	const company = [
 		{
@@ -171,6 +178,19 @@ export function MinimalFooter() {
 					<p className="text-muted-foreground text-center font-thin">
 						© <a href="/" className="hover:underline">HEXCYRA</a>. All rights
 						reserved {year}
+					</p>
+					<p className="text-muted-foreground flex items-center justify-center gap-1 text-center font-mono text-xs">
+						{credit.lead}
+						<a
+							href={credit.href}
+							target="_blank"
+							rel="noreferrer"
+							aria-label={`${credit.name} on GitHub`}
+							className="hover:text-foreground inline-flex items-center gap-1 underline-offset-4 duration-200 hover:underline"
+						>
+							<IconBrandGithub className="size-3.5" />
+							{credit.name}
+						</a>
 					</p>
 				</div>
 			</div>
