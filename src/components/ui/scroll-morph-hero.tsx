@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { motion, useTransform, useSpring, useMotionValue, MotionConfig } from "framer-motion";
 
 // --- Types ---
 export type AnimationPhase = "scatter" | "line" | "circle" | "bottom-strip";
@@ -345,6 +345,7 @@ export default function ScrollMorphHero({
     const contentY = useTransform(smoothMorph, [0.8, 1], [20, 0]);
 
     return (
+        <MotionConfig reducedMotion="user">
         <div ref={containerRef} className="relative w-full h-full bg-[#FAFAFA] overflow-hidden">
             {/* Container */}
             <div className="flex h-full w-full flex-col items-center justify-center perspective-1000">
@@ -472,5 +473,6 @@ export default function ScrollMorphHero({
                 </div>
             </div>
         </div>
+        </MotionConfig>
     );
 }

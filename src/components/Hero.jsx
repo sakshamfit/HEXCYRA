@@ -23,32 +23,33 @@ export default function Hero() {
       <div className="pointer-events-none absolute -left-32 bottom-0 h-[22rem] w-[22rem] rounded-full bg-lime-200 opacity-40 blur-3xl md:h-[30rem] md:w-[30rem]" />
 
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 items-end gap-12 lg:grid-cols-12">
+        {/* Badge */}
+        <span className="inline-flex items-center gap-2 rounded-full bg-orange-100 px-4 py-1.5 text-xs font-semibold text-orange-700 ring-1 ring-orange-200/70">
+          <span className="h-2 w-2 animate-bounce rounded-full bg-orange-500" />
+          {hero.badge}
+        </span>
+
+        {/* Headline — supplied copy, deliberately locked to exactly two lines.
+            The clamp sizes the type so line 1 ("Technology that") and line 2
+            (highlight + tail) always fit the container at every viewport,
+            measured against real Outfit 800 metrics with tracking-tight. */}
+        <h1 className="mt-7 font-display text-[clamp(1.5rem,7.4vw,6.5rem)] font-extrabold leading-[1.04] tracking-tight text-slate-900">
+          {hero.titleLines[0]}
+          <br />
+          <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pb-1 inline-block italic text-transparent">
+            {hero.highlight}
+          </span>{' '}
+          {hero.titleTail}
+        </h1>
+
+        <div className="mt-10 grid grid-cols-1 items-end gap-12 lg:grid-cols-12">
           <div className="lg:col-span-8">
-            {/* Badge */}
-            <span className="inline-flex items-center gap-2 rounded-full bg-orange-100 px-4 py-1.5 text-xs font-semibold text-orange-700 ring-1 ring-orange-200/70">
-              <span className="h-2 w-2 animate-bounce rounded-full bg-orange-500" />
-              {hero.badge}
-            </span>
-
-            {/* Headline — supplied copy, static */}
-            <h1 className="mt-7 font-display text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold leading-[1.05] sm:leading-[1.0] md:leading-[0.98] tracking-tight text-slate-900">
-              {hero.titleLines[0]}
-              <br />
-              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-4 pb-1 inline-block italic text-transparent">
-                {hero.highlight}
-              </span>
-              <br />
-              {hero.titleTail}
-            </h1>
-
             {/* Rolling capability line — the animated-hero pattern, cycling the
                 six capabilities from the supplied content. */}
             <AnimatedHero
               staticText="Expertise in"
               words={marqueeItems}
               interval={2400}
-              className="mt-8"
               headingClassName="text-2xl sm:text-4xl md:text-5xl leading-snug text-slate-900"
               rollingClassName="h-[1.55em]"
             />

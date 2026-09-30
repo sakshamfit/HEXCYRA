@@ -68,16 +68,26 @@ export const CrowdCanvas: React.FC<CrowdCanvasProps> = ({
     resize();
     window.addEventListener("resize", resize);
 
+    // Auto screen-size adjust (as the original stage does): thin the crowd
+    // out on narrow viewports so walkers never pile up on each other.
+    const count =
+      width >= 900 ? density : Math.max(10, Math.round((density * width) / 900));
+
     // Initialize walkers with varied depth, styles and directions
     const walkers: Walker[] = [];
-    for (let i = 0; i < density; i++) {
+    for (let i = 0; i < count; i++) {
       const scale = 0.5 + Math.random() * 0.7; // 0.5 (back) to 1.2 (front)
       const direction = Math.random() > 0.5 ? 1 : -1;
       const colors = PALETTE[Math.floor(Math.random() * PALETTE.length)];
 
+      // Ground the walker: feet sit lower on the stage the closer (larger)
+      // the walker is, so depth scale and ground line always agree — nobody
+      // floats above someone who should be behind them.
+      const depth = (scale - 0.5) / 0.7; // 0 (back) → 1 (front)
+
       walkers.push({
         x: Math.random() * width,
-        y: heightPx * 0.45 + Math.random() * (heightPx * 0.45),
+        y: heightPx * (0.55 + 0.38 * depth),
         speed: (0.6 + Math.random() * 0.9) * walkerSpeed * (scale * 0.9),
         direction,
         scale,
@@ -122,10 +132,11 @@ export const CrowdCanvas: React.FC<CrowdCanvasProps> = ({
         ctx.translate(w.x, w.y);
         ctx.scale(w.direction * w.scale, w.scale);
 
-        // Ground shadow
+        // Ground shadow — darkened so it still reads against the lit street
+        // floor the stage draws behind the crowd.
         ctx.beginPath();
         ctx.ellipse(0, 0, 10, 3, 0, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(0, 0, 0, 0.35)";
+        ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
         ctx.fill();
 
         // Walking kinematics (leg swing & arm swing)
@@ -213,54 +224,4 @@ export const CrowdCanvas: React.FC<CrowdCanvasProps> = ({
   );
 };
 
-export interface Skiper39Props {
-  className?: string;
-  badge?: string;
-  title?: string;
-  subtitle?: string;
-  density?: number;
-}
-
-export const Skiper39: React.FC<Skiper39Props> = ({
-  className,
-  badge = "Global Crowd",
-  title = "Building for everyone, everywhere.",
-  subtitle = "From startups to global enterprises, thousands walk with us every day.",
-  density = 32,
-}) => {
-  return (
-    <div className={cn("relative w-full overflow-hidden bg-black py-16", className)}>
-      {/* Background Street Horizon */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 border-t border-white/10 bg-gradient-to-t from-white/[0.04] to-transparent" />
-
-      {/* The Lively Animated Walking Crowd */}
-      <CrowdCanvas density={density} className="z-0 opacity-80" />
-
-      {/* Optional Foreground Banner Overlay */}
-      {(title || subtitle) && (
-        <div className="relative z-10 mx-auto max-w-7xl px-6 pointer-events-none text-center">
-          {badge && (
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-lime-400 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-lime-400 animate-pulse" />
-              {badge}
-            </span>
-          )}
-
-          {title && (
-            <h3 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-white md:text-3xl">
-              {title}
-            </h3>
-          )}
-
-          {subtitle && (
-            <p className="mt-2 text-sm text-white/50 max-w-xl mx-auto">
-              {subtitle}
-            </p>
-          )}
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default Skiper39;
+export default CrowdCanvas;

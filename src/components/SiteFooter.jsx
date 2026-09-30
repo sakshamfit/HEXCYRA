@@ -5,16 +5,16 @@ import { CrowdCanvas } from './ui/skiper39'
 
 /* ==========================================================================
    SITE FOOTER
-   Lively walking crowd canvas stage (Skiper39 by @reuno-ui), followed by
-   the brand mark, navigation links, and global location note.
+   The full Skiper39 street stage (Skiper39 by @reuno-ui): copy sits above,
+   then the walking crowd runs along a lit street horizon — grounded by their
+   contact shadows, fading out at both edges. The brand bar follows below.
    ========================================================================== */
 export default function SiteFooter() {
   return (
     <footer className="relative overflow-hidden bg-black text-white">
       {/* Skiper39 Crowd Stage */}
-      <div className="relative border-t border-white/10 bg-gradient-to-b from-black via-slate-950 to-black py-12 md:py-16">
-        <CrowdCanvas density={30} className="opacity-75" />
-
+      <div className="relative border-t border-white/10 bg-gradient-to-b from-black via-slate-950 to-black pt-12 md:pt-16">
+        {/* Foreground banner — held above the crowd */}
         <div className="relative z-10 mx-auto max-w-7xl px-6 text-center pointer-events-none">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-lime-400 backdrop-blur-md">
             <span className="h-1.5 w-1.5 rounded-full bg-lime-400 animate-pulse" />
@@ -26,6 +26,19 @@ export default function SiteFooter() {
           <p className="mt-2 text-xs text-white/50 max-w-md mx-auto">
             From local businesses to enterprise systems, our technology travels everywhere.
           </p>
+        </div>
+
+        {/* Street stage — the horizon strip plus the crowd walking on it */}
+        <div className="relative mt-8 h-40 md:h-48">
+          {/* Background Street Horizon (the strip the Skiper39 stage ships with) */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 border-t border-white/10 bg-gradient-to-t from-white/[0.07] to-transparent" />
+
+          {/* The crowd — edge-masked so walkers dissolve in and out instead
+              of popping at the sides. Density is tuned up; narrow viewports
+              thin out automatically inside CrowdCanvas. */}
+          <div className="absolute inset-0 [-webkit-mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+            <CrowdCanvas density={44} />
+          </div>
         </div>
       </div>
 

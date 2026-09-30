@@ -9,15 +9,27 @@ export function useReveal() {
   useEffect(() => {
     const els = Array.from(document.querySelectorAll('.reveal'))
     if (!('IntersectionObserver' in window) || els.length === 0) {
-      els.forEach((el) => el.classList.add('visible'))
+      els.forEach((el) => {
+        el.classList.add('visible')
+        el.setAttribute('data-visible', '')
+      })
       return
+    }
+
+    // `data-visible` is what the CSS actually keys on. React rewrites the
+    // className attribute whenever a component's class prop changes, which
+    // would silently wipe an externally-added `.visible`; data-* attributes
+    // React doesn't render itself are never touched.
+    const reveal = (el) => {
+      el.classList.add('visible')
+      el.setAttribute('data-visible', '')
     }
 
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
+            reveal(entry.target)
             obs.unobserve(entry.target)
           }
         })

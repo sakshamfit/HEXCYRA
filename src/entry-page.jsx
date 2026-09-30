@@ -6,6 +6,7 @@ import ApproachPage from './pages/ApproachPage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
+import './fonts.js'
 import './index.css'
 
 /* ==========================================================================
