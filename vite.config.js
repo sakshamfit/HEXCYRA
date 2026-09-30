@@ -53,7 +53,16 @@ const sitePlugin = {
      hooks run before the internal stack is installed, so an unknown page URL
      is answered before Vite ends the response with its empty 404. */
   configureServer(server) {
-    server.middlewares.use(pageFallback(path.resolve(dirname, 'dist')))
+    /* In dev the404 body comes from the SOURCE document, run through
+       transformIndexHtml — the built one points at /assets/*, which the
+       dev server does not serve, so unknown URLs would render unstyled
+       and log a fistful of 404s. */
+    server.middlewares.use(
+      pageFallback(path.resolve(dirname, 'dist'), {
+        notFound: path.resolve(dirname, '404.html'),
+        transform: (html) => server.transformIndexHtml('/404.html', html),
+      })
+    )
   },
   configurePreviewServer(server) {
     server.middlewares.use(pageFallback(path.resolve(dirname, 'dist')))
@@ -98,7 +107,7 @@ Sitemap: ${SITE}/sitemap.xml
    Registered in front of Vite's own layers, which end a 404 response before
    anything added behind them can speak. Pages that exist are passed through
    untouched. */
-const pageFallback = (distDir) => (req, res, next) => {
+const pageFallback = (distDir, dev404) => (req, res, next) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') return next()
   const [pathname, query] = (req.url ?? '/').split('?')
   if (/\/[^/]*\.[^/]+$/.test(pathname)) return next()
@@ -118,9 +127,24 @@ const pageFallback = (distDir) => (req, res, next) => {
     }
     return next()
   }
-  const notFound = path.join(distDir, '404.html')
+  const notFound = dev404?.notFound ?? path.join(distDir, '404.html')
   if (!fs.existsSync(notFound)) return next()
   res.statusCode = 404
+  if (dev404?.transform) {
+    fs.readFile(notFound, 'utf8', (err, html) => {
+      if (err) return res.end()
+      Promise.resolve(dev404.transform(html))
+        .then((out) => {
+          res.setHeader('Content-Type', 'text/html; charset=utf-8')
+          res.end(out)
+        })
+        .catch(() => {
+          res.setHeader('Content-Type', 'text/html; charset=utf-8')
+          res.end(html)
+        })
+    })
+    return
+  }
   res.setHeader('Content-Type', 'text/html; charset=utf-8')
   fs.createReadStream(notFound).pipe(res)
 }
