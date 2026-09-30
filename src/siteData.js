@@ -260,4 +260,10 @@ export const footer = {
   ],
   copyright: '© 2026 HEXCYRA',
   location: 'Gorakhpur · India · Beyond',
+  /* Credit line rendered under the copyright in the shared footer. */
+  credit: {
+    lead: 'I am made by',
+    name: 'sakshamfit',
+    href: 'https://github.com/sakshamfit',
+  },
 }
