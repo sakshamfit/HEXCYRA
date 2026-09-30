@@ -1,7 +1,7 @@
 "use client";
 
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { cn } from "@/lib/utils";
@@ -65,6 +65,7 @@ export const AnimatedTestimonials = ({
   const current = testimonials[active] || testimonials[0];
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className={cn("max-w-sm md:max-w-4xl mx-auto px-4 md:px-8 lg:px-12 py-12 md:py-20", className)}>
       <div className="relative grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
         <div>
@@ -184,6 +185,7 @@ export const AnimatedTestimonials = ({
         </div>
       </div>
     </div>
+    </MotionConfig>
   );
 };
 

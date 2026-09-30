@@ -205,7 +205,9 @@
   .animate-marquee-vertical-reverse,
   .animate-floaty,
   .animate-bounce,
-  .animate-pulse {
+  .animate-pulse,
+  .animate-spin,
+  .animate-fadeSlideUp {
     animation: none !important;
   }
 
