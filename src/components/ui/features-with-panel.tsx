@@ -47,7 +47,7 @@ function FeatureMedia({
         alt={alt}
         loading="lazy"
         decoding="async"
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover grayscale"
       />
     );
   }

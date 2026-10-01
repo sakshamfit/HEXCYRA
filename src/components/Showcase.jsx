@@ -48,7 +48,7 @@ export default function Showcase() {
       <div className="flex justify-center px-6 pb-16">
         <a
           href={routes.solutions}
-          className="group inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white transition-transform duration-300 ease-pop hover:scale-105"
+          className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-transform duration-300 ease-pop hover:scale-105"
         >
           {hero.secondaryCta}
           <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />

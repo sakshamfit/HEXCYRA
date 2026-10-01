@@ -107,7 +107,7 @@ export const AnimatedTestimonials = ({
                     // The first few cards are eager so a switch never waits
                     // on a decode — that stall read as stutter.
                     priority={index < 2}
-                    className="h-full w-full rounded-3xl object-cover object-center shadow-xl"
+                    className="h-full w-full rounded-3xl object-cover object-center grayscale shadow-xl"
                   />
                 </motion.div>
               ))}
@@ -137,7 +137,7 @@ export const AnimatedTestimonials = ({
             <h3 className="text-2xl font-bold text-foreground">
               {current.name}
             </h3>
-            <p className="text-sm font-semibold uppercase tracking-wider text-fuchsia-600 mt-1">
+            <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mt-1">
               {current.designation}
             </p>
             <motion.p className="text-base sm:text-lg text-muted-foreground mt-6 leading-relaxed">

@@ -2,19 +2,18 @@ import React from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { routes, work } from '../siteData.js'
 
-/* Tile treatment: each concept keeps its palette (sand / indigo / rose) as a
-   duotone wash over the photograph, so the images stay minimal and the grid
-   still reads as one family. */
+/* Tile treatment: minimal monochrome wash over each photograph so the grid
+   reads as one cohesive black-and-white family. */
 const TONES = {
-  sand: 'light-artwork-card border-black bg-[#E9E4DE] text-slate-900',
-  indigo: 'border-black bg-indigo-600 text-white',
-  rose: 'border-black bg-rose-500 text-white',
+  sand: 'border-slate-200 bg-neutral-900 text-white',
+  indigo: 'border-slate-200 bg-neutral-900 text-white',
+  rose: 'border-slate-200 bg-neutral-900 text-white',
 }
 
 const WASH = {
-  sand: 'bg-gradient-to-t from-black/80 via-black/25 to-transparent',
-  indigo: 'bg-indigo-600/65',
-  rose: 'bg-rose-500/65',
+  sand: 'bg-gradient-to-t from-black/85 via-black/35 to-black/10',
+  indigo: 'bg-gradient-to-t from-black/85 via-black/45 to-black/20',
+  rose: 'bg-gradient-to-t from-black/85 via-black/45 to-black/20',
 }
 
 function TileImage({ item, priority }) {
@@ -26,7 +25,7 @@ function TileImage({ item, priority }) {
       height={672}
       loading={priority ? 'eager' : 'lazy'}
       decoding="async"
-      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-pop group-hover:scale-105"
+      className="absolute inset-0 h-full w-full object-cover grayscale transition-transform duration-700 ease-pop group-hover:scale-105"
     />
   )
 }
@@ -39,14 +38,14 @@ export default function Work() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="reveal">
           <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-            <span className="h-1.5 w-1.5 rounded-full bg-fuchsia-500" />
+            <span className="h-1.5 w-1.5 rounded-full bg-slate-900" />
             {work.kicker}
           </span>
 
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
             <h2 className="font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-slate-900 md:text-6xl lg:col-span-7">
               {work.title}{' '}
-              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
+              <span className="inline-block pr-3 pb-1 italic text-slate-500">
                 {work.accent}
               </span>
             </h2>
@@ -60,13 +59,13 @@ export default function Work() {
         <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* 1 · Healthcare concept */}
           <article
-            className={`hover-pop reveal group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border-2 p-7 md:p-9 ${TONES[first.tone]} ${first.span} ${first.aspect}`}
+            className={`hover-pop reveal group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border p-7 md:p-9 ${TONES[first.tone]} ${first.span} ${first.aspect}`}
           >
             <TileImage item={first} priority />
             <div className={`pointer-events-none absolute inset-0 ${WASH[first.tone]}`} />
 
             <header className="relative flex items-start justify-between gap-4">
-              <span className="rounded-full bg-white/70 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-slate-600 backdrop-blur">
+              <span className="rounded-full bg-white/15 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur">
                 {first.label}
               </span>
               <span className="font-display text-[11px] font-bold uppercase tracking-widest text-white/80">
@@ -78,7 +77,7 @@ export default function Work() {
               <h3 className="font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-white md:text-6xl">
                 {first.headline}
                 <br />
-                <span className="bg-gradient-to-r from-teal-200 to-sky-200 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
+                <span className="inline-block pr-3 pb-1 italic text-white/70">
                   {first.headlineAccent}
                 </span>
               </h3>
@@ -104,7 +103,7 @@ export default function Work() {
                   {first.meta}
                 </p>
               </div>
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white text-slate-900 transition-transform duration-500 ease-pop group-hover:rotate-45">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white text-black transition-transform duration-500 ease-pop group-hover:rotate-45">
                 <ArrowUpRight className="h-5 w-5" />
               </span>
             </footer>
@@ -112,7 +111,7 @@ export default function Work() {
 
           {/* 2 · Business presence */}
           <article
-            className={`hover-pop reveal group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border-2 p-7 md:p-8 ${TONES[second.tone]} ${second.span} ${second.aspect}`}
+            className={`hover-pop reveal group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border p-7 md:p-8 ${TONES[second.tone]} ${second.span} ${second.aspect}`}
           >
             <TileImage item={second} />
             <div className={`pointer-events-none absolute inset-0 ${WASH[second.tone]}`} />
@@ -142,7 +141,7 @@ export default function Work() {
 
           {/* 3 · Security foundation */}
           <article
-            className={`hover-pop reveal group relative overflow-hidden rounded-[2.5rem] border-2 p-7 md:p-8 ${TONES[third.tone]} ${third.span} ${third.aspect}`}
+            className={`hover-pop reveal group relative overflow-hidden rounded-[2.5rem] border p-7 md:p-8 ${TONES[third.tone]} ${third.span} ${third.aspect}`}
           >
             <TileImage item={third} />
             <div className={`pointer-events-none absolute inset-0 ${WASH[third.tone]}`} />
@@ -171,11 +170,9 @@ export default function Work() {
             </div>
           </article>
 
-          {/* 4 · Closing note — dark slate, lime accent */}
-          <article className="hover-pop reveal group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border-2 border-black bg-slate-900 p-7 text-white md:p-9 lg:col-span-7 aspect-[16/10]">
-            <div className="pointer-events-none absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-lime-400/20 blur-3xl" />
-
-            <span className="relative w-fit rounded-full bg-white/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-lime-300">
+          {/* 4 · Closing note — minimal black */}
+          <article className="hover-pop reveal group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border border-white/15 bg-black p-7 text-white md:p-9 lg:col-span-7 aspect-[16/10]">
+            <span className="relative w-fit rounded-full bg-white/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-white/70">
               {work.kicker}
             </span>
 
@@ -183,11 +180,9 @@ export default function Work() {
               <p className="max-w-xl font-display text-2xl font-extrabold leading-snug tracking-tight md:text-4xl">
                 {work.lead}
               </p>
-              {/* A real link: the contact panel is a page now, not a section
-                  further down this one. */}
               <a
                 href={routes.contact}
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition-transform duration-300 ease-pop hover:scale-105"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition-transform duration-300 ease-pop hover:scale-105"
               >
                 Start a Project
                 <ArrowUpRight className="h-4 w-4" />

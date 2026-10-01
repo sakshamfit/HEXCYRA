@@ -20,13 +20,11 @@ export interface Walker {
 }
 
 const PALETTE = [
-  { body: "#a3e635", clothes: "#4d7c0f" }, // lime
-  { body: "#d946ef", clothes: "#86198f" }, // fuchsia
-  { body: "#38bdf8", clothes: "#0369a1" }, // sky
-  { body: "#fbbf24", clothes: "#b45309" }, // amber
-  { body: "#f43f5e", clothes: "#9f1239" }, // rose
-  { body: "#94a3b8", clothes: "#334155" }, // slate
-  { body: "#ffffff", clothes: "#475569" }, // white / charcoal
+  { body: "#f5f5f5", clothes: "#262626" },
+  { body: "#d4d4d4", clothes: "#404040" },
+  { body: "#a3a3a3", clothes: "#171717" },
+  { body: "#e5e5e5", clothes: "#525252" },
+  { body: "#ffffff", clothes: "#333333" },
 ];
 
 export interface CrowdCanvasProps {

@@ -6,12 +6,6 @@ import PageNext from '../components/PageNext.jsx'
 import SiteFooter from '../components/SiteFooter.jsx'
 import { useReveal } from '../hooks.js'
 
-/* ==========================================================================
-   /approach/ — 03 / Approach
-   The process as an orbit, then the same four steps as a list. Picking a step
-   here carries you to /work/ with that step already open on the machine, so
-   the two pages are one process seen two ways.
-   ========================================================================== */
 export default function ApproachPage() {
   useReveal()
 
@@ -20,7 +14,7 @@ export default function ApproachPage() {
   }, [])
 
   return (
-    <div className="min-h-screen w-full bg-white font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900">
+    <div className="site-page min-h-screen w-full font-sans text-slate-900 antialiased selection:bg-slate-900 selection:text-white">
       <Nav />
 
       <main className="pt-28 md:pt-32">
