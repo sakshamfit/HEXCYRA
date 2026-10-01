@@ -287,7 +287,7 @@ function initMachineScene(
     const TAU = Math.PI * 2
     const embedded = options.embedded
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
-    const palette = { lime: 0xbef264, white: 0xf4f1ea, dark: 0x171b21, steel: 0x59616b }
+    const palette = { lime: 0xe5e5e5, white: 0xf4f1ea, dark: 0x171b21, steel: 0x59616b }
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(33, frameWidth() / frameHeight(), 0.1, 150)
     let renderer: THREE.WebGLRenderer
@@ -381,7 +381,7 @@ function initMachineScene(
       black: mat(0x050909, 0, 0.6),
       light: mat(palette.lime, 0.2, 0.25, { emissive: palette.lime, emissiveIntensity: 1.5 }),
       whiteLight: mat(0xfff3d7, 0.1, 0.3, { emissive: 0xfff0d0, emissiveIntensity: 1.8 }),
-      green: mat(0xc6d9a1, 0.1, 0.3, { emissive: 0x91b364, emissiveIntensity: 0.7 }),
+      green: mat(0xd4d4d4, 0.1, 0.3, { emissive: 0xa3a3a3, emissiveIntensity: 0.7 }),
       glass: mat(0x81949e, 0.45, 0.16, { transparent: true, opacity: 0.19, depthWrite: false }),
       paper: mat(0xf4f1ea, 0, 0.85),
     }
@@ -1800,7 +1800,7 @@ const STYLES = String.raw`
   color-scheme: dark;
   --bg: #000000;
   --white: #f4f1ea;
-  --lime: #bef264;
+  --lime: #f5f5f5;
   --muted: #81848b;
   --line: rgba(244, 241, 234, 0.11);
 }

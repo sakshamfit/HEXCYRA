@@ -183,7 +183,7 @@ function CursorBubble({
             ref={bubbleRef}
             aria-hidden="true"
             className={cn(
-              "pointer-events-none fixed top-0 left-0 z-50 origin-bottom-left scale-0 select-none rounded-full bg-slate-900 text-white px-3.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider opacity-0 shadow-2xl border border-white/20 backdrop-blur-md ring-2 ring-fuchsia-500/40",
+              "pointer-events-none fixed top-0 left-0 z-50 origin-bottom-left scale-0 select-none rounded-full bg-primary text-primary-foreground px-3.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider opacity-0 shadow-2xl border border-white/20 backdrop-blur-md",
               bubbleClassName
             )}
           />

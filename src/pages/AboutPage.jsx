@@ -8,16 +8,11 @@ import PageNext from '../components/PageNext.jsx'
 import SiteFooter from '../components/SiteFooter.jsx'
 import { useReveal } from '../hooks.js'
 
-/* ==========================================================================
-   /about/ — 06 / About + 07 / Academy + 05 / Who we work with + Stagger Testimonials
-   The company story, founders, the Academy card, the client sectors,
-   and staggered live feedback evidence.
-   ========================================================================== */
 export default function AboutPage() {
   useReveal()
 
   return (
-    <div className="site-page min-h-screen w-full font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900">
+    <div className="site-page min-h-screen w-full font-sans text-slate-900 antialiased selection:bg-slate-900 selection:text-white">
       <Nav />
 
       <main className="pt-28 md:pt-32">

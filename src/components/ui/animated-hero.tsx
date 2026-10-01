@@ -112,7 +112,7 @@ export default function AnimatedHero({
                     : `translateY(${i > index ? "120%" : "-120%"})`,
                 }}
               >
-                <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-6 pb-2 inline-block italic text-transparent whitespace-nowrap">
+                <span className="inline-block whitespace-nowrap pr-6 pb-2 italic text-slate-500">
                   {word}
                 </span>
               </span>

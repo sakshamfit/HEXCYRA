@@ -11,7 +11,7 @@ import React, {
 } from 'react'
 import { applyEnvironment, phaseAt, readStoredMode, STORAGE_KEY, TIMELINE, writeStoredMode } from '@/lib/environment.js'
 
-const AnimatedShaderBackground = lazy(() => import('@/components/ui/animated-shader-background'))
+const WavyBackground = lazy(() => import('@/components/ui/blue-meshy-background'))
 
 const EnvironmentContext = createContext(null)
 
@@ -196,7 +196,7 @@ export function EnvironmentProvider({ children }) {
   return (
     <>
       <Suspense fallback={<div aria-hidden="true" className="animated-shader-background" />}>
-        <AnimatedShaderBackground />
+        <WavyBackground className="animated-shader-background fixed inset-0 pointer-events-none z-0" />
       </Suspense>
       <EnvironmentContext.Provider value={value}>{children}</EnvironmentContext.Provider>
     </>

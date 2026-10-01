@@ -3,8 +3,7 @@ import { whatWeDo } from '../siteData.js'
 
 /* ==========================================================================
    01 / WHAT WE DO
-   Split heading + the three principles. Text only — the colour comes from
-   the gradient accents and the numbered type.
+   Split heading + the three principles. Minimal monochrome typography.
    ========================================================================== */
 export default function Intro() {
   return (
@@ -12,14 +11,14 @@ export default function Intro() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="reveal">
           <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
-            <span className="h-1.5 w-1.5 rounded-full bg-fuchsia-500" />
+            <span className="h-1.5 w-1.5 rounded-full bg-slate-900" />
             {whatWeDo.kicker}
           </span>
 
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
             <h2 className="font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-slate-900 md:text-6xl lg:col-span-7">
               {whatWeDo.title}{' '}
-              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
+              <span className="inline-block pr-3 pb-1 italic text-slate-500">
                 {whatWeDo.accent}
               </span>
             </h2>
@@ -29,7 +28,7 @@ export default function Intro() {
           </div>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-8 border-t-2 border-black pt-10 md:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-8 border-t border-slate-200 pt-10 md:grid-cols-3">
           {whatWeDo.principles.map((item, index) => (
             <div
               key={item.no}

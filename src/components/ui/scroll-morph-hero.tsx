@@ -81,7 +81,7 @@ function FlipCard({
                                 alt={item.label ?? `hero-${index}`}
                                 loading={index === 0 ? 'eager' : 'lazy'}
                                 decoding="async"
-                                className="h-full w-full object-cover"
+                                className="h-full w-full object-cover grayscale"
                             />
                             <div className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-transparent" />
                         </>
@@ -105,7 +105,7 @@ function FlipCard({
                     style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                 >
                     <div className="text-center w-full px-0.5">
-                        <p className="text-[7px] font-bold text-blue-400 uppercase tracking-wider mb-1 leading-tight break-words">
+                        <p className="text-[7px] font-bold text-white/70 uppercase tracking-wider mb-1 leading-tight break-words">
                             {item.label ?? "HEXCYRA"}
                         </p>
                         <p className="text-xs font-medium text-white">{item.no}</p>

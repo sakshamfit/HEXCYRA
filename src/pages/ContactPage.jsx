@@ -5,16 +5,11 @@ import PageNext from '../components/PageNext.jsx'
 import SiteFooter from '../components/SiteFooter.jsx'
 import { useReveal } from '../hooks.js'
 
-/* ==========================================================================
-   /contact/ — 08 / Start a conversation
-   One panel, one address, one action. The last page of the route, so nothing
-   follows it but the footer.
-   ========================================================================== */
 export default function ContactPage() {
   useReveal()
 
   return (
-    <div className="site-page min-h-screen w-full font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900">
+    <div className="site-page min-h-screen w-full font-sans text-slate-900 antialiased selection:bg-slate-900 selection:text-white">
       <Nav />
 
       <main className="pt-28 md:pt-32">

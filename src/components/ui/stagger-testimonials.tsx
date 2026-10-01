@@ -118,12 +118,12 @@ function TestimonialCard({ item }: TestimonialCardProps) {
   return (
     <div className="review-card group relative flex flex-col justify-between rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-xl">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1 text-amber-400">
+        <div className="flex items-center gap-1 text-slate-900">
           {Array.from({ length: item.rating ?? 5 }).map((_, i) => (
-            <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+            <Star key={i} className="h-4 w-4 fill-slate-900 text-slate-900" />
           ))}
         </div>
-        <Quote className="h-5 w-5 text-slate-300 transition-colors group-hover:text-fuchsia-500" />
+        <Quote className="h-5 w-5 text-slate-300 transition-colors group-hover:text-slate-900" />
       </div>
 
       <p className="mt-4 text-sm font-medium leading-relaxed text-slate-700">
@@ -137,7 +137,7 @@ function TestimonialCard({ item }: TestimonialCardProps) {
           width={40}
           height={40}
           loading="lazy"
-          className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-slate-100"
+          className="h-10 w-10 shrink-0 rounded-full object-cover grayscale ring-2 ring-slate-100"
         />
         <div className="min-w-0">
           <h4 className="truncate text-sm font-bold text-slate-900">
@@ -186,7 +186,7 @@ export const StaggerTestimonials = ({
         <div className="reveal max-w-3xl">
           {kicker && (
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-slate-600 shadow-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-lime-500" />
+              <span className="h-1.5 w-1.5 rounded-full bg-slate-900" />
               {kicker}
             </span>
           )}
@@ -194,7 +194,7 @@ export const StaggerTestimonials = ({
           <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-slate-900 md:text-5xl lg:text-6xl">
             {title}{" "}
             {accent && (
-              <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
+              <span className="inline-block pr-3 pb-1 italic text-slate-500">
                 {accent}
               </span>
             )}

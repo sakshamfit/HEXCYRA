@@ -2,15 +2,7 @@ import React from 'react'
 import Timeline from '@/components/ui/timeline'
 import { approach } from '../siteData.js'
 
-/* ==========================================================================
-   03 / APPROACH
-   The process is explained with the horizontal scroll Timeline animation
-   (inspired by @hyperiux/components/timeline):
-   Milestone cards glide horizontally, stems illuminate, and each phase
-   reveals its details as the user advances through the four steps.
-   ========================================================================== */
 export default function Approach({ heading: Heading = 'h2' }) {
-  const accents = ['#a3e635', '#38bdf8', '#d946ef', '#f59e0b']
   const categories = ['Discovery', 'Architecture', 'Engineering', 'Continuous Growth']
 
   const milestones = approach.steps.map((step, idx) => ({
@@ -21,7 +13,7 @@ export default function Approach({ heading: Heading = 'h2' }) {
     description: step.desc,
     category: categories[idx] || 'Execution',
     status: idx < 2 ? 'completed' : idx === 2 ? 'active' : 'upcoming',
-    accentColor: accents[idx] || '#a3e635',
+    accentColor: '#ffffff',
   }))
 
   return (
@@ -35,7 +27,7 @@ export default function Approach({ heading: Heading = 'h2' }) {
         lead={approach.lead}
         milestones={milestones}
         backgroundColor="#000000"
-        activeColor="#a3e635"
+        activeColor="#ffffff"
       />
 
       {/* Accessible text list for screen readers and SEO crawlers */}

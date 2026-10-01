@@ -3,103 +3,103 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   ATMOSPHERE — LIGHTTON-style day → night colour stops
+   ATMOSPHERE — Minimal monochrome day → night colour stops
    ========================================================================== */
 :root {
   color-scheme: dark;
-  --bg: rgba(14, 17, 25, 1);
-  --bg-2: rgba(19, 23, 33, 1);
-  --surface: rgba(25, 30, 42, 1);
-  --panel: rgba(30, 35, 48, 1);
-  --fg: rgba(246, 244, 238, 1);
-  --fg-2: rgba(190, 194, 205, 1);
-  --fg-3: rgba(139, 146, 163, 1);
-  --line: rgba(246, 244, 238, 0.13);
-  --line-strong: rgba(246, 244, 238, 0.68);
-  --inv: rgba(244, 243, 238, 1);
-  --inv-fg: rgba(16, 19, 26, 1);
-  --horizon: rgba(156, 103, 200, 0.1);
-  --sky: rgba(19, 23, 34, 1);
-  --watermark: rgba(246, 244, 238, 0.03);
-  --bg-rgb: 14, 17, 25;
-  --surface-rgb: 25, 30, 42;
-  --panel-rgb: 30, 35, 48;
-  --fg-rgb: 246, 244, 238;
-  --inv-rgb: 244, 243, 238;
-  --inv-fg-rgb: 16, 19, 26;
+  --bg: rgba(10, 10, 10, 1);
+  --bg-2: rgba(16, 16, 16, 1);
+  --surface: rgba(22, 22, 22, 1);
+  --panel: rgba(26, 26, 26, 1);
+  --fg: rgba(246, 246, 246, 1);
+  --fg-2: rgba(190, 190, 190, 1);
+  --fg-3: rgba(138, 138, 138, 1);
+  --line: rgba(246, 246, 246, 0.13);
+  --line-strong: rgba(246, 246, 246, 0.68);
+  --inv: rgba(246, 246, 246, 1);
+  --inv-fg: rgba(12, 12, 12, 1);
+  --horizon: rgba(255, 255, 255, 0.03);
+  --sky: rgba(16, 16, 16, 1);
+  --watermark: rgba(246, 246, 246, 0.03);
+  --bg-rgb: 10, 10, 10;
+  --surface-rgb: 22, 22, 22;
+  --panel-rgb: 26, 26, 26;
+  --fg-rgb: 246, 246, 246;
+  --inv-rgb: 246, 246, 246;
+  --inv-fg-rgb: 12, 12, 12;
   --env: 1;
   --lamp-g: 1;
   --ambient-g: 1;
-  --aurora-opacity: 0.66;
+  --aurora-opacity: 0.44;
   --theme-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
   /* shadcn/ui tokens are updated alongside the atmosphere engine. */
-  --background: 224 28% 8%;
-  --foreground: 36 26% 92%;
-  --card: 222 24% 15%;
-  --card-foreground: 36 26% 92%;
-  --popover: 222 24% 15%;
-  --popover-foreground: 36 26% 92%;
-  --primary: 40 21% 95%;
-  --primary-foreground: 225 24% 7%;
-  --secondary: 222 20% 16%;
-  --secondary-foreground: 36 26% 92%;
-  --muted: 222 20% 16%;
-  --muted-foreground: 218 11% 65%;
-  --accent: 222 20% 16%;
-  --accent-foreground: 36 26% 92%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 224 12% 30% / 0.45;
-  --input: 224 12% 30% / 0.45;
-  --ring: 218 11% 65%;
+  --background: 0 0% 4%;
+  --foreground: 0 0% 96%;
+  --card: 0 0% 10%;
+  --card-foreground: 0 0% 96%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 96%;
+  --primary: 0 0% 96%;
+  --primary-foreground: 0 0% 5%;
+  --secondary: 0 0% 9%;
+  --secondary-foreground: 0 0% 96%;
+  --muted: 0 0% 9%;
+  --muted-foreground: 0 0% 65%;
+  --accent: 0 0% 9%;
+  --accent-foreground: 0 0% 96%;
+  --destructive: 0 0% 25%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 30% / 0.45;
+  --input: 0 0% 30% / 0.45;
+  --ring: 0 0% 65%;
   --radius: 0.5rem;
 }
 
 :root[data-mode='day'] {
   color-scheme: light;
-  --bg: rgba(248, 250, 253, 1);
-  --bg-2: rgba(237, 242, 249, 1);
-  --surface: rgba(244, 247, 251, 1);
+  --bg: rgba(250, 250, 250, 1);
+  --bg-2: rgba(242, 242, 242, 1);
+  --surface: rgba(245, 245, 245, 1);
   --panel: rgba(255, 255, 255, 1);
-  --fg: rgba(16, 24, 40, 1);
-  --fg-2: rgba(71, 84, 103, 1);
-  --fg-3: rgba(118, 132, 153, 1);
-  --line: rgba(16, 24, 40, 0.11);
-  --line-strong: rgba(16, 24, 40, 0.7);
-  --inv: rgba(17, 24, 39, 1);
+  --fg: rgba(15, 15, 15, 1);
+  --fg-2: rgba(72, 72, 72, 1);
+  --fg-3: rgba(120, 120, 120, 1);
+  --line: rgba(15, 15, 15, 0.12);
+  --line-strong: rgba(15, 15, 15, 0.72);
+  --inv: rgba(15, 15, 15, 1);
   --inv-fg: rgba(255, 255, 255, 1);
-  --horizon: rgba(196, 214, 244, 0.12);
-  --sky: rgba(220, 232, 250, 1);
-  --watermark: rgba(32, 54, 94, 0.045);
-  --bg-rgb: 248, 250, 253;
-  --surface-rgb: 244, 247, 251;
+  --horizon: rgba(0, 0, 0, 0.03);
+  --sky: rgba(240, 240, 240, 1);
+  --watermark: rgba(0, 0, 0, 0.04);
+  --bg-rgb: 250, 250, 250;
+  --surface-rgb: 245, 245, 245;
   --panel-rgb: 255, 255, 255;
-  --fg-rgb: 16, 24, 40;
-  --inv-rgb: 17, 24, 39;
+  --fg-rgb: 15, 15, 15;
+  --inv-rgb: 15, 15, 15;
   --inv-fg-rgb: 255, 255, 255;
   --env: 0;
   --lamp-g: 0;
   --ambient-g: 0;
-  --aurora-opacity: 0.42;
+  --aurora-opacity: 0.32;
 
-  --background: 210 33% 99%;
-  --foreground: 222 44% 11%;
+  --background: 0 0% 98%;
+  --foreground: 0 0% 6%;
   --card: 0 0% 100%;
-  --card-foreground: 222 44% 11%;
+  --card-foreground: 0 0% 6%;
   --popover: 0 0% 100%;
-  --popover-foreground: 222 44% 11%;
-  --primary: 222 39% 11%;
+  --popover-foreground: 0 0% 6%;
+  --primary: 0 0% 6%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 214 40% 95%;
-  --secondary-foreground: 222 44% 11%;
-  --muted: 214 40% 95%;
-  --muted-foreground: 215 16% 47%;
-  --accent: 214 40% 95%;
-  --accent-foreground: 222 44% 11%;
-  --border: 214 32% 91% / 0.9;
-  --input: 214 32% 91% / 0.9;
-  --ring: 222 44% 11%;
+  --secondary: 0 0% 95%;
+  --secondary-foreground: 0 0% 6%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 0% 6%;
+  --border: 0 0% 90% / 0.9;
+  --input: 0 0% 90% / 0.9;
+  --ring: 0 0% 6%;
 }
 
 /* ==========================================================================
@@ -158,7 +158,7 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #d946ef;
+    background: var(--fg);
   }
 
   * {
@@ -295,8 +295,7 @@
   inset: 0;
   content: '';
   background:
-    radial-gradient(ellipse 62% 52% at 10% 12%, color-mix(in srgb, var(--sky) 28%, transparent), transparent 100%),
-    radial-gradient(ellipse 48% 54% at 92% 68%, color-mix(in srgb, #a855f7 9%, transparent), transparent 100%),
+    radial-gradient(ellipse 62% 52% at 10% 12%, color-mix(in srgb, var(--sky) 24%, transparent), transparent 100%),
     linear-gradient(to top, var(--horizon), transparent 70%);
 }
 
@@ -305,7 +304,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  opacity: var(--aurora-opacity, 0.5);
+  opacity: var(--aurora-opacity, 0.3);
 }
 
 .site-soft-panel {
@@ -337,13 +336,13 @@
 
 .theme-toggle-sun {
   left: 8px;
-  color: #f59e0b;
+  color: var(--fg-2);
   opacity: calc(1 - var(--env));
 }
 
 .theme-toggle-moon {
   right: 8px;
-  color: #6366f1;
+  color: var(--fg-2);
   opacity: var(--env);
 }
 
@@ -443,76 +442,31 @@ html .border-slate-400 {
   border-color: var(--line);
 }
 
-/* Bright lime and sand art keeps its ink dark for readable contrast at night. */
-html .bg-lime-300,
+/* Light artwork cards keep dark ink for readable contrast at night. */
 html .light-artwork-card {
-  color: #172033;
+  color: #111111;
 }
 
-html .bg-lime-300 .text-slate-950,
-html .bg-lime-300 .text-slate-900,
-html .bg-lime-300 .text-slate-800,
-html .bg-lime-300 .text-slate-700,
-html .bg-lime-300 .text-slate-600,
 html .light-artwork-card .text-slate-950,
 html .light-artwork-card .text-slate-900,
 html .light-artwork-card .text-slate-800,
 html .light-artwork-card .text-slate-700,
 html .light-artwork-card .text-slate-600 {
-  color: #172033;
+  color: #111111;
 }
 
-/* Reviews intentionally stay a bright, editorial-white island in either mode. */
+/* Reviews blend with the active dark/bright mode while keeping subtle borders. */
 html .reviews-light {
-  color-scheme: light;
-  color: #101828;
-  background: #fff;
-  border-block: 1px solid rgba(15, 23, 42, 0.08);
-}
-
-html .reviews-light .text-slate-950,
-html .reviews-light .text-slate-900 {
-  color: #101828;
-}
-
-html .reviews-light .text-slate-800,
-html .reviews-light .text-slate-700,
-html .reviews-light .text-slate-600 {
-  color: #475467;
-}
-
-html .reviews-light .text-slate-500,
-html .reviews-light .text-slate-400 {
-  color: #667085;
-}
-
-html .reviews-light .text-slate-300 {
-  color: #cbd5e1;
-}
-
-html .reviews-light .bg-white,
-html .reviews-light .review-card {
-  background: #fff;
-}
-
-html .reviews-light .bg-white\/90 {
-  background-color: rgba(255, 255, 255, 0.94);
-}
-
-html .reviews-light .border-slate-50,
-html .reviews-light .border-slate-100,
-html .reviews-light .border-slate-200,
-html .reviews-light .border-slate-200\/80,
-html .reviews-light .border-slate-400 {
-  border-color: rgba(15, 23, 42, 0.1);
+  background: transparent;
+  border-block: 1px solid var(--line);
 }
 
 .testimonial-fade-top {
-  background: linear-gradient(to bottom, #fff 0%, rgba(255, 255, 255, 0.84) 45%, transparent 100%);
+  background: linear-gradient(to bottom, var(--bg) 0%, transparent 100%);
 }
 
 .testimonial-fade-bottom {
-  background: linear-gradient(to top, #fff 0%, rgba(255, 255, 255, 0.84) 45%, transparent 100%);
+  background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
 }
 
 /* Honour reduced-motion preferences across scroll and marquee motion. */

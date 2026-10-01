@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from 'react'
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
-import Marquee from './components/Marquee.jsx'
 import Intro from './components/Intro.jsx'
 import Clients from './components/Clients.jsx'
 import StaggerTestimonials from './components/ui/stagger-testimonials'
@@ -26,7 +25,7 @@ function ShowcaseFallback() {
       className="flex h-screen min-h-[640px] w-full items-center justify-center bg-transparent"
     >
       <span className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
-        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-lime-500" />
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-slate-400" />
         Loading showcase
       </span>
     </section>
@@ -51,28 +50,15 @@ function FeaturesFallback() {
   )
 }
 
-/* ==========================================================================
-   HEXCYRA — Technology. Security. Growth.
-   UI: the digital-agency reference (playful, high-contrast, organic-modern).
-   Content: the supplied HEXCYRA copy, in its original section order — no
-   invented numbers, no external assets beyond Google Fonts.
-
-   The home page is the front door: the hero, the capabilities that can be
-   tried in place, the showcase, what we do and who we work with. Each
-   numbered section of the document now has its own index page —
-   /solutions/, /work/, /about/, /contact/ — and the nav and footer link to
-   them as real documents. The old Approach section has been retired.
-   ========================================================================== */
 export default function App() {
   useReveal()
 
   return (
-    <div className="site-page min-h-screen w-full font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900">
+    <div className="site-page min-h-screen w-full font-sans text-slate-900 antialiased selection:bg-slate-900 selection:text-white">
       <Nav />
 
       <main>
         <Hero />
-        <Marquee />
         <Suspense fallback={<FeaturesFallback />}>
           <Features />
         </Suspense>

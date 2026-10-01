@@ -26,7 +26,7 @@ const DOCUMENTS = {
 
 /* Only the pages that belong in a sitemap. */
 const INDEXED = ['/', '/solutions/', '/work/', '/about/', '/contact/']
-const THEME_PRELOAD = `<script>try{var m=localStorage.getItem('hexcyra.mode')==='day'?'day':'night',d=document.documentElement;d.dataset.mode=m;d.style.colorScheme=m==='night'?'dark':'light';var t=document.querySelector('meta[name="theme-color"]');if(t)t.content=m==='night'?'#0e1119':'#f8fafd'}catch(e){document.documentElement.dataset.mode='night'}</script>`
+const THEME_PRELOAD = `<script>try{var m=localStorage.getItem('hexcyra.mode')==='day'?'day':'night',d=document.documentElement;d.dataset.mode=m;d.style.colorScheme=m==='night'?'dark':'light';var t=document.querySelector('meta[name="theme-color"]');if(t)t.content=m==='night'?'#0a0a0a':'#fafafa'}catch(e){document.documentElement.dataset.mode='night'}</script>`
 
 /* ---------------------------------------------------------------------------
    Two build-time jobs Vite cannot do on its own:

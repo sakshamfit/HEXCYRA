@@ -14,7 +14,7 @@ export default function DayNightToggle({ className = '' }) {
       aria-pressed={night}
       aria-label={night ? 'Switch to day' : 'Switch to night'}
       title={night ? 'Switch to daylight' : 'Switch to night'}
-      className={`theme-toggle group inline-flex h-10 items-center gap-2 rounded-full px-2.5 text-slate-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 ${className}`}
+      className={`theme-toggle group inline-flex h-10 items-center gap-2 rounded-full px-2.5 text-slate-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 ${className}`}
     >
       <span className="theme-toggle-track" aria-hidden="true">
         <Sun className="theme-toggle-sun" size={14} />
