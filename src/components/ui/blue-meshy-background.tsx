@@ -31,29 +31,53 @@ const NOISE_SWIRL_FACTOR = 0.2;
 // Number of fractal noise octaves in fbm (must be integer).
 const FBM_OCTAVES = 10;
 
-// 20-step monochromatic palette (black, white, and neutral grayscale).
-// If the darkest color is used, alpha=0 => total transparency in darkest areas.
-const seaColors = [
-  [0.0, 0.0, 0.0],
-  [0.03, 0.03, 0.03],
-  [0.06, 0.06, 0.06],
-  [0.1, 0.1, 0.1],
-  [0.14, 0.14, 0.14],
-  [0.19, 0.19, 0.19],
-  [0.24, 0.24, 0.24],
-  [0.3, 0.3, 0.3],
-  [0.36, 0.36, 0.36],
-  [0.42, 0.42, 0.42],
-  [0.48, 0.48, 0.48],
-  [0.54, 0.54, 0.54],
-  [0.6, 0.6, 0.6],
-  [0.66, 0.66, 0.66],
-  [0.72, 0.72, 0.72],
-  [0.78, 0.78, 0.78],
-  [0.84, 0.84, 0.84],
-  [0.89, 0.89, 0.89],
-  [0.94, 0.94, 0.94],
-  [0.98, 0.98, 0.98],
+// Colourful 20-step palettes keep the animated atmosphere expressive in both
+// modes. The day set is airy and luminous; the night set moves through navy,
+// cyan, indigo, magenta and coral rather than collapsing to grayscale.
+const dayColors = [
+  [0.96, 0.97, 1.0],
+  [0.91, 0.95, 1.0],
+  [0.84, 0.91, 1.0],
+  [0.76, 0.86, 0.99],
+  [0.69, 0.8, 0.98],
+  [0.63, 0.73, 0.95],
+  [0.58, 0.64, 0.91],
+  [0.63, 0.56, 0.9],
+  [0.7, 0.5, 0.88],
+  [0.78, 0.46, 0.84],
+  [0.86, 0.47, 0.72],
+  [0.94, 0.52, 0.6],
+  [1.0, 0.61, 0.5],
+  [1.0, 0.69, 0.47],
+  [0.98, 0.77, 0.5],
+  [0.95, 0.84, 0.61],
+  [0.9, 0.88, 0.72],
+  [0.83, 0.91, 0.82],
+  [0.77, 0.94, 0.88],
+  [0.72, 0.96, 0.92],
+];
+
+const nightColors = [
+  [0.01, 0.02, 0.08],
+  [0.015, 0.05, 0.14],
+  [0.02, 0.1, 0.21],
+  [0.02, 0.18, 0.28],
+  [0.02, 0.3, 0.36],
+  [0.04, 0.4, 0.44],
+  [0.08, 0.3, 0.5],
+  [0.16, 0.2, 0.58],
+  [0.26, 0.14, 0.62],
+  [0.38, 0.1, 0.6],
+  [0.52, 0.08, 0.5],
+  [0.66, 0.09, 0.4],
+  [0.78, 0.12, 0.3],
+  [0.88, 0.18, 0.22],
+  [0.94, 0.28, 0.18],
+  [0.96, 0.4, 0.2],
+  [0.94, 0.55, 0.24],
+  [0.86, 0.67, 0.3],
+  [0.68, 0.72, 0.45],
+  [0.45, 0.75, 0.62],
 ];
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -64,8 +88,11 @@ function buildFragmentShader(): string {
   // Force integer for the for-loop.
   const fbmOctavesInt = Math.floor(FBM_OCTAVES);
 
-  // Convert seaColors array to GLSL array of vec3.
-  const colorArraySrc = seaColors
+  // Convert both mode palettes to GLSL arrays of vec3.
+  const dayColorArraySrc = dayColors
+    .map((c) => `vec3(${c[0]}, ${c[1]}, ${c[2]})`)
+    .join(",\n  ");
+  const nightColorArraySrc = nightColors
     .map((c) => `vec3(${c[0]}, ${c[1]}, ${c[2]})`)
     .join(",\n  ");
 
@@ -80,9 +107,12 @@ uniform float uEnv;
 
 #define NUM_COLORS 20
 
-// 20-step monochromatic palette.
-vec3 seaColors[NUM_COLORS] = vec3[](
-  ${colorArraySrc}
+// Two 20-step colour palettes, blended as the environment shifts.
+vec3 dayColors[NUM_COLORS] = vec3[](
+  ${dayColorArraySrc}
+);
+vec3 nightColors[NUM_COLORS] = vec3[](
+  ${nightColorArraySrc}
 );
 
 // ----------------------------------------------------------
@@ -200,18 +230,17 @@ void main() {
   int iHigh = int(min(float(iLow + 1), float(NUM_COLORS - 1)));
   float f = fract(idx);
 
-  vec3 colLow = seaColors[iLow];
-  vec3 colHigh = seaColors[iHigh];
-  vec3 nightColor = mix(colLow, colHigh, f);
-  vec3 dayColor = vec3(1.0) - nightColor;
+  vec3 dayLow = dayColors[iLow];
+  vec3 dayHigh = dayColors[iHigh];
+  vec3 nightLow = nightColors[iLow];
+  vec3 nightHigh = nightColors[iHigh];
+  vec3 dayColor = mix(dayLow, dayHigh, f);
+  vec3 nightColor = mix(nightLow, nightHigh, f);
   vec3 color = mix(dayColor, nightColor, clamp(uEnv, 0.0, 1.0));
 
-  // If it's the darkest color, set alpha=0 => total transparency
-  if (iLow == 0 && iHigh == 0) {
-    outColor = vec4(color, 0.0);
-  } else {
-    outColor = vec4(color, 1.0);
-  }
+  // Let the deepest navy blend into the page while preserving the colour wash.
+  float alpha = smoothstep(0.0, 0.12, noiseVal);
+  outColor = vec4(color, alpha * 0.9);
 }
 `;
 }

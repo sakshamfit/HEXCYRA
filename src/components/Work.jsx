@@ -2,8 +2,8 @@ import React from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { routes, work } from '../siteData.js'
 
-/* Tile treatment: minimal monochrome wash over each photograph so the grid
-   reads as one cohesive black-and-white family. */
+/* Tile treatment: rich colour washes over each photograph so the grid feels
+   like one cohesive visual system without muting the source imagery. */
 const TONES = {
   sand: 'border-slate-200 bg-neutral-900 text-white',
   indigo: 'border-slate-200 bg-neutral-900 text-white',
@@ -11,9 +11,9 @@ const TONES = {
 }
 
 const WASH = {
-  sand: 'bg-gradient-to-t from-black/85 via-black/35 to-black/10',
-  indigo: 'bg-gradient-to-t from-black/85 via-black/45 to-black/20',
-  rose: 'bg-gradient-to-t from-black/85 via-black/45 to-black/20',
+  sand: 'bg-gradient-to-t from-amber-950/85 via-orange-950/25 to-transparent',
+  indigo: 'bg-gradient-to-t from-indigo-950/90 via-indigo-900/28 to-transparent',
+  rose: 'bg-gradient-to-t from-fuchsia-950/90 via-rose-900/25 to-transparent',
 }
 
 function TileImage({ item, priority }) {
@@ -25,7 +25,7 @@ function TileImage({ item, priority }) {
       height={672}
       loading={priority ? 'eager' : 'lazy'}
       decoding="async"
-      className="absolute inset-0 h-full w-full object-cover grayscale transition-transform duration-700 ease-pop group-hover:scale-105"
+      className="absolute inset-0 h-full w-full object-cover saturate-125 contrast-[1.04] transition-transform duration-700 ease-pop group-hover:scale-105"
     />
   )
 }

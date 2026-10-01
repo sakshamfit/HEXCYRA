@@ -107,7 +107,7 @@ export const AnimatedTestimonials = ({
                     // The first few cards are eager so a switch never waits
                     // on a decode — that stall read as stutter.
                     priority={index < 2}
-                    className="h-full w-full rounded-3xl object-cover object-center grayscale shadow-xl"
+                    className="h-full w-full rounded-3xl object-cover object-center saturate-125 shadow-xl"
                   />
                 </motion.div>
               ))}

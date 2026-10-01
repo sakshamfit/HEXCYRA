@@ -3,30 +3,36 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   ATMOSPHERE — Minimal monochrome day → night colour stops
+   ATMOSPHERE — Vivid indigo, teal and coral day → night colour stops
    ========================================================================== */
 :root {
   color-scheme: dark;
-  --bg: rgba(10, 10, 10, 1);
-  --bg-2: rgba(16, 16, 16, 1);
-  --surface: rgba(22, 22, 22, 1);
-  --panel: rgba(26, 26, 26, 1);
-  --fg: rgba(246, 246, 246, 1);
-  --fg-2: rgba(190, 190, 190, 1);
-  --fg-3: rgba(138, 138, 138, 1);
-  --line: rgba(246, 246, 246, 0.13);
-  --line-strong: rgba(246, 246, 246, 0.68);
-  --inv: rgba(246, 246, 246, 1);
-  --inv-fg: rgba(12, 12, 12, 1);
-  --horizon: rgba(255, 255, 255, 0.03);
-  --sky: rgba(16, 16, 16, 1);
-  --watermark: rgba(246, 246, 246, 0.03);
-  --bg-rgb: 10, 10, 10;
-  --surface-rgb: 22, 22, 22;
-  --panel-rgb: 26, 26, 26;
-  --fg-rgb: 246, 246, 246;
-  --inv-rgb: 246, 246, 246;
-  --inv-fg-rgb: 12, 12, 12;
+  --bg: rgba(7, 13, 31, 1);
+  --bg-2: rgba(11, 20, 45, 1);
+  --surface: rgba(16, 29, 61, 1);
+  --panel: rgba(20, 35, 72, 0.94);
+  --fg: rgba(244, 247, 255, 1);
+  --fg-2: rgba(189, 204, 239, 1);
+  --fg-3: rgba(132, 154, 204, 1);
+  --line: rgba(129, 115, 255, 0.22);
+  --line-strong: rgba(170, 187, 255, 0.76);
+  --inv: rgba(139, 123, 255, 1);
+  --inv-fg: rgba(10, 16, 38, 1);
+  --horizon: rgba(45, 212, 191, 0.12);
+  --sky: rgba(10, 22, 50, 1);
+  --watermark: rgba(153, 164, 255, 0.09);
+  --brand: rgba(139, 123, 255, 1);
+  --brand-deep: rgba(91, 78, 211, 1);
+  --brand-foreground: rgba(255, 255, 255, 1);
+  --accent-color: rgba(45, 212, 191, 1);
+  --accent-2: rgba(251, 146, 60, 1);
+  --accent-3: rgba(244, 114, 182, 1);
+  --bg-rgb: 7, 13, 31;
+  --surface-rgb: 16, 29, 61;
+  --panel-rgb: 20, 35, 72;
+  --fg-rgb: 244, 247, 255;
+  --inv-rgb: 139, 123, 255;
+  --inv-fg-rgb: 10, 16, 38;
   --env: 1;
   --lamp-g: 1;
   --ambient-g: 1;
@@ -34,72 +40,78 @@
   --theme-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
   /* shadcn/ui tokens are updated alongside the atmosphere engine. */
-  --background: 0 0% 4%;
-  --foreground: 0 0% 96%;
-  --card: 0 0% 10%;
-  --card-foreground: 0 0% 96%;
-  --popover: 0 0% 10%;
-  --popover-foreground: 0 0% 96%;
-  --primary: 0 0% 96%;
-  --primary-foreground: 0 0% 5%;
-  --secondary: 0 0% 9%;
-  --secondary-foreground: 0 0% 96%;
-  --muted: 0 0% 9%;
-  --muted-foreground: 0 0% 65%;
-  --accent: 0 0% 9%;
-  --accent-foreground: 0 0% 96%;
-  --destructive: 0 0% 25%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 30% / 0.45;
-  --input: 0 0% 30% / 0.45;
-  --ring: 0 0% 65%;
-  --radius: 0.5rem;
+  --background: 225 63% 7%;
+  --foreground: 223 100% 98%;
+  --card: 221 56% 18%;
+  --card-foreground: 223 100% 98%;
+  --popover: 221 56% 18%;
+  --popover-foreground: 223 100% 98%;
+  --primary: 247 100% 69%;
+  --primary-foreground: 225 58% 9%;
+  --secondary: 222 61% 12%;
+  --secondary-foreground: 223 100% 98%;
+  --muted: 220 59% 15%;
+  --muted-foreground: 218 58% 84%;
+  --accent: 166 72% 50%;
+  --accent-foreground: 225 58% 9%;
+  --destructive: 14 90% 61%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 247 100% 69% / 0.22;
+  --input: 247 100% 69% / 0.22;
+  --ring: 166 72% 50%;
+  --radius: 0.75rem;
 }
 
 :root[data-mode='day'] {
   color-scheme: light;
-  --bg: rgba(250, 250, 250, 1);
-  --bg-2: rgba(242, 242, 242, 1);
-  --surface: rgba(245, 245, 245, 1);
-  --panel: rgba(255, 255, 255, 1);
-  --fg: rgba(15, 15, 15, 1);
-  --fg-2: rgba(72, 72, 72, 1);
-  --fg-3: rgba(120, 120, 120, 1);
-  --line: rgba(15, 15, 15, 0.12);
-  --line-strong: rgba(15, 15, 15, 0.72);
-  --inv: rgba(15, 15, 15, 1);
+  --bg: rgba(247, 248, 255, 1);
+  --bg-2: rgba(238, 242, 255, 1);
+  --surface: rgba(232, 238, 255, 1);
+  --panel: rgba(255, 255, 255, 0.92);
+  --fg: rgba(17, 24, 50, 1);
+  --fg-2: rgba(55, 65, 95, 1);
+  --fg-3: rgba(102, 113, 148, 1);
+  --line: rgba(79, 70, 229, 0.18);
+  --line-strong: rgba(79, 70, 229, 0.72);
+  --inv: rgba(79, 70, 229, 1);
   --inv-fg: rgba(255, 255, 255, 1);
-  --horizon: rgba(0, 0, 0, 0.03);
-  --sky: rgba(240, 240, 240, 1);
-  --watermark: rgba(0, 0, 0, 0.04);
-  --bg-rgb: 250, 250, 250;
-  --surface-rgb: 245, 245, 245;
+  --horizon: rgba(99, 102, 241, 0.08);
+  --sky: rgba(224, 231, 255, 1);
+  --watermark: rgba(79, 70, 229, 0.07);
+  --brand: rgba(79, 70, 229, 1);
+  --brand-deep: rgba(67, 56, 202, 1);
+  --brand-foreground: rgba(255, 255, 255, 1);
+  --accent-color: rgba(13, 148, 136, 1);
+  --accent-2: rgba(234, 88, 12, 1);
+  --accent-3: rgba(219, 39, 119, 1);
+  --bg-rgb: 247, 248, 255;
+  --surface-rgb: 232, 238, 255;
   --panel-rgb: 255, 255, 255;
-  --fg-rgb: 15, 15, 15;
-  --inv-rgb: 15, 15, 15;
+  --fg-rgb: 17, 24, 50;
+  --inv-rgb: 79, 70, 229;
   --inv-fg-rgb: 255, 255, 255;
   --env: 0;
   --lamp-g: 0;
   --ambient-g: 0;
   --aurora-opacity: 0.32;
 
-  --background: 0 0% 98%;
-  --foreground: 0 0% 6%;
+  --background: 228 100% 98%;
+  --foreground: 226 50% 13%;
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 6%;
+  --card-foreground: 226 50% 13%;
   --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 6%;
-  --primary: 0 0% 6%;
+  --popover-foreground: 226 50% 13%;
+  --primary: 239 84% 67%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 95%;
-  --secondary-foreground: 0 0% 6%;
-  --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 45%;
-  --accent: 0 0% 96%;
-  --accent-foreground: 0 0% 6%;
-  --border: 0 0% 90% / 0.9;
-  --input: 0 0% 90% / 0.9;
-  --ring: 0 0% 6%;
+  --secondary: 225 100% 95%;
+  --secondary-foreground: 226 50% 13%;
+  --muted: 225 100% 96%;
+  --muted-foreground: 225 28% 42%;
+  --accent: 173 80% 32%;
+  --accent-foreground: 0 0% 100%;
+  --border: 239 84% 67% / 0.18;
+  --input: 239 84% 67% / 0.18;
+  --ring: 173 80% 32%;
 }
 
 /* ==========================================================================
@@ -307,9 +319,67 @@
   opacity: var(--aurora-opacity, 0.3);
 }
 
+/* The shader carries a soft colour bloom behind the content instead of a
+   flat black/white wash. The canvas supplies the moving texture on top. */
+.animated-shader-background::before {
+  background:
+    radial-gradient(ellipse 48% 42% at 8% 8%, color-mix(in srgb, var(--accent-3) 22%, transparent), transparent 82%),
+    radial-gradient(ellipse 56% 48% at 92% 18%, color-mix(in srgb, var(--accent-color) 18%, transparent), transparent 84%),
+    radial-gradient(ellipse 60% 50% at 55% 100%, color-mix(in srgb, var(--brand) 16%, transparent), transparent 86%),
+    linear-gradient(to top, var(--horizon), transparent 72%);
+}
+
 .site-soft-panel {
   background: var(--panel);
 }
+
+/* Accent surfaces used by the page's dark feature cards. */
+html .bg-black,
+html .bg-gray-900 {
+  background-color: var(--brand-deep) !important;
+}
+
+html .bg-slate-900 {
+  background-color: var(--brand) !important;
+}
+
+html .text-slate-500,
+html .text-gray-500 {
+  color: var(--accent-color);
+}
+
+html .text-slate-400 {
+  color: color-mix(in srgb, var(--accent-color) 72%, var(--fg-3));
+}
+
+html .text-slate-300 {
+  color: color-mix(in srgb, var(--brand) 48%, var(--fg));
+}
+
+html .border-slate-200,
+html .border-slate-200\/80,
+html .border-slate-400 {
+  border-color: var(--line);
+}
+
+html .bg-slate-100,
+html .bg-slate-50 {
+  background-color: var(--surface);
+}
+
+.solutions-featured {
+  background: linear-gradient(145deg, var(--brand-deep), color-mix(in srgb, var(--accent-3) 52%, var(--brand-deep))) !important;
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--brand-deep) 28%, transparent);
+}
+
+.testimonial-fade-top {
+  background: linear-gradient(to bottom, var(--bg) 0%, transparent 100%);
+}
+
+.testimonial-fade-bottom {
+  background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
+}
+
 
 .theme-toggle:hover {
   background: var(--surface);
@@ -378,13 +448,16 @@ html .text-gray-600 {
 }
 
 html .text-slate-500,
-html .text-slate-400,
 html .text-gray-500 {
-  color: var(--fg-3);
+  color: var(--accent-color);
+}
+
+html .text-slate-400 {
+  color: color-mix(in srgb, var(--accent-color) 72%, var(--fg-3));
 }
 
 html .text-slate-300 {
-  color: color-mix(in srgb, var(--fg) 42%, transparent);
+  color: color-mix(in srgb, var(--brand) 48%, var(--fg));
 }
 
 html .text-slate-200 {

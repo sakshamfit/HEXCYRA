@@ -5,7 +5,7 @@ import { hero, marqueeItems, routes } from '../siteData.js'
 
 /* ==========================================================================
    SECTION 2 — HERO
-   Minimal, type-led opening backed by the monochromatic meshy shader.
+   Type-led opening backed by the colourful meshy shader.
    ========================================================================== */
 export default function Hero() {
   const go = (id) =>

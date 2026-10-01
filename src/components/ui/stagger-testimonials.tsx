@@ -120,7 +120,7 @@ function TestimonialCard({ item }: TestimonialCardProps) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1 text-slate-900">
           {Array.from({ length: item.rating ?? 5 }).map((_, i) => (
-            <Star key={i} className="h-4 w-4 fill-slate-900 text-slate-900" />
+            <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-500" />
           ))}
         </div>
         <Quote className="h-5 w-5 text-slate-300 transition-colors group-hover:text-slate-900" />
@@ -137,7 +137,7 @@ function TestimonialCard({ item }: TestimonialCardProps) {
           width={40}
           height={40}
           loading="lazy"
-          className="h-10 w-10 shrink-0 rounded-full object-cover grayscale ring-2 ring-slate-100"
+          className="h-10 w-10 shrink-0 rounded-full object-cover saturate-125 ring-2 ring-teal-200/70"
         />
         <div className="min-w-0">
           <h4 className="truncate text-sm font-bold text-slate-900">
