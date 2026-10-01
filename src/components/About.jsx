@@ -57,7 +57,7 @@ export default function About({ heading: Heading = 'h2' }) {
         </div>
 
         {/* Founders Leadership Spotlight */}
-        <div className="reveal mt-12 overflow-hidden rounded-[3rem] border border-slate-200 bg-gradient-to-b from-slate-50/80 to-white p-7 md:p-12 shadow-sm">
+        <div className="reveal mt-12 overflow-hidden rounded-[3rem] border border-slate-200 bg-white p-7 shadow-sm md:p-12">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-slate-700 shadow-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-fuchsia-500" />

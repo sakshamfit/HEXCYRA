@@ -3,48 +3,135 @@
 @tailwind utilities;
 
 /* ==========================================================================
+   ATMOSPHERE — LIGHTTON-style day → night colour stops
+   ========================================================================== */
+:root {
+  color-scheme: dark;
+  --bg: rgba(14, 17, 25, 1);
+  --bg-2: rgba(19, 23, 33, 1);
+  --surface: rgba(25, 30, 42, 1);
+  --panel: rgba(30, 35, 48, 1);
+  --fg: rgba(246, 244, 238, 1);
+  --fg-2: rgba(190, 194, 205, 1);
+  --fg-3: rgba(139, 146, 163, 1);
+  --line: rgba(246, 244, 238, 0.13);
+  --line-strong: rgba(246, 244, 238, 0.68);
+  --inv: rgba(244, 243, 238, 1);
+  --inv-fg: rgba(16, 19, 26, 1);
+  --horizon: rgba(156, 103, 200, 0.1);
+  --sky: rgba(19, 23, 34, 1);
+  --watermark: rgba(246, 244, 238, 0.03);
+  --bg-rgb: 14, 17, 25;
+  --surface-rgb: 25, 30, 42;
+  --panel-rgb: 30, 35, 48;
+  --fg-rgb: 246, 244, 238;
+  --inv-rgb: 244, 243, 238;
+  --inv-fg-rgb: 16, 19, 26;
+  --env: 1;
+  --lamp-g: 1;
+  --ambient-g: 1;
+  --aurora-opacity: 0.66;
+  --theme-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* shadcn/ui tokens are updated alongside the atmosphere engine. */
+  --background: 224 28% 8%;
+  --foreground: 36 26% 92%;
+  --card: 222 24% 15%;
+  --card-foreground: 36 26% 92%;
+  --popover: 222 24% 15%;
+  --popover-foreground: 36 26% 92%;
+  --primary: 40 21% 95%;
+  --primary-foreground: 225 24% 7%;
+  --secondary: 222 20% 16%;
+  --secondary-foreground: 36 26% 92%;
+  --muted: 222 20% 16%;
+  --muted-foreground: 218 11% 65%;
+  --accent: 222 20% 16%;
+  --accent-foreground: 36 26% 92%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 224 12% 30% / 0.45;
+  --input: 224 12% 30% / 0.45;
+  --ring: 218 11% 65%;
+  --radius: 0.5rem;
+}
+
+:root[data-mode='day'] {
+  color-scheme: light;
+  --bg: rgba(248, 250, 253, 1);
+  --bg-2: rgba(237, 242, 249, 1);
+  --surface: rgba(244, 247, 251, 1);
+  --panel: rgba(255, 255, 255, 1);
+  --fg: rgba(16, 24, 40, 1);
+  --fg-2: rgba(71, 84, 103, 1);
+  --fg-3: rgba(118, 132, 153, 1);
+  --line: rgba(16, 24, 40, 0.11);
+  --line-strong: rgba(16, 24, 40, 0.7);
+  --inv: rgba(17, 24, 39, 1);
+  --inv-fg: rgba(255, 255, 255, 1);
+  --horizon: rgba(196, 214, 244, 0.12);
+  --sky: rgba(220, 232, 250, 1);
+  --watermark: rgba(32, 54, 94, 0.045);
+  --bg-rgb: 248, 250, 253;
+  --surface-rgb: 244, 247, 251;
+  --panel-rgb: 255, 255, 255;
+  --fg-rgb: 16, 24, 40;
+  --inv-rgb: 17, 24, 39;
+  --inv-fg-rgb: 255, 255, 255;
+  --env: 0;
+  --lamp-g: 0;
+  --ambient-g: 0;
+  --aurora-opacity: 0.42;
+
+  --background: 210 33% 99%;
+  --foreground: 222 44% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 44% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 44% 11%;
+  --primary: 222 39% 11%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 214 40% 95%;
+  --secondary-foreground: 222 44% 11%;
+  --muted: 214 40% 95%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 214 40% 95%;
+  --accent-foreground: 222 44% 11%;
+  --border: 214 32% 91% / 0.9;
+  --input: 214 32% 91% / 0.9;
+  --ring: 222 44% 11%;
+}
+
+/* ==========================================================================
    BASE — global type + page behaviour
    ========================================================================== */
 @layer base {
-  /* shadcn/ui design tokens (light theme) — consumed by tailwind.config.js
-     so the copied ui/ primitives resolve bg-primary, bg-card, border-input… */
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
-  }
-
-  /* Bare `border` utilities (used by the shadcn Card) inherit --border. */
   * {
-    border-color: hsl(var(--border));
+    border-color: var(--line);
   }
 
   html {
+    min-width: 320px;
     scroll-behavior: smooth;
-    /* keeps anchored sections clear of the fixed pill nav */
     scroll-padding-top: 7rem;
     -webkit-tap-highlight-color: transparent;
+    background: var(--bg);
+    color: var(--fg);
   }
 
   body {
-    @apply bg-white font-sans text-slate-900 antialiased;
+    @apply font-sans antialiased;
+    min-width: 320px;
+    overflow-x: hidden;
+    background: var(--bg);
+    color: var(--fg);
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    isolation: isolate;
   }
 
   h1,
@@ -56,7 +143,6 @@
     @apply font-display tracking-tight;
   }
 
-  /* Non-standard scrollbar: 8px, ink thumb, invisible track. */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -67,7 +153,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #0f172a;
+    background: var(--line-strong);
     border-radius: 9999px;
   }
 
@@ -75,10 +161,9 @@
     background: #d946ef;
   }
 
-  /* Firefox */
   * {
     scrollbar-width: thin;
-    scrollbar-color: #0f172a transparent;
+    scrollbar-color: var(--line-strong) transparent;
   }
 }
 
@@ -86,10 +171,9 @@
    UTILITIES — fidelity classes called out by the design spec
    ========================================================================== */
 @layer utilities {
-  /* Hide scrollbars while keeping the element scrollable. */
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE / Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   .no-scrollbar::-webkit-scrollbar {
@@ -98,7 +182,6 @@
     height: 0;
   }
 
-  /* 2% scale + -1deg tilt with the signature overshoot easing. */
   .hover-pop {
     transition:
       transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -107,10 +190,6 @@
     will-change: transform;
   }
 
-  /* Scroll-reveal (driven by useReveal / IntersectionObserver).
-     Stagger is passed in as --reveal-delay so the delay never leaks into the
-     hover transition. Declared AFTER .hover-pop: on cards that carry both
-     classes this rule must win while the card is still hidden. */
   .reveal {
     opacity: 0;
     transform: translateY(28px);
@@ -125,7 +204,6 @@
     transform: translateY(0);
   }
 
-  /* Once revealed, a .hover-pop card switches back to the pop timing. */
   .reveal.visible.hover-pop {
     transition:
       transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -133,32 +211,24 @@
       border-color 0.6s ease;
   }
 
-  /* Declared last so the hover transform beats `.reveal.visible`. */
   .hover-pop:hover,
   .reveal.visible.hover-pop:hover {
     transform: scale(1.02) rotate(-1deg);
   }
 
-  /* 3D perspective helper used by the scroll-morph deck (Tailwind 4 ships
-     "perspective-1000" as a first-class utility; Tailwind 3 does not). */
   .perspective-1000 {
     perspective: 1000px;
   }
 
-  /* Same story for the capabilities panel: it asks for "aspect-4/3", which
-     Tailwind 3 spells aspect-[4/3]. Declared here so the component can keep
-     the Tailwind 4 class name. */
   .aspect-4\/3 {
     aspect-ratio: 4 / 3;
   }
 
-  /* Vertical (rotated) display type used by the rose work card. */
   .text-vertical {
     writing-mode: vertical-rl;
     text-orientation: mixed;
   }
 
-  /* Stagger Testimonials infinite vertical animation */
   @keyframes marquee-vertical {
     0% {
       transform: translateY(0%);
@@ -177,6 +247,16 @@
     }
   }
 
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
   .animate-marquee-vertical {
     animation: marquee-vertical var(--marquee-duration, 38s) linear infinite;
   }
@@ -192,8 +272,250 @@
 }
 
 /* ==========================================================================
-   MOTION SAFETY — honour reduced-motion preferences
+   SITE-WIDE SHADER BACKGROUND + DAY/NIGHT CONTROLS
    ========================================================================== */
+.site-page {
+  position: relative;
+  z-index: 1;
+  color: var(--fg);
+  background: transparent;
+}
+
+.animated-shader-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+
+.animated-shader-background::before {
+  position: absolute;
+  inset: 0;
+  content: '';
+  background:
+    radial-gradient(ellipse 62% 52% at 10% 12%, color-mix(in srgb, var(--sky) 28%, transparent), transparent 100%),
+    radial-gradient(ellipse 48% 54% at 92% 68%, color-mix(in srgb, #a855f7 9%, transparent), transparent 100%),
+    linear-gradient(to top, var(--horizon), transparent 70%);
+}
+
+.animated-shader-background canvas {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: var(--aurora-opacity, 0.5);
+}
+
+.site-soft-panel {
+  background: var(--panel);
+}
+
+.theme-toggle:hover {
+  background: var(--surface);
+}
+
+.theme-toggle-track {
+  position: relative;
+  display: inline-block;
+  width: 64px;
+  height: 32px;
+  flex: none;
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  background: var(--surface);
+}
+
+.theme-toggle-sun,
+.theme-toggle-moon {
+  position: absolute;
+  top: 8px;
+  z-index: 1;
+  transition: opacity 120ms linear;
+}
+
+.theme-toggle-sun {
+  left: 8px;
+  color: #f59e0b;
+  opacity: calc(1 - var(--env));
+}
+
+.theme-toggle-moon {
+  right: 8px;
+  color: #6366f1;
+  opacity: var(--env);
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  z-index: 2;
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 9999px;
+  background: var(--inv);
+  color: var(--inv-fg);
+  transform: translateX(calc(var(--env) * 32px));
+}
+
+/* ==========================================================================
+   THEME-AWARE TAILWIND COLOURS — keeps existing UI readable at every stop
+   ========================================================================== */
+html .text-slate-950,
+html .text-slate-900 {
+  color: var(--fg);
+}
+
+html .text-slate-800,
+html .text-slate-700,
+html .text-slate-600,
+html .text-gray-900,
+html .text-gray-600 {
+  color: var(--fg-2);
+}
+
+html .text-slate-500,
+html .text-slate-400,
+html .text-gray-500 {
+  color: var(--fg-3);
+}
+
+html .text-slate-300 {
+  color: color-mix(in srgb, var(--fg) 42%, transparent);
+}
+
+html .text-slate-200 {
+  color: color-mix(in srgb, var(--fg) 22%, transparent);
+}
+
+html .bg-white {
+  background-color: var(--panel);
+}
+
+html .bg-white\/50 {
+  background-color: rgba(var(--panel-rgb), 0.5);
+}
+
+html .bg-white\/60 {
+  background-color: rgba(var(--panel-rgb), 0.6);
+}
+
+html .bg-white\/70 {
+  background-color: rgba(var(--panel-rgb), 0.7);
+}
+
+html .bg-white\/80 {
+  background-color: rgba(var(--panel-rgb), 0.8);
+}
+
+html .bg-white\/90 {
+  background-color: rgba(var(--panel-rgb), 0.9);
+}
+
+html .bg-white\/95 {
+  background-color: rgba(var(--panel-rgb), 0.95);
+}
+
+html .bg-slate-50,
+html .bg-slate-50\/80 {
+  background-color: var(--bg-2);
+}
+
+html .bg-slate-100,
+html .bg-slate-200,
+html .bg-gray-200 {
+  background-color: var(--surface);
+}
+
+html .border-black {
+  border-color: var(--line-strong);
+}
+
+html .border-slate-50,
+html .border-slate-100,
+html .border-slate-200,
+html .border-slate-200\/80,
+html .border-slate-400 {
+  border-color: var(--line);
+}
+
+/* Bright lime and sand art keeps its ink dark for readable contrast at night. */
+html .bg-lime-300,
+html .light-artwork-card {
+  color: #172033;
+}
+
+html .bg-lime-300 .text-slate-950,
+html .bg-lime-300 .text-slate-900,
+html .bg-lime-300 .text-slate-800,
+html .bg-lime-300 .text-slate-700,
+html .bg-lime-300 .text-slate-600,
+html .light-artwork-card .text-slate-950,
+html .light-artwork-card .text-slate-900,
+html .light-artwork-card .text-slate-800,
+html .light-artwork-card .text-slate-700,
+html .light-artwork-card .text-slate-600 {
+  color: #172033;
+}
+
+/* Reviews intentionally stay a bright, editorial-white island in either mode. */
+html .reviews-light {
+  color-scheme: light;
+  color: #101828;
+  background: #fff;
+  border-block: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+html .reviews-light .text-slate-950,
+html .reviews-light .text-slate-900 {
+  color: #101828;
+}
+
+html .reviews-light .text-slate-800,
+html .reviews-light .text-slate-700,
+html .reviews-light .text-slate-600 {
+  color: #475467;
+}
+
+html .reviews-light .text-slate-500,
+html .reviews-light .text-slate-400 {
+  color: #667085;
+}
+
+html .reviews-light .text-slate-300 {
+  color: #cbd5e1;
+}
+
+html .reviews-light .bg-white,
+html .reviews-light .review-card {
+  background: #fff;
+}
+
+html .reviews-light .bg-white\/90 {
+  background-color: rgba(255, 255, 255, 0.94);
+}
+
+html .reviews-light .border-slate-50,
+html .reviews-light .border-slate-100,
+html .reviews-light .border-slate-200,
+html .reviews-light .border-slate-200\/80,
+html .reviews-light .border-slate-400 {
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+.testimonial-fade-top {
+  background: linear-gradient(to bottom, #fff 0%, rgba(255, 255, 255, 0.84) 45%, transparent 100%);
+}
+
+.testimonial-fade-bottom {
+  background: linear-gradient(to top, #fff 0%, rgba(255, 255, 255, 0.84) 45%, transparent 100%);
+}
+
+/* Honour reduced-motion preferences across scroll and marquee motion. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -217,9 +539,6 @@
     transition: none;
   }
 
-  /* Hover pops would otherwise keep their 0.6s ramp from the
-     `.reveal.visible.hover-pop` rule — feedback still applies, just
-     without the animation. */
   .hover-pop {
     transition: none !important;
   }

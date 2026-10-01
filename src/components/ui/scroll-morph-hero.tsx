@@ -71,7 +71,7 @@ function FlipCard({
             >
                 {/* Front Face */}
                 <div
-                    className="absolute inset-0 h-full w-full overflow-hidden rounded-xl shadow-lg bg-gray-200"
+                    className="absolute inset-0 h-full w-full overflow-hidden rounded-xl shadow-lg bg-slate-100"
                     style={{ backfaceVisibility: "hidden" }}
                 >
                     {item.src ? (
@@ -346,7 +346,7 @@ export default function ScrollMorphHero({
 
     return (
         <MotionConfig reducedMotion="user">
-        <div ref={containerRef} className="relative w-full h-full bg-[#FAFAFA] overflow-hidden">
+        <div ref={containerRef} className="relative w-full h-full bg-transparent overflow-hidden">
             {/* Container */}
             <div className="flex h-full w-full flex-col items-center justify-center perspective-1000">
 
@@ -356,7 +356,7 @@ export default function ScrollMorphHero({
                         initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                         animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 1 - morphValue * 2, y: 0, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
                         transition={{ duration: 1 }}
-                        className="font-display text-3xl font-extrabold tracking-tight text-gray-900 md:text-5xl"
+                        className="font-display text-3xl font-extrabold tracking-tight text-slate-900 md:text-5xl"
                     >
                         {introTitle}
                     </motion.h2>
@@ -364,7 +364,7 @@ export default function ScrollMorphHero({
                         initial={{ opacity: 0 }}
                         animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 0.5 - morphValue } : { opacity: 0 }}
                         transition={{ duration: 1, delay: 0.2 }}
-                        className="mt-4 text-xs font-bold tracking-[0.2em] text-gray-500 uppercase"
+                        className="mt-4 text-xs font-bold tracking-[0.2em] text-slate-500 uppercase"
                     >
                         {introCue}
                     </motion.p>
@@ -375,10 +375,10 @@ export default function ScrollMorphHero({
                     style={{ opacity: contentOpacity, y: contentY }}
                     className="absolute top-[10%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-4"
                 >
-                    <h2 className="font-display text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
+                    <h2 className="font-display text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
                         {arcTitle}
                     </h2>
-                    <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed">
+                    <p className="text-sm md:text-base text-slate-600 max-w-lg leading-relaxed">
                         {arcBody}
                     </p>
                 </motion.div>

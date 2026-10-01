@@ -41,10 +41,6 @@ export function MinimalFooter() {
 			href: '/work/',
 		},
 		{
-			title: 'Approach',
-			href: '/approach/',
-		},
-		{
 			title: 'About',
 			href: '/about/',
 		},

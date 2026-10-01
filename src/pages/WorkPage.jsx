@@ -67,8 +67,8 @@ export default function WorkPage() {
     window.__machine?.setMode('assembled')
   }, [])
 
-  /* /work/?step=2 — the approach page hands over with a step already chosen.
-     The scene has to exist first, so this waits for onReady. */
+  /* /work/?step=2 can open the matching station directly. The scene has to
+     exist first, so this waits for onReady. */
   useEffect(() => {
     if (!ready) return
     const requested = Number(new URLSearchParams(window.location.search).get('step'))
@@ -79,7 +79,7 @@ export default function WorkPage() {
   }, [ready])
 
   return (
-    <div className="min-h-screen w-full bg-white font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900">
+    <div className="site-page min-h-screen w-full font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900">
       <Nav />
 
       <main>

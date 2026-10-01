@@ -4,13 +4,10 @@ import { approach } from '../siteData.js'
 
 /* ==========================================================================
    THE FOUR STEPS
-   One list, two pages. On /work/ it is the control panel for the machine:
-   picking a step focuses its station, and the machine reports back which step
-   is open. On /approach/ it is the plain reading of the same process, and
-   picking a step carries you to the machine with that step already open.
-
-   The copy is `approach.steps` — one source, two presentations, so the two
-   pages can never drift apart.
+   The four steps on /work/ are the control panel for the machine: picking a
+   step focuses its station, and the machine reports back which step is open.
+   The copy is `approach.steps`, so the description and the 3D stations stay in
+   sync.
    ========================================================================== */
 export default function ProcessSteps({ active = -1, onSelect, id = 'steps' }) {
   return (

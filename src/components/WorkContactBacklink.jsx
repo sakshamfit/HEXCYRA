@@ -7,7 +7,7 @@ export default function WorkContactBacklink({ className = '' }) {
   return (
     <section aria-label="Work and contact links" className={`relative py-16 md:py-24 ${className}`}>
       <div className="mx-auto max-w-7xl px-6">
-        <CursorBubble className="reveal group relative flex w-full flex-col items-center justify-center gap-8 overflow-hidden rounded-[3rem] border-2 border-black bg-gradient-to-b from-white via-slate-50/80 to-slate-100 p-10 text-center shadow-xl md:p-20">
+        <CursorBubble className="reveal group site-soft-panel relative flex w-full flex-col items-center justify-center gap-8 overflow-hidden rounded-[3rem] border-2 border-black p-10 text-center shadow-xl md:p-20">
           {/* Subtle Ambient Backdrops */}
           <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-fuchsia-400/15 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-lime-400/20 blur-3xl" />

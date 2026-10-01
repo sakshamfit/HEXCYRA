@@ -18,14 +18,15 @@ const DOCUMENTS = {
   '/index.html': '/',
   '/solutions/index.html': '/solutions/',
   '/work/index.html': '/work/',
-  '/approach/index.html': '/approach/',
+  '/approach/index.html': '/work/',
   '/about/index.html': '/about/',
   '/contact/index.html': '/contact/',
   '/404.html': '/404.html',
 }
 
 /* Only the pages that belong in a sitemap. */
-const INDEXED = ['/', '/solutions/', '/work/', '/approach/', '/about/', '/contact/']
+const INDEXED = ['/', '/solutions/', '/work/', '/about/', '/contact/']
+const THEME_PRELOAD = `<script>try{var m=localStorage.getItem('hexcyra.mode')==='day'?'day':'night',d=document.documentElement;d.dataset.mode=m;d.style.colorScheme=m==='night'?'dark':'light';var t=document.querySelector('meta[name="theme-color"]');if(t)t.content=m==='night'?'#0e1119':'#f8fafd'}catch(e){document.documentElement.dataset.mode='night'}</script>`
 
 /* ---------------------------------------------------------------------------
    Two build-time jobs Vite cannot do on its own:
@@ -46,7 +47,10 @@ const sitePlugin = {
       if (!path) return html
       return html
         .replaceAll('%SITE%', SITE)
-        .replace('</head>', `    <link rel="canonical" href="${SITE}${path}" />\n  </head>`)
+        .replace(
+          '</head>',
+          `    <link rel="canonical" href="${SITE}${path}" />\n    ${THEME_PRELOAD}\n  </head>`,
+        )
     },
   },
   /* Both hooks register the middleware in front of Vite's own layers — the
@@ -110,6 +114,11 @@ Sitemap: ${SITE}/sitemap.xml
 const pageFallback = (distDir, dev404) => (req, res, next) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') return next()
   const [pathname, query] = (req.url ?? '/').split('?')
+  if (pathname === '/approach' || pathname === '/approach/') {
+    res.statusCode = 301
+    res.setHeader('Location', `/work/${query ? `?${query}` : ''}`)
+    return res.end()
+  }
   if (/\/[^/]*\.[^/]+$/.test(pathname)) return next()
   /* Vite's own dev modules are extensionless URLs (/@vite/client,
      /@react-refresh, /@fs/…, /@id/…) — without this pass-through they get
@@ -166,10 +175,9 @@ export default defineConfig({
     target: 'es2019',
     cssCodeSplit: true,
     rollupOptions: {
-      /* One HTML document per index page, so the section a page owns is in
-         that page's markup and nothing is reachable from a page it does not
-         belong to. Five of the six documents share src/entry-page.jsx and
-         therefore one chunk; the home page has its own entry. */
+      /* Content documents share src/entry-page.jsx and therefore one chunk;
+         the home page has its own entry. The retired /approach/ document is
+         a lightweight redirect to /work/ and contains no app entry. */
       input: {
         index: path.resolve(dirname, 'index.html'),
         'solutions/index': path.resolve(dirname, 'solutions/index.html'),
