@@ -5,7 +5,7 @@ import { Icon } from '../icons.jsx'
 
 /* ==========================================================================
    02 / SOLUTIONS
-   Six capability cards in a minimal monochrome layout.
+   Six capability cards in a colourful, high-contrast layout.
    ========================================================================== */
 export default function Solutions({ heading: Heading = 'h2' }) {
   return (
@@ -41,8 +41,8 @@ export default function Solutions({ heading: Heading = 'h2' }) {
                 style={{ '--reveal-delay': `${(index % 3) * 80}ms` }}
                 className={`reveal hover-pop group flex flex-col justify-between rounded-[2rem] p-7 md:p-8 ${
                   featured
-                    ? 'border border-white/15 bg-black text-white shadow-2xl shadow-black/20'
-                    : 'border border-slate-200 bg-white text-slate-900 shadow-sm shadow-black/5 hover:shadow-xl hover:shadow-black/10'
+                    ? 'solutions-featured border border-white/20 text-white shadow-2xl shadow-indigo-950/25'
+                    : 'solutions-card border border-slate-200 bg-white text-slate-900 shadow-sm shadow-indigo-950/5 hover:shadow-xl hover:shadow-indigo-950/10'
                 } ${middleColumn ? 'lg:-translate-y-4' : ''}`}
               >
                 <div>

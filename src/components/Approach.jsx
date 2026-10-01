@@ -13,7 +13,7 @@ export default function Approach({ heading: Heading = 'h2' }) {
     description: step.desc,
     category: categories[idx] || 'Execution',
     status: idx < 2 ? 'completed' : idx === 2 ? 'active' : 'upcoming',
-    accentColor: '#ffffff',
+    accentColor: '#8b7bff',
   }))
 
   return (
@@ -26,8 +26,10 @@ export default function Approach({ heading: Heading = 'h2' }) {
         periodLabel={approach.kicker}
         lead={approach.lead}
         milestones={milestones}
-        backgroundColor="#000000"
-        activeColor="#ffffff"
+        backgroundColor="#0b1430"
+        textColor="#f4f7ff"
+        mutedTextColor="#bdccef"
+        activeColor="#2dd4bf"
       />
 
       {/* Accessible text list for screen readers and SEO crawlers */}

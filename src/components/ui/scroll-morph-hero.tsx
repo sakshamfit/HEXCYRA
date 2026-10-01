@@ -81,7 +81,7 @@ function FlipCard({
                                 alt={item.label ?? `hero-${index}`}
                                 loading={index === 0 ? 'eager' : 'lazy'}
                                 decoding="async"
-                                className="h-full w-full object-cover grayscale"
+                                className="h-full w-full object-cover saturate-125 contrast-[1.04]"
                             />
                             <div className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-transparent" />
                         </>
