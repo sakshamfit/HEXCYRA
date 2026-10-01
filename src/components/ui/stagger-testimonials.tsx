@@ -116,34 +116,34 @@ interface TestimonialCardProps {
 
 function TestimonialCard({ item }: TestimonialCardProps) {
   return (
-    <div className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/90 dark:hover:border-slate-700">
+    <div className="review-card group relative flex flex-col justify-between rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-xl">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1 text-amber-400">
           {Array.from({ length: item.rating ?? 5 }).map((_, i) => (
             <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
           ))}
         </div>
-        <Quote className="h-5 w-5 text-slate-300 transition-colors group-hover:text-fuchsia-500 dark:text-slate-700" />
+        <Quote className="h-5 w-5 text-slate-300 transition-colors group-hover:text-fuchsia-500" />
       </div>
 
-      <p className="mt-4 text-sm font-medium leading-relaxed text-slate-700 dark:text-slate-300">
+      <p className="mt-4 text-sm font-medium leading-relaxed text-slate-700">
         &ldquo;{item.quote}&rdquo;
       </p>
 
-      <div className="mt-6 flex items-center gap-3 border-t border-slate-100 pt-4 dark:border-slate-800/80">
+      <div className="mt-6 flex items-center gap-3 border-t border-slate-100 pt-4">
         <img
           src={item.image}
           alt={item.name}
           width={40}
           height={40}
           loading="lazy"
-          className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-slate-100 dark:ring-slate-800"
+          className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-slate-100"
         />
         <div className="min-w-0">
-          <h4 className="truncate text-sm font-bold text-slate-900 dark:text-white">
+          <h4 className="truncate text-sm font-bold text-slate-900">
             {item.name}
           </h4>
-          <p className="truncate text-xs font-medium text-slate-500 dark:text-slate-400">
+          <p className="truncate text-xs font-medium text-slate-500">
             {item.role}
           </p>
         </div>
@@ -180,18 +180,18 @@ export const StaggerTestimonials = ({
   const list3 = [...col3, ...col3];
 
   return (
-    <section className={cn("relative w-full overflow-hidden py-20 md:py-28", className)}>
+    <section className={cn("reviews-light relative w-full overflow-hidden py-20 md:py-28", className)}>
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="reveal max-w-3xl">
           {kicker && (
-            <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-slate-600 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
+            <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-slate-600 shadow-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-lime-500" />
               {kicker}
             </span>
           )}
 
-          <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-slate-900 dark:text-white md:text-5xl lg:text-6xl">
+          <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-slate-900 md:text-5xl lg:text-6xl">
             {title}{" "}
             {accent && (
               <span className="bg-gradient-to-r from-fuchsia-500 to-indigo-500 bg-clip-text pr-3 pb-1 inline-block italic text-transparent">
@@ -201,7 +201,7 @@ export const StaggerTestimonials = ({
           </h2>
 
           {subtitle && (
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-400 md:text-lg">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">
               {subtitle}
             </p>
           )}
@@ -210,8 +210,8 @@ export const StaggerTestimonials = ({
         {/* Staggered Vertical Marquee Container */}
         <div className="reveal relative mt-14 h-[600px] md:h-[680px] overflow-hidden">
           {/* Top & Bottom fade gradient masks */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-20 h-24 bg-gradient-to-b from-white via-white/80 to-transparent dark:from-slate-950 dark:via-slate-950/80" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-28 bg-gradient-to-t from-white via-white/80 to-transparent dark:from-slate-950 dark:via-slate-950/80" />
+          <div className="testimonial-fade testimonial-fade-top pointer-events-none absolute inset-x-0 top-0 z-20 h-24" />
+          <div className="testimonial-fade testimonial-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 z-20 h-28" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
             {/* Column 1 - scrolls up */}

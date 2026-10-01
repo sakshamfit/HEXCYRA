@@ -15,7 +15,7 @@ export default function SolutionsPage() {
   useReveal()
 
   return (
-    <div className="min-h-screen w-full bg-white font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900">
+    <div className="site-page min-h-screen w-full font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900">
       <Nav />
 
       <main className="pt-28 md:pt-32">

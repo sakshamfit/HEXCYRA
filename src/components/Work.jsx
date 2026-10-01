@@ -6,7 +6,7 @@ import { routes, work } from '../siteData.js'
    duotone wash over the photograph, so the images stay minimal and the grid
    still reads as one family. */
 const TONES = {
-  sand: 'border-black bg-[#E9E4DE] text-slate-900',
+  sand: 'light-artwork-card border-black bg-[#E9E4DE] text-slate-900',
   indigo: 'border-black bg-indigo-600 text-white',
   rose: 'border-black bg-rose-500 text-white',
 }

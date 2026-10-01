@@ -2,16 +2,13 @@ import React, { useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { brand, navLinks, routes } from '../siteData.js'
 import { useScrolled } from '../hooks.js'
+import DayNightToggle from './env/DayNightToggle.jsx'
 
 /* ==========================================================================
    NAVIGATION
-   Fixed wrapper (px-6 py-6) holding a centred white pill. The pill keeps
-   backdrop-blur-md at all times and swaps bg-white/80 → bg-white/95 with a
-   shadow increase once the page has scrolled past 50px.
-
-   Every item is a real link now that each section is its own index page, so
-   the nav works without JavaScript, and a section can be opened, copied and
-   bookmarked. Clicking the page you are already on returns to its top.
+   Fixed wrapper holding a frosted, theme-aware pill. The day/night control
+   remains in view at every breakpoint while page links adapt to screen size.
+   Clicking the page you are already on returns to its top.
    ========================================================================== */
 export default function Nav() {
   const scrolled = useScrolled(50)
@@ -70,6 +67,8 @@ export default function Nav() {
           </div>
 
           <div className="flex items-center gap-2">
+            <DayNightToggle />
+
             {/* CTA — fuchsia panel slides in from the left on hover */}
             <a
               href={routes.contact}

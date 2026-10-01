@@ -9,13 +9,11 @@ export const brand = {
   tagline: 'Technology. Security. Growth.',
 }
 
-/* One index page per section of the supplied document. `id` is the section
-   anchor (the home page used to carry every section at once), `path` is the
-   page it now lives on. */
+/* Primary page destinations shown in the navigation. The old Approach page
+   now forwards to Work, where the interactive process lives. */
 export const navLinks = [
   { id: 'solutions', label: 'Solutions', path: '/solutions/' },
   { id: 'work', label: 'Work', path: '/work/' },
-  { id: 'approach', label: 'Approach', path: '/approach/' },
   { id: 'about', label: 'About', path: '/about/' },
 ]
 
@@ -24,7 +22,6 @@ export const routes = {
   home: '/',
   solutions: '/solutions/',
   work: '/work/',
-  approach: '/approach/',
   about: '/about/',
   contact: '/contact/',
 }
@@ -254,7 +251,6 @@ export const footer = {
   links: [
     { label: 'Solutions', path: '/solutions/' },
     { label: 'Work', path: '/work/' },
-    { label: 'Approach', path: '/approach/' },
     { label: 'About', path: '/about/' },
     { label: 'Contact', path: '/contact/' },
   ],

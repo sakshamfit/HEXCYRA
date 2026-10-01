@@ -1,6 +1,6 @@
 import React from 'react'
 import { ArrowUpRight } from 'lucide-react'
-import { about, approach, contact, routes, work } from '../siteData.js'
+import { about, contact, routes, work } from '../siteData.js'
 
 /* ==========================================================================
    NEXT PAGE
@@ -11,8 +11,7 @@ import { about, approach, contact, routes, work } from '../siteData.js'
    ========================================================================== */
 const NEXT = {
   [routes.solutions]: { href: routes.work, ...work },
-  [routes.work]: { href: routes.approach, ...approach },
-  [routes.approach]: { href: routes.about, ...about },
+  [routes.work]: { href: routes.about, ...about },
   [routes.about]: { href: routes.contact, ...contact },
 }
 
@@ -21,7 +20,7 @@ export default function PageNext({ page }) {
   if (!next) return null
 
   return (
-    <section aria-label="Next page" className="bg-white px-6 py-16 md:py-20">
+    <section aria-label="Next page" className="bg-transparent px-6 py-16 md:py-20">
       <div className="mx-auto max-w-7xl">
         <a
           href={next.href}

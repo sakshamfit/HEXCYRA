@@ -13,7 +13,7 @@ export default function NotFoundPage() {
   useReveal()
 
   return (
-    <div className="min-h-screen w-full bg-white font-sans text-slate-900 antialiased">
+    <div className="site-page min-h-screen w-full font-sans text-slate-900 antialiased">
       <Nav />
 
       <main className="px-6 pb-24 pt-40 md:pt-48">

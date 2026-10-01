@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react'
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
 import Marquee from './components/Marquee.jsx'
-import Approach from './components/Approach.jsx'
 import Intro from './components/Intro.jsx'
 import Clients from './components/Clients.jsx'
 import StaggerTestimonials from './components/ui/stagger-testimonials'
@@ -24,7 +23,7 @@ function ShowcaseFallback() {
   return (
     <section
       aria-hidden="true"
-      className="flex h-screen min-h-[640px] w-full items-center justify-center bg-[#FAFAFA]"
+      className="flex h-screen min-h-[640px] w-full items-center justify-center bg-transparent"
     >
       <span className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
         <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-lime-500" />
@@ -38,7 +37,7 @@ function FeaturesFallback() {
   return (
     <section
       aria-hidden="true"
-      className="w-full bg-white py-24"
+      className="w-full bg-transparent py-24"
     >
       <div className="mx-auto max-w-6xl px-6">
         <div className="h-12 w-2/3 animate-pulse rounded-2xl bg-slate-100" />
@@ -61,14 +60,14 @@ function FeaturesFallback() {
    The home page is the front door: the hero, the capabilities that can be
    tried in place, the showcase, what we do and who we work with. Each
    numbered section of the document now has its own index page —
-   /solutions/, /work/, /approach/, /about/, /contact/ — and the nav and the
-   footer link to them as real documents.
+   /solutions/, /work/, /about/, /contact/ — and the nav and footer link to
+   them as real documents. The old Approach section has been retired.
    ========================================================================== */
 export default function App() {
   useReveal()
 
   return (
-    <div className="min-h-screen w-full bg-white font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900">
+    <div className="site-page min-h-screen w-full font-sans text-slate-900 antialiased selection:bg-fuchsia-300 selection:text-fuchsia-900">
       <Nav />
 
       <main>
@@ -80,7 +79,6 @@ export default function App() {
         <Suspense fallback={<ShowcaseFallback />}>
           <Showcase />
         </Suspense>
-        <Approach heading="h2" />
         <Intro />
         <Clients />
         <StaggerTestimonials />
